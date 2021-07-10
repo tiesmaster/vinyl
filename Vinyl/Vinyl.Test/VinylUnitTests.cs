@@ -23,7 +23,7 @@ namespace Vinyl.Test
         public async Task TestMethod2()
         {
             var test = @"
-    using System;
+    using System
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
