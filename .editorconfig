@@ -36,39 +36,6 @@ dotnet_naming_symbols.private_fields.applicable_accessibilities = private
 dotnet_naming_style.prefix_underscore.capitalization = camel_case
 dotnet_naming_style.prefix_underscore.required_prefix = _
 
-# CA2007: Consider calling ConfigureAwait on the awaited task
-# Justification: Don't use CA(false) in applications, only in NuGet class libraries.
-dotnet_diagnostic.CA2007.severity = none
-
-# CA1062: Validate arguments of public methods
-# Justification: Use C# 8 nullable reference types instead
-dotnet_diagnostic.CA1062.severity = none
-
-# CA1303: Do not pass literals as localized parameters
-# Justification: Not using localization
-dotnet_diagnostic.CA1303.severity = none
-
-# CA1820: Test for empty strings using string length
-# Justification: Comparing strings using String.Length is a premature optimization
-dotnet_diagnostic.CA1820.severity = none
-
-# RCS1090: Call 'ConfigureAwait(false)'.
-# Justification: Same as CA2007
-dotnet_diagnostic.RCS1090.severity = none
-
-# RCS1102: Make class static.
-# Justification: Same as CA1052
-dotnet_diagnostic.RCS1102.severity = none
-
-# RCS1021: Simplify lambda expression.
-# Justification: Keeping a block body, when a lambda expression is allowed can actually improve readability
-#                in certain situations. So we allow this.
-dotnet_diagnostic.RCS1021.severity = silent
-
-# RCS1118: Mark local variable as const.
-# Justification: Prefer var over constants for local variables.
-dotnet_diagnostic.RCS1118.severity = silent
-
 # Xml project files
 [*.{csproj,vcxproj,vcxproj.filters,proj,nativeproj,locproj}]
 indent_size = 2
