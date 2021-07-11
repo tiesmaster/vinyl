@@ -5,6 +5,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Rename;
 using Microsoft.CodeAnalysis.Text;
+
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -18,6 +19,7 @@ namespace Vinyl
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(VinylCodeFixProvider)), Shared]
     public class VinylCodeFixProvider : CodeFixProvider
     {
+        private static readonly string CodeFixTitle = "Make uppercase";
         public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
             get { return ImmutableArray.Create(VinylAnalyzer.DiagnosticId); }
@@ -43,9 +45,9 @@ namespace Vinyl
             // Register a code action that will invoke the fix.
             context.RegisterCodeFix(
                 CodeAction.Create(
-                    title: CodeFixResources.CodeFixTitle,
+                    title: CodeFixTitle,
                     createChangedSolution: c => MakeUppercaseAsync(context.Document, declaration, c),
-                    equivalenceKey: nameof(CodeFixResources.CodeFixTitle)),
+                    equivalenceKey: nameof(CodeFixTitle)),
                 diagnostic);
         }
 
