@@ -1,10 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using System.Threading.Tasks;
+
 using VerifyCS = Vinyl.Test.CSharpCodeFixVerifier<
     Vinyl.VinylAnalyzer,
     Vinyl.VinylCodeFixProvider>;
 
-namespace Vinyl.Test
+namespace Vinyl.UnitTests
 {
     [TestClass]
     public class VinylUnitTest

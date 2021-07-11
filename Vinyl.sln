@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vinyl.CodeFixes", "src\Viny
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vinyl.Package", "src\Vinyl.Package\Vinyl.Package.csproj", "{14C09D12-A1C5-4AF4-BA22-4E254504FF43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vinyl.Test", "tests\Vinyl.Test\Vinyl.Test.csproj", "{7D985F72-B797-49F2-81E0-61EF9C594154}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vinyl.UnitTests", "tests\Vinyl.UnitTests\Vinyl.UnitTests.csproj", "{7D985F72-B797-49F2-81E0-61EF9C594154}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vinyl.Vsix", "src\Vinyl.Vsix\Vinyl.Vsix.csproj", "{BCC569B5-7568-446A-9BDD-8260F86A83A9}"
 EndProject
