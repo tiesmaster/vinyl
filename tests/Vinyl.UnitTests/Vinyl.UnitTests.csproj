@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Vinyl.CodeFixes\Vinyl.CodeFixes.csproj" />
-    <ProjectReference Include="..\..\src\Vinyl\Vinyl.csproj" />
+    <ProjectReference Include="..\..\src\Vinyl.Analyzers\Vinyl.Analyzers.csproj" />
   </ItemGroup>
 
 </Project>

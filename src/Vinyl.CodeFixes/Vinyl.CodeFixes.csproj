@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Vinyl\Vinyl.csproj" />
+    <ProjectReference Include="..\Vinyl.Analyzers\Vinyl.Analyzers.csproj" />
   </ItemGroup>
 
 </Project>

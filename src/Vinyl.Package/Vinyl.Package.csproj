@@ -28,7 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Vinyl.CodeFixes\Vinyl.CodeFixes.csproj" />
-    <ProjectReference Include="..\Vinyl\Vinyl.csproj" />
+    <ProjectReference Include="..\Vinyl.Analyzers\Vinyl.Analyzers.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,7 +37,7 @@
 
   <Target Name="_AddAnalyzersToOutput">
     <ItemGroup>
-      <TfmSpecificPackageFile Include="$(OutputPath)\Vinyl.dll" PackagePath="analyzers/dotnet/cs" />
+      <TfmSpecificPackageFile Include="$(OutputPath)\Vinyl.Analyzers.dll" PackagePath="analyzers/dotnet/cs" />
       <TfmSpecificPackageFile Include="$(OutputPath)\Vinyl.CodeFixes.dll" PackagePath="analyzers/dotnet/cs" />
     </ItemGroup>
   </Target>

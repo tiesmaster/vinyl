@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vinyl", "src\Vinyl\Vinyl.csproj", "{1C08E817-FB89-4E7E-BC34-6B3DDB596A35}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vinyl.Analyzers", "src\Vinyl.Analyzers\Vinyl.Analyzers.csproj", "{1C08E817-FB89-4E7E-BC34-6B3DDB596A35}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vinyl.CodeFixes", "src\Vinyl.CodeFixes\Vinyl.CodeFixes.csproj", "{1846ABC4-D1FA-4660-BEEA-16579A61815D}"
 EndProject
