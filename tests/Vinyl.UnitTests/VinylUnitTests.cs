@@ -1,6 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Threading.Tasks;
 
-using System.Threading.Tasks;
+using Xunit;
 
 using VerifyCS = Vinyl.UnitTests.CSharpCodeFixVerifier<
     Vinyl.VinylAnalyzer,
@@ -8,11 +8,10 @@ using VerifyCS = Vinyl.UnitTests.CSharpCodeFixVerifier<
 
 namespace Vinyl.UnitTests
 {
-    [TestClass]
     public class VinylUnitTest
     {
         //No diagnostics expected to show up
-        [TestMethod]
+        [Fact]
         public async Task TestMethod1()
         {
             var test = @"";
@@ -21,7 +20,7 @@ namespace Vinyl.UnitTests
         }
 
         //Diagnostic and CodeFix both triggered and checked for
-        [TestMethod]
+        [Fact]
         public async Task TestMethod2()
         {
             var test = @"
