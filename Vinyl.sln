@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vinyl", "Vinyl\Vinyl\Vinyl.csproj", "{1C08E817-FB89-4E7E-BC34-6B3DDB596A35}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vinyl", "src\Vinyl\Vinyl.csproj", "{1C08E817-FB89-4E7E-BC34-6B3DDB596A35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vinyl.CodeFixes", "Vinyl\Vinyl.CodeFixes\Vinyl.CodeFixes.csproj", "{1846ABC4-D1FA-4660-BEEA-16579A61815D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vinyl.CodeFixes", "src\Vinyl.CodeFixes\Vinyl.CodeFixes.csproj", "{1846ABC4-D1FA-4660-BEEA-16579A61815D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vinyl.Package", "Vinyl\Vinyl.Package\Vinyl.Package.csproj", "{14C09D12-A1C5-4AF4-BA22-4E254504FF43}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vinyl.Package", "src\Vinyl.Package\Vinyl.Package.csproj", "{14C09D12-A1C5-4AF4-BA22-4E254504FF43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vinyl.Test", "Vinyl\Vinyl.Test\Vinyl.Test.csproj", "{7D985F72-B797-49F2-81E0-61EF9C594154}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vinyl.Test", "src\Vinyl.Test\Vinyl.Test.csproj", "{7D985F72-B797-49F2-81E0-61EF9C594154}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vinyl.Vsix", "Vinyl\Vinyl.Vsix\Vinyl.Vsix.csproj", "{BCC569B5-7568-446A-9BDD-8260F86A83A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vinyl.Vsix", "src\Vinyl.Vsix\Vinyl.Vsix.csproj", "{BCC569B5-7568-446A-9BDD-8260F86A83A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
