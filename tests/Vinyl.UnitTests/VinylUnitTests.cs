@@ -2,7 +2,7 @@
 
 using System.Threading.Tasks;
 
-using VerifyCS = Vinyl.Test.CSharpCodeFixVerifier<
+using VerifyCS = Vinyl.UnitTests.CSharpCodeFixVerifier<
     Vinyl.VinylAnalyzer,
     Vinyl.VinylCodeFixProvider>;
 

@@ -4,10 +4,11 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Testing;
 using Microsoft.CodeAnalysis.Testing.Verifiers;
 using Microsoft.CodeAnalysis.VisualBasic.Testing;
+
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Vinyl.Test
+namespace Vinyl.UnitTests
 {
     public static partial class VisualBasicCodeFixVerifier<TAnalyzer, TCodeFix>
         where TAnalyzer : DiagnosticAnalyzer, new()

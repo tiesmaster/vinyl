@@ -1,9 +1,10 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+
 using System;
 using System.Collections.Immutable;
 
-namespace Vinyl.Test
+namespace Vinyl.UnitTests
 {
     internal static class CSharpVerifierHelper
     {

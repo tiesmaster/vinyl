@@ -1,9 +1,10 @@
 ﻿using Microsoft.CodeAnalysis.CodeRefactorings;
 using Microsoft.CodeAnalysis.Testing;
+
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Vinyl.Test
+namespace Vinyl.UnitTests
 {
     public static partial class CSharpCodeRefactoringVerifier<TCodeRefactoring>
         where TCodeRefactoring : CodeRefactoringProvider, new()

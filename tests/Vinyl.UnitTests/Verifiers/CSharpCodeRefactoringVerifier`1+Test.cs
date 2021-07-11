@@ -2,7 +2,7 @@
 using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Testing.Verifiers;
 
-namespace Vinyl.Test
+namespace Vinyl.UnitTests
 {
     public static partial class CSharpCodeRefactoringVerifier<TCodeRefactoring>
         where TCodeRefactoring : CodeRefactoringProvider, new()

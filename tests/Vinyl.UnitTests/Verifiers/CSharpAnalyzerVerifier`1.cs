@@ -3,10 +3,11 @@ using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Testing;
 using Microsoft.CodeAnalysis.Testing.Verifiers;
+
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Vinyl.Test
+namespace Vinyl.UnitTests
 {
     public static partial class CSharpAnalyzerVerifier<TAnalyzer>
         where TAnalyzer : DiagnosticAnalyzer, new()

@@ -2,7 +2,7 @@
 using Microsoft.CodeAnalysis.Testing.Verifiers;
 using Microsoft.CodeAnalysis.VisualBasic.Testing;
 
-namespace Vinyl.Test
+namespace Vinyl.UnitTests
 {
     public static partial class VisualBasicCodeRefactoringVerifier<TCodeRefactoring>
         where TCodeRefactoring : CodeRefactoringProvider, new()
