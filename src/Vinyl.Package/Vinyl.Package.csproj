@@ -28,7 +28,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Vinyl.CodeFixes\Vinyl.CodeFixes.csproj" />
-    <ProjectReference Include="..\Vinyl.Analyzers\Vinyl.Analyzers.csproj" />
   </ItemGroup>
 
   <ItemGroup>

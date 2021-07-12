@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis" Version="3.3.1" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing.XUnit " Version="1.1.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing.XUnit" Version="1.1.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeRefactoring.Testing.XUnit" Version="1.1.0" />
@@ -22,7 +21,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Vinyl.CodeFixes\Vinyl.CodeFixes.csproj" />
-    <ProjectReference Include="..\..\src\Vinyl.Analyzers\Vinyl.Analyzers.csproj" />
   </ItemGroup>
 
 </Project>
