@@ -33,6 +33,7 @@
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="Exists('$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets')" />
 
   <ItemGroup>
+    <ProjectReference Include="..\Vinyl.Analyzers\Vinyl.Analyzers.csproj" />
     <ProjectReference Include="..\Vinyl.CodeFixes\Vinyl.CodeFixes.csproj" />
   </ItemGroup>
 

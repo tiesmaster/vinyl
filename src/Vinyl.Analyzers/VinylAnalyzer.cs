@@ -1,13 +1,10 @@
-﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
-
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Threading;
+
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
+
+using Vinyl.Core;
 
 namespace Vinyl
 {
@@ -41,7 +38,7 @@ namespace Vinyl
             var namedTypeSymbol = (INamedTypeSymbol)context.Symbol;
 
             // Find just those named type symbols with names containing lowercase letters.
-            if (namedTypeSymbol.Name.ToCharArray().Any(char.IsLower))
+            if (Test.Hoi() && namedTypeSymbol.Name.ToCharArray().Any(char.IsLower))
             {
                 // For all such symbols, produce a diagnostic.
                 var diagnostic = Diagnostic.Create(Rule, namedTypeSymbol.Locations[0], namedTypeSymbol.Name);
