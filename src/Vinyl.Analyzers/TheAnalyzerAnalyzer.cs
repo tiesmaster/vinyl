@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 
-namespace Analyzer2
+namespace Vinyl
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class TheAnalyzerAnalyzer : DiagnosticAnalyzer

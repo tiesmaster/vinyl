@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Analyzer2
+namespace Vinyl
 {
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(TheAnalyzerCodeFixProvider)), Shared]
     public class TheAnalyzerCodeFixProvider : CodeFixProvider

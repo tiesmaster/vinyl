@@ -3,15 +3,15 @@ using System.Threading.Tasks;
 using Xunit;
 
 using VerifyCS = Vinyl.UnitTests.CSharpCodeFixVerifier<
-    Analyzer2.TheAnalyzerAnalyzer,
-    Analyzer2.TheAnalyzerCodeFixProvider>;
+    Vinyl.TheAnalyzerAnalyzer,
+    Vinyl.TheAnalyzerCodeFixProvider>;
 
 // docs: https://github.com/dotnet/roslyn-sdk/blob/main/src/Microsoft.CodeAnalysis.Testing/README.md
 // tut:  https://docs.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/tutorials/how-to-write-csharp-analyzer-code-fix
 // awes: https://project-awesome.org/ironcev/awesome-roslyn
 // src:  https://sourceroslyn.io/
 
-namespace Analyzer2.Test
+namespace Vinyl.Test
 {
     public class TheAnalyzerUnitTest
     {
