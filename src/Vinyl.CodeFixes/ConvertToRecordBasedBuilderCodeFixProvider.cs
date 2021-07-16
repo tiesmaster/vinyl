@@ -16,24 +16,18 @@ namespace Vinyl
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(ConvertToRecordBasedBuilderCodeFixProvider)), Shared]
     public class ConvertToRecordBasedBuilderCodeFixProvider : CodeFixProvider
     {
-        private static readonly string CodeFixTitle = "Convert to record-based builder";
+        private const string CodeFixTitle = "Convert to record-based builder";
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds
-        {
-            get { return ImmutableArray.Create(ConvertToRecordBasedBuilderAnalyzer.DiagnosticId); }
-        }
+            => ImmutableArray.Create(ConvertToRecordBasedBuilderAnalyzer.DiagnosticId);
 
         public sealed override FixAllProvider GetFixAllProvider()
-        {
-            // See https://github.com/dotnet/roslyn/blob/master/docs/analyzers/FixAllProvider.md for more information on Fix All Providers
-            return WellKnownFixAllProviders.BatchFixer;
-        }
+            => WellKnownFixAllProviders.BatchFixer;
 
         public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
 
-            // TODO: Replace the following code with your own analysis, generating a CodeAction for each fix to suggest
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
 
