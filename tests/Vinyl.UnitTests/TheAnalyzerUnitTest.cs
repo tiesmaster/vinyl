@@ -6,11 +6,6 @@ using VerifyCS = Vinyl.UnitTests.CSharpCodeFixVerifier<
     Vinyl.TheAnalyzerAnalyzer,
     Vinyl.TheAnalyzerCodeFixProvider>;
 
-// docs: https://github.com/dotnet/roslyn-sdk/blob/main/src/Microsoft.CodeAnalysis.Testing/README.md
-// tut:  https://docs.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/tutorials/how-to-write-csharp-analyzer-code-fix
-// awes: https://project-awesome.org/ironcev/awesome-roslyn
-// src:  https://sourceroslyn.io/
-
 namespace Vinyl.Test
 {
     public class TheAnalyzerUnitTest
