@@ -4,3 +4,6 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    ignore:
+      - dependency-name: "Microsoft.CodeAnalysis.*"
+        update-types: ["version-update:semver-patch"]
