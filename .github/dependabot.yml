@@ -1,0 +1,5 @@
+version: 2
+updates:
+  - package_manager: "dotnet:nuget"
+    directory: "/"
+    update_schedule: "daily"
