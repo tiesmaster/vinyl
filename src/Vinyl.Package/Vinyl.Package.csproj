@@ -9,7 +9,6 @@
 
   <PropertyGroup>
     <PackageId>Vinyl</PackageId>
-    <PackageVersion>1.0.0.0</PackageVersion>
     <Authors>tiesmaster</Authors>
     <PackageLicenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</PackageLicenseUrl>
     <PackageProjectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</PackageProjectUrl>
