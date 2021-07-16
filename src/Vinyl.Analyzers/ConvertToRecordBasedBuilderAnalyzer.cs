@@ -20,7 +20,7 @@ namespace Vinyl
         private const string _messageFormat = "Class-based builder '{0}' can be converted to record-based builder";
         private const string _description = "Class-based builder should be using records instead.";
 
-        private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(
+        private static readonly DiagnosticDescriptor _rule = new DiagnosticDescriptor(
             DiagnosticId,
             _title,
             _messageFormat,
@@ -29,7 +29,7 @@ namespace Vinyl
             isEnabledByDefault: true,
             description: _description);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(_rule);
 
         public override void Initialize(AnalysisContext context)
         {
@@ -50,7 +50,7 @@ namespace Vinyl
                     context.Node.SyntaxTree,
                     TextSpan.FromBounds(classdeclaration.Keyword.Span.Start, classdeclaration.Identifier.Span.End));
 
-                var diagnostic = Diagnostic.Create(Rule, location, classdeclaration.Identifier.ValueText);
+                var diagnostic = Diagnostic.Create(_rule, location, classdeclaration.Identifier.ValueText);
                 context.ReportDiagnostic(diagnostic);
             }
         }
