@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Text;
 namespace Vinyl
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class TheAnalyzerAnalyzer : DiagnosticAnalyzer
+    public class ConvertToRecordBasedBuilderAnalyzer : DiagnosticAnalyzer
     {
         public const string DiagnosticId = "TheAnalyzer";
 

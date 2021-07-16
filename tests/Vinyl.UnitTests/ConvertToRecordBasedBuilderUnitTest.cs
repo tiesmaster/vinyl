@@ -3,12 +3,12 @@ using System.Threading.Tasks;
 using Xunit;
 
 using VerifyCS = Vinyl.UnitTests.CSharpCodeFixVerifier<
-    Vinyl.TheAnalyzerAnalyzer,
-    Vinyl.TheAnalyzerCodeFixProvider>;
+    Vinyl.ConvertToRecordBasedBuilderAnalyzer,
+    Vinyl.ConvertToRecordBasedBuilderCodeFixProvider>;
 
 namespace Vinyl.Test
 {
-    public class TheAnalyzerUnitTest
+    public class ConvertToRecordBasedBuilderUnitTest
     {
         [Fact]
         public async Task NoCodeNoDiagnostic()

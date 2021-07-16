@@ -13,12 +13,12 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Vinyl
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(TheAnalyzerCodeFixProvider)), Shared]
-    public class TheAnalyzerCodeFixProvider : CodeFixProvider
+    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(ConvertToRecordBasedBuilderCodeFixProvider)), Shared]
+    public class ConvertToRecordBasedBuilderCodeFixProvider : CodeFixProvider
     {
         public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
-            get { return ImmutableArray.Create(TheAnalyzerAnalyzer.DiagnosticId); }
+            get { return ImmutableArray.Create(ConvertToRecordBasedBuilderAnalyzer.DiagnosticId); }
         }
 
         public sealed override FixAllProvider GetFixAllProvider()
