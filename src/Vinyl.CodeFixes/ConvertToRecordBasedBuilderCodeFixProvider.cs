@@ -16,6 +16,8 @@ namespace Vinyl
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(ConvertToRecordBasedBuilderCodeFixProvider)), Shared]
     public class ConvertToRecordBasedBuilderCodeFixProvider : CodeFixProvider
     {
+        private static readonly string CodeFixTitle = "Convert to record-based builder";
+
         public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
             get { return ImmutableArray.Create(ConvertToRecordBasedBuilderAnalyzer.DiagnosticId); }
@@ -41,9 +43,9 @@ namespace Vinyl
             // Register a code action that will invoke the fix.
             context.RegisterCodeFix(
                 CodeAction.Create(
-                    title: "Convert to record-based builder",
+                    title: CodeFixTitle,
                     createChangedSolution: c => ConvertToRecordBasedBuilder(context.Document, declaration, c),
-                    equivalenceKey: "Hoi"),
+                    equivalenceKey: CodeFixTitle),
                 diagnostic);
         }
 
