@@ -10,10 +10,10 @@
   <PropertyGroup>
     <PackageId>Vinyl</PackageId>
     <Authors>tiesmaster</Authors>
-    <PackageLicenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</PackageLicenseUrl>
-    <PackageProjectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</PackageProjectUrl>
-    <PackageIconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</PackageIconUrl>
-    <RepositoryUrl>http://REPOSITORY_URL_HERE_OR_DELETE_THIS_LINE</RepositoryUrl>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/tiesmaster/vinyl</PackageProjectUrl>
+    <PackageIconUrl>https://en.wikipedia.org/wiki/LP_record#/media/File:12in-Vinyl-LP-Record-Angle.jpg</PackageIconUrl>
+    <RepositoryUrl>https://github.com/tiesmaster/vinyl</RepositoryUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description>Vinyl</Description>
     <PackageReleaseNotes>Summary of changes made in this release of the package.</PackageReleaseNotes>
