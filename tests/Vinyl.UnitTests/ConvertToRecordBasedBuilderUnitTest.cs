@@ -63,7 +63,7 @@ namespace TestProject
     }
 }";
 
-            var expected = VerifyCS.Diagnostic("TheAnalyzer").WithLocation(0).WithArguments("BookBuilder");
+            var expected = VerifyCS.Diagnostic("VINYL0001").WithLocation(0).WithArguments("BookBuilder");
             await VerifyCS.VerifyAnalyzerAsync(test, expected);
         }
 
@@ -189,7 +189,7 @@ namespace TestProject
     }
 }";
 
-            var expected = VerifyCS.Diagnostic("TheAnalyzer").WithLocation(0).WithArguments("BookBuilder");
+            var expected = VerifyCS.Diagnostic("VINYL0001").WithLocation(0).WithArguments("BookBuilder");
             await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
         }
     }
