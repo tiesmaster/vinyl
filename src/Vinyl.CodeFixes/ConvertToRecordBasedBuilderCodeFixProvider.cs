@@ -131,19 +131,36 @@ namespace Vinyl
             // ==================================================================================================================
 
             // Convert default-setting ctor -> Default property
-            var defaultSettingConstructor = newRecordDeclaration.Members.Single(node =>
+            var defaultSettingConstructor = newRecordDeclaration.Members.SingleOrDefault(node =>
                 node.IsKind(SyntaxKind.ConstructorDeclaration) && !((ConstructorDeclarationSyntax)node).ParameterList.Parameters.Any());
 
-            var typeSyntax = SyntaxFactory.ParseTypeName(newRecordDeclaration.Identifier.Text);
-            var defaultSettingProperty = SyntaxFactory
-                .PropertyDeclaration(typeSyntax, "Default")
-                .WithModifiers(
-                    SyntaxFactory.Token(SyntaxKind.PublicKeyword),
-                    SyntaxFactory.Token(SyntaxKind.StaticKeyword))
-                .WithExpressionBody(ConvertDefaultFieldSettingToContructorInvocation((ConstructorDeclarationSyntax)defaultSettingConstructor))
-                .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
+            if (defaultSettingConstructor is object)
+            {
+                var typeSyntax = SyntaxFactory.ParseTypeName(newRecordDeclaration.Identifier.Text);
+                var defaultSettingProperty = SyntaxFactory
+                    .PropertyDeclaration(typeSyntax, "Default")
+                    .WithModifiers(
+                        SyntaxFactory.Token(SyntaxKind.PublicKeyword),
+                        SyntaxFactory.Token(SyntaxKind.StaticKeyword))
+                    .WithExpressionBody(ConvertDefaultFieldSettingToContructorInvocation((ConstructorDeclarationSyntax)defaultSettingConstructor))
+                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
 
-            newRecordDeclaration = newRecordDeclaration.ReplaceNode(defaultSettingConstructor, defaultSettingProperty);
+                newRecordDeclaration = newRecordDeclaration.ReplaceNode(defaultSettingConstructor, defaultSettingProperty);
+            }
+            else
+            {
+                var typeSyntax = SyntaxFactory.ParseTypeName(newRecordDeclaration.Identifier.Text);
+                var defaultSettingProperty = SyntaxFactory
+                    .PropertyDeclaration(typeSyntax, "Default")
+                    .WithModifiers(
+                        SyntaxFactory.Token(SyntaxKind.PublicKeyword),
+                        SyntaxFactory.Token(SyntaxKind.StaticKeyword))
+                    .WithExpressionBody(GetContructorInvocationFromParameterList(parameterList))
+                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
+
+                newRecordDeclaration = newRecordDeclaration
+                    .WithMembers(newRecordDeclaration.Members.Insert(0, defaultSettingProperty));
+            }
 
             // Remove the ctor with parameters
             bool IsPrimaryConstructor(MemberDeclarationSyntax node)
@@ -231,6 +248,22 @@ namespace Vinyl
             var arguments = defaultSettingConstructor.Body.Statements
                 .Cast<ExpressionStatementSyntax>()
                 .Select(statement => ConvertFieldAssignmentToNamedArgument((AssignmentExpressionSyntax)statement.Expression))
+                .ToSeparatedSyntaxList();
+
+            return SyntaxFactory
+                .ArrowExpressionClause(SyntaxFactory
+                .ImplicitObjectCreationExpression()
+                .WithArgumentList(SyntaxFactory.ArgumentList(arguments)));
+        }
+
+        private ArrowExpressionClauseSyntax GetContructorInvocationFromParameterList(ParameterListSyntax parameterList)
+        {
+            ArgumentSyntax ConvertParameterToArgumentWithDefault(ParameterSyntax parameter) => SyntaxFactory
+                .Argument(SyntaxFactory.ParseExpression("default"))
+                .WithNameColon(SyntaxFactory.NameColon(parameter.Identifier.ValueText));
+
+            var arguments = parameterList.Parameters
+                .Select(ConvertParameterToArgumentWithDefault)
                 .ToSeparatedSyntaxList();
 
             return SyntaxFactory
