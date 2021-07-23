@@ -73,10 +73,13 @@ namespace Vinyl
 
         private bool IsImmutableFluentBuilder(ClassDeclarationSyntax classDeclaration)
         {
-            return !classDeclaration.Members.Any(member =>
-                member.IsKind(SyntaxKind.MethodDeclaration)
-                && ((MethodDeclarationSyntax)member).Identifier.ValueText.StartsWith("With")
-                && ((MethodDeclarationSyntax)member).Body?.Statements.Any(x => x is ReturnStatementSyntax @return && @return.Expression.IsKind(SyntaxKind.ThisExpression)) == true);
+            return !classDeclaration.Members
+                .Any(member =>
+                    member is MethodDeclarationSyntax method
+                    && method.Identifier.ValueText.StartsWith("With")
+                    && method.Body?.Statements.Any(x =>
+                        x is ReturnStatementSyntax @return
+                        && @return.Expression.IsKind(SyntaxKind.ThisExpression)) == true);
         }
     }
 }
