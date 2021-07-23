@@ -223,24 +223,6 @@ namespace Vinyl
             return SyntaxFactory.ParameterList(SyntaxFactory.SeparatedList(parameters));
         }
 
-        private ArrowExpressionClauseSyntax ConvertDefaultFieldSettingToContructorInvocation(
-            ConstructorDeclarationSyntax defaultSettingConstructor)
-        {
-            ArgumentSyntax ConvertFieldAssignmentToNamedArgument(AssignmentExpressionSyntax assignmentExpression) => SyntaxFactory
-                .Argument(assignmentExpression.Right)
-                .WithNameColon(SyntaxFactory.NameColon((IdentifierNameSyntax)assignmentExpression.Left));
-
-            var arguments = defaultSettingConstructor.Body.Statements
-                .Cast<ExpressionStatementSyntax>()
-                .Select(statement => ConvertFieldAssignmentToNamedArgument((AssignmentExpressionSyntax)statement.Expression))
-                .ToSeparatedSyntaxList();
-
-            return SyntaxFactory
-                .ArrowExpressionClause(SyntaxFactory
-                .ImplicitObjectCreationExpression()
-                .WithArgumentList(SyntaxFactory.ArgumentList(arguments)));
-        }
-
         private MemberDeclarationSyntax FindBestMatchForDefaultSettingConstructor(
             RecordDeclarationSyntax newRecordDeclaration,
             ParameterListSyntax parameterList)
