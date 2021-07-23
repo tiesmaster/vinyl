@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
@@ -15,5 +16,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
         public static HashSet<T> ToHashSet<T>(this IEnumerable<T> source)
             => new HashSet<T>(source);
+
+        public static HashSet<string> ToParameterNames(this ParameterListSyntax parameterList)
+            => parameterList.Parameters
+                .Select(node => node.Identifier.Text)
+                .ToHashSet();
     }
 }

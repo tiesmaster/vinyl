@@ -127,10 +127,11 @@ namespace Vinyl
             newRecordDeclaration = newClassDeclaration.CopyAnnotationsTo(newRecordDeclaration);
 
             // ==================================================================================================================
-            // Step 3: Remove default ctor and default-setting ctor -> Default property
+            // Step 3: Add default-setting ctor, and set defaults based on best matching constructor
+            //         setting defaults, and remove all constructors
             // ==================================================================================================================
 
-            // Convert default-setting ctor -> Default property
+            // Find best matching default setting constructor and create default property with defaults from that constructor
             var bestMatchDefaultSettingContructor = FindBestMatchForDefaultSettingConstructor(newRecordDeclaration, parameterList);
 
             var defaultValueLookup = CalculateDefaultValuesFromFieldSetting(
@@ -249,9 +250,7 @@ namespace Vinyl
                 .Where(node => node.IsKind(SyntaxKind.ConstructorDeclaration))
                 .Cast<ConstructorDeclarationSyntax>();
 
-            var recordParameterNames = parameterList.Parameters
-                .Select(node => node.Identifier.Text)
-                .ToHashSet();
+            var recordParameterNames = parameterList.ToParameterNames();
 
             bool IsDefaultSettingParameterAssignment(StatementSyntax statement, HashSet<string> constructorParameterNames)
             {
@@ -265,9 +264,7 @@ namespace Vinyl
 
             int GetCountDefaultSettingParameterAssignments(ConstructorDeclarationSyntax contructor)
             {
-                var constructorParameterNames = contructor.ParameterList.Parameters
-                    .Select(node => node.Identifier.Text)
-                    .ToHashSet();
+                var constructorParameterNames = contructor.ParameterList.ToParameterNames();
 
                 return contructor.Body.Statements
                     .Count(statement => IsDefaultSettingParameterAssignment(statement, constructorParameterNames));
@@ -282,13 +279,8 @@ namespace Vinyl
             ConstructorDeclarationSyntax bestMatchDefaultSettingContructor,
             ParameterListSyntax parameterList)
         {
-            var constructorParameterNames = bestMatchDefaultSettingContructor.ParameterList.Parameters
-                .Select(node => node.Identifier.Text)
-                .ToHashSet();
-
-            var recordParameterNames = parameterList.Parameters
-                .Select(node => node.Identifier.Text)
-                .ToHashSet();
+            var constructorParameterNames = bestMatchDefaultSettingContructor.ParameterList.ToParameterNames();
+            var recordParameterNames = parameterList.ToParameterNames();
 
             var defaultValuesLookup = new Dictionary<string, ExpressionSyntax>();
             foreach (var statement in bestMatchDefaultSettingContructor.Body.Statements)
