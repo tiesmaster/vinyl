@@ -131,11 +131,13 @@ namespace Vinyl
             //         setting defaults, and remove all constructors
             // ==================================================================================================================
 
+            var recordParameterNames = parameterList.ToParameterNames();
+
             // Find best matching default setting constructor and create default property with defaults from that constructor
-            var bestMatchDefaultSettingContructor = FindBestMatchForDefaultSettingConstructor(newRecordDeclaration, parameterList);
+            var bestMatchDefaultSettingContructor = FindBestMatchForDefaultSettingConstructor(newRecordDeclaration, recordParameterNames);
 
             var defaultValueLookup = CalculateDefaultValuesFromFieldSetting(
-                (ConstructorDeclarationSyntax)bestMatchDefaultSettingContructor, parameterList);
+                (ConstructorDeclarationSyntax)bestMatchDefaultSettingContructor, recordParameterNames);
 
             var typeSyntax = SyntaxFactory.ParseTypeName(newRecordDeclaration.Identifier.Text);
             var defaultSettingProperty = SyntaxFactory
@@ -225,14 +227,12 @@ namespace Vinyl
 
         private MemberDeclarationSyntax FindBestMatchForDefaultSettingConstructor(
             RecordDeclarationSyntax newRecordDeclaration,
-            ParameterListSyntax parameterList)
+            HashSet<string> recordParameterNames)
         {
             var allConstructors = newRecordDeclaration
                 .Members
                 .Where(node => node.IsKind(SyntaxKind.ConstructorDeclaration))
                 .Cast<ConstructorDeclarationSyntax>();
-
-            var recordParameterNames = parameterList.ToParameterNames();
 
             bool IsDefaultSettingParameterAssignment(StatementSyntax statement, HashSet<string> constructorParameterNames)
             {
@@ -259,10 +259,9 @@ namespace Vinyl
 
         private Dictionary<string, ExpressionSyntax> CalculateDefaultValuesFromFieldSetting(
             ConstructorDeclarationSyntax bestMatchDefaultSettingContructor,
-            ParameterListSyntax parameterList)
+            HashSet<string> recordParameterNames)
         {
             var constructorParameterNames = bestMatchDefaultSettingContructor.ParameterList.ToParameterNames();
-            var recordParameterNames = parameterList.ToParameterNames();
 
             var defaultValuesLookup = new Dictionary<string, ExpressionSyntax>();
             foreach (var statement in bestMatchDefaultSettingContructor.Body.Statements)
