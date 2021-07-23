@@ -44,7 +44,8 @@ namespace Vinyl
             var classdeclaration = (ClassDeclarationSyntax)context.Node;
 
             if (classdeclaration.Identifier.ValueText.EndsWith("Builder")
-                && AllFieldsHaveFieldNamingConvention(classdeclaration))
+                && AllFieldsHaveFieldNamingConvention(classdeclaration)
+                && IsImmutableFluentBuilder(classdeclaration))
             {
                 var location = Location.Create(
                     context.Node.SyntaxTree,
@@ -68,6 +69,14 @@ namespace Vinyl
                 .Cast<FieldDeclarationSyntax>();
 
             return fields.All(x => HasFieldNamingConvention(x.Declaration.Variables.Single().Identifier.Text));
+        }
+
+        private bool IsImmutableFluentBuilder(ClassDeclarationSyntax classDeclaration)
+        {
+            return !classDeclaration.Members.Any(member =>
+                member.IsKind(SyntaxKind.MethodDeclaration)
+                && ((MethodDeclarationSyntax)member).Identifier.ValueText.StartsWith("With")
+                && ((MethodDeclarationSyntax)member).Body?.Statements.Any(x => x is ReturnStatementSyntax @return && @return.Expression.IsKind(SyntaxKind.ThisExpression)) == true);
         }
     }
 }
