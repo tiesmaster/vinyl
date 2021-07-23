@@ -231,26 +231,8 @@ namespace Vinyl
         {
             var allConstructors = newRecordDeclaration.Members.GetContructors();
 
-            bool IsDefaultSettingParameterAssignment(StatementSyntax statement, HashSet<string> constructorParameterNames)
-            {
-                return statement is ExpressionStatementSyntax stmt
-                    && stmt.Expression is AssignmentExpressionSyntax assignment
-                    && assignment.Left is IdentifierNameSyntax fieldSettingIdent
-                    && recordParameterNames.Contains(fieldSettingIdent.Identifier.Text)
-                    && !(assignment.Right is IdentifierNameSyntax parameterIdent
-                        && constructorParameterNames.Contains(parameterIdent.Identifier.Text));
-            }
-
-            int GetCountDefaultSettingParameterAssignments(ConstructorDeclarationSyntax contructor)
-            {
-                var constructorParameterNames = contructor.ParameterList.ToParameterNames();
-
-                return contructor.Body.Statements
-                    .Count(statement => IsDefaultSettingParameterAssignment(statement, constructorParameterNames));
-            }
-
             return allConstructors
-                .OrderBy(node => GetCountDefaultSettingParameterAssignments(node))
+                .OrderBy(node => GetDefaultSettingParameterAssignments(node, recordParameterNames).Count())
                 .Last();
         }
 
@@ -283,6 +265,27 @@ namespace Vinyl
             }
 
             return defaultValuesLookup;
+        }
+
+        private IEnumerable<AssignmentExpressionSyntax> GetDefaultSettingParameterAssignments(
+            ConstructorDeclarationSyntax contructor,
+            HashSet<string> recordParameterNames)
+        {
+            var constructorParameterNames = contructor.ParameterList.ToParameterNames();
+
+            bool IsDefaultSettingParameterAssignment(StatementSyntax statement)
+            {
+                return statement is ExpressionStatementSyntax stmt
+                    && stmt.Expression is AssignmentExpressionSyntax assignment
+                    && assignment.Left is IdentifierNameSyntax fieldSettingIdent
+                    && recordParameterNames.Contains(fieldSettingIdent.Identifier.Text)
+                    && !(assignment.Right is IdentifierNameSyntax parameterIdent
+                        && constructorParameterNames.Contains(parameterIdent.Identifier.Text));
+            }
+
+            return contructor.Body.Statements
+                .Where(statement => IsDefaultSettingParameterAssignment(statement))
+                .Select(statement => (AssignmentExpressionSyntax)((ExpressionStatementSyntax)statement).Expression);
         }
 
         private ArrowExpressionClauseSyntax GetContructorInvocationFromParameterList(
