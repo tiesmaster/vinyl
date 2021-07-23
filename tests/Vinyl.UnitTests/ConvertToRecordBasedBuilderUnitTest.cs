@@ -270,5 +270,50 @@ namespace TestProject
             var expected = VerifyCS.Diagnostic("VINYL0001").WithLocation(0).WithArguments("BookBuilder");
             await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
         }
+
+        [Fact]
+        public async Task GivenClassBasedBuilderNonImmutable_WhenAnalysing_ThenDoesNotReport()
+        {
+            var test = @"
+namespace TestProject
+{
+    public {|#0:class BookBuilder|}
+    {
+        private readonly BookDto _dto;
+
+        public BookBuilder()
+        {
+            _dto = new BookDto
+            {
+                Id = 0,
+                Title = string.Empty
+            };
+        }
+
+        public BookBuilder WithId(int id)
+        {
+            _dto.Id = id;
+            return this;
+        }
+
+        public BookBuilder WithTitle(string title)
+        {
+            _dto.Title = title;
+            return this;
+        }
+
+        public BookDto Build() => _dto;
+        public static implicit operator BookDto(BookBuilder builder) => builder.Build();
+    }
+
+    public class BookDto
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+    }
+}";
+
+            await VerifyCS.VerifyAnalyzerAsync(test);
+        }
     }
 }
