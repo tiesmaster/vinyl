@@ -126,16 +126,16 @@ namespace TestProject
         private readonly int _id;
         private readonly string _title;
 
-        public BookBuilder()
-        {
-            _id = default;
-            _title = default;
-        }
-
         public BookBuilder(int id, string title)
         {
             _id = id;
             _title = title;
+        }
+
+        public BookBuilder()
+        {
+            _id = default;
+            _title = string.Empty;
         }
 
         public BookBuilder WithId(int id) => new BookBuilder(id, _title);
@@ -165,7 +165,7 @@ namespace TestProject
 {
     public record BookBuilder(int Id, string Title)
     {
-        public static BookBuilder Default => new(Id: default, Title: default);
+        public static BookBuilder Default => new(Id: default, Title: string.Empty);
 
         public BookBuilder WithId(int id) => this with { Id = id };
         public BookBuilder WithTitle(string title) => this with { Title = title };

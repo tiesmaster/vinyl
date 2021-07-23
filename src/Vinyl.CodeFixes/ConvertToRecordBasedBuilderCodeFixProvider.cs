@@ -134,7 +134,7 @@ namespace Vinyl
             var defaultSettingConstructor = newRecordDeclaration.Members.SingleOrDefault(node =>
                 node.IsKind(SyntaxKind.ConstructorDeclaration) && !((ConstructorDeclarationSyntax)node).ParameterList.Parameters.Any());
 
-            if (defaultSettingConstructor is object)
+            if (false)
             {
                 var typeSyntax = SyntaxFactory.ParseTypeName(newRecordDeclaration.Identifier.Text);
                 var defaultSettingProperty = SyntaxFactory
@@ -150,8 +150,12 @@ namespace Vinyl
             }
             else
             {
-                var bestMatchDefaultSettingContructor = newRecordDeclaration.Members.First(node =>
-                    node.IsKind(SyntaxKind.ConstructorDeclaration));
+                // TODO:
+                //   * find match implementeren: aantal parameter setting assignments (zonder parameter) per constructor berekenen en sorteren daarop
+                //   * tests terugdraaien
+                //   * if(false) weghalen
+
+                var bestMatchDefaultSettingContructor = FindBestMatchForDefaultSettingConstructor(newRecordDeclaration, parameterList);
 
                 var defaultValueLookup = CalculateDefaultValuesFromFieldSetting(
                     (ConstructorDeclarationSyntax)bestMatchDefaultSettingContructor, parameterList);
@@ -259,6 +263,44 @@ namespace Vinyl
                 .ArrowExpressionClause(SyntaxFactory
                 .ImplicitObjectCreationExpression()
                 .WithArgumentList(SyntaxFactory.ArgumentList(arguments)));
+        }
+
+        private MemberDeclarationSyntax FindBestMatchForDefaultSettingConstructor(
+            RecordDeclarationSyntax newRecordDeclaration,
+            ParameterListSyntax parameterList)
+        {
+            var allConstructors = newRecordDeclaration
+                .Members
+                .Where(node => node.IsKind(SyntaxKind.ConstructorDeclaration))
+                .Cast<ConstructorDeclarationSyntax>();
+
+            var recordParameterNames = parameterList.Parameters
+                .Select(node => node.Identifier.Text)
+                .ToHashSet();
+
+            bool IsDefaultSettingParameterAssignment(StatementSyntax statement, HashSet<string> constructorParameterNames)
+            {
+                return statement is ExpressionStatementSyntax stmt
+                    && stmt.Expression is AssignmentExpressionSyntax assignment
+                    && assignment.Left is IdentifierNameSyntax fieldSettingIdent
+                    && recordParameterNames.Contains(fieldSettingIdent.Identifier.Text)
+                    && !(assignment.Right is IdentifierNameSyntax parameterIdent
+                        && constructorParameterNames.Contains(parameterIdent.Identifier.Text));
+            }
+
+            int GetCountDefaultSettingParameterAssignments(ConstructorDeclarationSyntax contructor)
+            {
+                var constructorParameterNames = contructor.ParameterList.Parameters
+                    .Select(node => node.Identifier.Text)
+                    .ToHashSet();
+
+                return contructor.Body.Statements
+                    .Count(statement => IsDefaultSettingParameterAssignment(statement, constructorParameterNames));
+            }
+
+            return allConstructors
+                .OrderBy(node => GetCountDefaultSettingParameterAssignments(node))
+                .Last();
         }
 
         private Dictionary<string, ExpressionSyntax> CalculateDefaultValuesFromFieldSetting(
