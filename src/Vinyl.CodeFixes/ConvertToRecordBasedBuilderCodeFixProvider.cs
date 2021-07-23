@@ -240,31 +240,10 @@ namespace Vinyl
             ConstructorDeclarationSyntax bestMatchDefaultSettingContructor,
             HashSet<string> recordParameterNames)
         {
-            var constructorParameterNames = bestMatchDefaultSettingContructor.ParameterList.ToParameterNames();
-
-            var defaultValuesLookup = new Dictionary<string, ExpressionSyntax>();
-            foreach (var statement in bestMatchDefaultSettingContructor.Body.Statements)
-            {
-                if (statement is ExpressionStatementSyntax stmt
-                    && stmt.Expression is AssignmentExpressionSyntax assignment)
-                {
-                    if (assignment.Right is IdentifierNameSyntax parameterIdent
-                        && constructorParameterNames.Contains(parameterIdent.Identifier.Text))
-                    {
-                        // don't add
-                    }
-                    else
-                    {
-                        if (assignment.Left is IdentifierNameSyntax fieldSettingIdent
-                            && recordParameterNames.Contains(fieldSettingIdent.Identifier.Text))
-                        {
-                            defaultValuesLookup[fieldSettingIdent.Identifier.Text] = assignment.Right;
-                        }
-                    }
-                }
-            }
-
-            return defaultValuesLookup;
+            return GetDefaultSettingParameterAssignments(bestMatchDefaultSettingContructor, recordParameterNames)
+                .ToDictionary(
+                    assignment => ((IdentifierNameSyntax)assignment.Left).Identifier.Text,
+                    assignment => assignment.Right);
         }
 
         private IEnumerable<AssignmentExpressionSyntax> GetDefaultSettingParameterAssignments(
