@@ -142,34 +142,38 @@ namespace Vinyl
                     .WithModifiers(
                         SyntaxFactory.Token(SyntaxKind.PublicKeyword),
                         SyntaxFactory.Token(SyntaxKind.StaticKeyword))
-                    .WithExpressionBody(ConvertDefaultFieldSettingToContructorInvocation((ConstructorDeclarationSyntax)defaultSettingConstructor))
+                    .WithExpressionBody(
+                        ConvertDefaultFieldSettingToContructorInvocation((ConstructorDeclarationSyntax)defaultSettingConstructor))
                     .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
 
                 newRecordDeclaration = newRecordDeclaration.ReplaceNode(defaultSettingConstructor, defaultSettingProperty);
             }
             else
             {
+                var bestMatchDefaultSettingContructor = newRecordDeclaration.Members.First(node =>
+                    node.IsKind(SyntaxKind.ConstructorDeclaration));
+
+                var defaultValueLookup = CalculateDefaultValuesFromFieldSetting(
+                    (ConstructorDeclarationSyntax)bestMatchDefaultSettingContructor, parameterList);
+
                 var typeSyntax = SyntaxFactory.ParseTypeName(newRecordDeclaration.Identifier.Text);
                 var defaultSettingProperty = SyntaxFactory
                     .PropertyDeclaration(typeSyntax, "Default")
                     .WithModifiers(
                         SyntaxFactory.Token(SyntaxKind.PublicKeyword),
                         SyntaxFactory.Token(SyntaxKind.StaticKeyword))
-                    .WithExpressionBody(GetContructorInvocationFromParameterList(parameterList))
+                    .WithExpressionBody(GetContructorInvocationFromParameterList(parameterList, defaultValueLookup))
                     .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
 
                 newRecordDeclaration = newRecordDeclaration
                     .WithMembers(newRecordDeclaration.Members.Insert(0, defaultSettingProperty));
             }
 
-            // Remove the ctor with parameters
-            bool IsPrimaryConstructor(MemberDeclarationSyntax node)
-                => node.IsKind(SyntaxKind.ConstructorDeclaration) && ((ConstructorDeclarationSyntax)node).ParameterList.Parameters.Any();
-
+            // Remove all constructors
             newRecordDeclaration = newRecordDeclaration.WithMembers(
                 newRecordDeclaration
                     .Members
-                    .Where(node => !IsPrimaryConstructor(node))
+                    .Where(node => !node.IsKind(SyntaxKind.ConstructorDeclaration))
                     .ToSyntaxList());
 
             // ==================================================================================================================
@@ -239,7 +243,8 @@ namespace Vinyl
             return SyntaxFactory.ParameterList(SyntaxFactory.SeparatedList(parameters));
         }
 
-        private ArrowExpressionClauseSyntax ConvertDefaultFieldSettingToContructorInvocation(ConstructorDeclarationSyntax defaultSettingConstructor)
+        private ArrowExpressionClauseSyntax ConvertDefaultFieldSettingToContructorInvocation(
+            ConstructorDeclarationSyntax defaultSettingConstructor)
         {
             ArgumentSyntax ConvertFieldAssignmentToNamedArgument(AssignmentExpressionSyntax assignmentExpression) => SyntaxFactory
                 .Argument(assignmentExpression.Right)
@@ -256,27 +261,74 @@ namespace Vinyl
                 .WithArgumentList(SyntaxFactory.ArgumentList(arguments)));
         }
 
-        private ArrowExpressionClauseSyntax GetContructorInvocationFromParameterList(ParameterListSyntax parameterList)
+        private Dictionary<string, ExpressionSyntax> CalculateDefaultValuesFromFieldSetting(
+            ConstructorDeclarationSyntax bestMatchDefaultSettingContructor,
+            ParameterListSyntax parameterList)
         {
+            var constructorParameterNames = bestMatchDefaultSettingContructor.ParameterList.Parameters
+                .Select(node => node.Identifier.Text)
+                .ToHashSet();
+
+            var recordParameterNames = parameterList.Parameters
+                .Select(node => node.Identifier.Text)
+                .ToHashSet();
+
+            var defaultValuesLookup = new Dictionary<string, ExpressionSyntax>();
+            foreach (var statement in bestMatchDefaultSettingContructor.Body.Statements)
+            {
+                if (statement is ExpressionStatementSyntax stmt
+                    && stmt.Expression is AssignmentExpressionSyntax assignment)
+                {
+                    if (assignment.Right is IdentifierNameSyntax parameterIdent
+                        && constructorParameterNames.Contains(parameterIdent.Identifier.Text))
+                    {
+                        // don't add
+                    }
+                    else
+                    {
+                        if (assignment.Left is IdentifierNameSyntax fieldSettingIdent
+                            && recordParameterNames.Contains(fieldSettingIdent.Identifier.Text))
+                        {
+                            defaultValuesLookup[fieldSettingIdent.Identifier.Text] = assignment.Right;
+                        }
+                    }
+                }
+            }
+
+            return defaultValuesLookup;
+        }
+
+        private ArrowExpressionClauseSyntax GetContructorInvocationFromParameterList(
+            ParameterListSyntax parameterList,
+            Dictionary<string, ExpressionSyntax> defaultValueLookup)
+        {
+            var fallbackDefaultValue = SyntaxFactory.ParseExpression("default");
+
             ArgumentSyntax ConvertParameterToArgumentWithDefault(ParameterSyntax parameter) => SyntaxFactory
-                .Argument(SyntaxFactory.ParseExpression("default"))
+                .Argument(defaultValueLookup.TryGetValue(parameter.Identifier.Text, out var defaultValue)
+                    ? defaultValue
+                    : fallbackDefaultValue)
                 .WithNameColon(SyntaxFactory.NameColon(parameter.Identifier.ValueText));
 
             var arguments = parameterList.Parameters
                 .Select(ConvertParameterToArgumentWithDefault)
                 .ToSeparatedSyntaxList();
 
-            return SyntaxFactory
-                .ArrowExpressionClause(SyntaxFactory
+            return SyntaxFactory.ArrowExpressionClause(SyntaxFactory
                 .ImplicitObjectCreationExpression()
                 .WithArgumentList(SyntaxFactory.ArgumentList(arguments)));
         }
 
-        private bool IsDefaultWitherMethod(MemberDeclarationSyntax member, Dictionary<string, ParameterSyntax> defaultWitherMethodNameToParametersMapping)
+        private bool IsDefaultWitherMethod(
+            MemberDeclarationSyntax member,
+            Dictionary<string, ParameterSyntax> defaultWitherMethodNameToParametersMapping)
         {
             return member.IsKind(SyntaxKind.MethodDeclaration)
-                && defaultWitherMethodNameToParametersMapping.TryGetValue(((MethodDeclarationSyntax)member).Identifier.ValueText, out var recordParameter)
-                && ToParameterTypeAndName(recordParameter) == ToParameterTypeAndName(((MethodDeclarationSyntax)member).ParameterList.Parameters.First());
+                && defaultWitherMethodNameToParametersMapping.TryGetValue(
+                    ((MethodDeclarationSyntax)member).Identifier.ValueText,
+                    out var recordParameter)
+                && ToParameterTypeAndName(recordParameter) == ToParameterTypeAndName(
+                    ((MethodDeclarationSyntax)member).ParameterList.Parameters.First());
         }
 
         private (string, string) ToParameterTypeAndName(ParameterSyntax node) => (node.Type.ToString(), ToCamelCase(node.Identifier.ValueText));

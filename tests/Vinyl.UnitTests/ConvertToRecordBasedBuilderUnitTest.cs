@@ -243,7 +243,7 @@ namespace TestProject
 {
     public record BookBuilder(int Id, string Title)
     {
-        public static BookBuilder Default => new(Id: default, Title: default);
+        public static BookBuilder Default => new(Id: default, Title: string.Empty);
 
         public BookBuilder WithId(int id) => this with { Id = id };
         public BookBuilder WithTitle(string title) => this with { Title = title };
