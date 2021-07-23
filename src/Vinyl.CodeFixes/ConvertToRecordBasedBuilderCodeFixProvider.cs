@@ -131,47 +131,22 @@ namespace Vinyl
             // ==================================================================================================================
 
             // Convert default-setting ctor -> Default property
-            var defaultSettingConstructor = newRecordDeclaration.Members.SingleOrDefault(node =>
-                node.IsKind(SyntaxKind.ConstructorDeclaration) && !((ConstructorDeclarationSyntax)node).ParameterList.Parameters.Any());
+            var bestMatchDefaultSettingContructor = FindBestMatchForDefaultSettingConstructor(newRecordDeclaration, parameterList);
 
-            if (false)
-            {
-                var typeSyntax = SyntaxFactory.ParseTypeName(newRecordDeclaration.Identifier.Text);
-                var defaultSettingProperty = SyntaxFactory
-                    .PropertyDeclaration(typeSyntax, "Default")
-                    .WithModifiers(
-                        SyntaxFactory.Token(SyntaxKind.PublicKeyword),
-                        SyntaxFactory.Token(SyntaxKind.StaticKeyword))
-                    .WithExpressionBody(
-                        ConvertDefaultFieldSettingToContructorInvocation((ConstructorDeclarationSyntax)defaultSettingConstructor))
-                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
+            var defaultValueLookup = CalculateDefaultValuesFromFieldSetting(
+                (ConstructorDeclarationSyntax)bestMatchDefaultSettingContructor, parameterList);
 
-                newRecordDeclaration = newRecordDeclaration.ReplaceNode(defaultSettingConstructor, defaultSettingProperty);
-            }
-            else
-            {
-                // TODO:
-                //   * find match implementeren: aantal parameter setting assignments (zonder parameter) per constructor berekenen en sorteren daarop
-                //   * tests terugdraaien
-                //   * if(false) weghalen
+            var typeSyntax = SyntaxFactory.ParseTypeName(newRecordDeclaration.Identifier.Text);
+            var defaultSettingProperty = SyntaxFactory
+                .PropertyDeclaration(typeSyntax, "Default")
+                .WithModifiers(
+                    SyntaxFactory.Token(SyntaxKind.PublicKeyword),
+                    SyntaxFactory.Token(SyntaxKind.StaticKeyword))
+                .WithExpressionBody(GetContructorInvocationFromParameterList(parameterList, defaultValueLookup))
+                .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
 
-                var bestMatchDefaultSettingContructor = FindBestMatchForDefaultSettingConstructor(newRecordDeclaration, parameterList);
-
-                var defaultValueLookup = CalculateDefaultValuesFromFieldSetting(
-                    (ConstructorDeclarationSyntax)bestMatchDefaultSettingContructor, parameterList);
-
-                var typeSyntax = SyntaxFactory.ParseTypeName(newRecordDeclaration.Identifier.Text);
-                var defaultSettingProperty = SyntaxFactory
-                    .PropertyDeclaration(typeSyntax, "Default")
-                    .WithModifiers(
-                        SyntaxFactory.Token(SyntaxKind.PublicKeyword),
-                        SyntaxFactory.Token(SyntaxKind.StaticKeyword))
-                    .WithExpressionBody(GetContructorInvocationFromParameterList(parameterList, defaultValueLookup))
-                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
-
-                newRecordDeclaration = newRecordDeclaration
-                    .WithMembers(newRecordDeclaration.Members.Insert(0, defaultSettingProperty));
-            }
+            newRecordDeclaration = newRecordDeclaration
+                .WithMembers(newRecordDeclaration.Members.Insert(0, defaultSettingProperty));
 
             // Remove all constructors
             newRecordDeclaration = newRecordDeclaration.WithMembers(
