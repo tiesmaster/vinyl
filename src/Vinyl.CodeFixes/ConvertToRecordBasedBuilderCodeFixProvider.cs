@@ -229,9 +229,7 @@ namespace Vinyl
             RecordDeclarationSyntax newRecordDeclaration,
             HashSet<string> recordParameterNames)
         {
-            var allConstructors = from member in newRecordDeclaration.Members
-                                  where member.IsKind(SyntaxKind.ConstructorDeclaration)
-                                  select (ConstructorDeclarationSyntax)member;
+            var allConstructors = newRecordDeclaration.Members.GetContructors();
 
             bool IsDefaultSettingParameterAssignment(StatementSyntax statement, HashSet<string> constructorParameterNames)
             {

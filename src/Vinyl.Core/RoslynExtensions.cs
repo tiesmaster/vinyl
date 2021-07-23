@@ -21,5 +21,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             => parameterList.Parameters
                 .Select(node => node.Identifier.Text)
                 .ToHashSet();
+
+        public static IEnumerable<ConstructorDeclarationSyntax> GetContructors(this SyntaxList<MemberDeclarationSyntax> members)
+            => from member in members
+               where member.IsKind(SyntaxKind.ConstructorDeclaration)
+               select (ConstructorDeclarationSyntax)member;
     }
 }
