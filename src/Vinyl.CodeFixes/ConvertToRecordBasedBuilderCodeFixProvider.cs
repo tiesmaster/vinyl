@@ -85,7 +85,7 @@ namespace Vinyl
                 .DescendantTokens().Where(x => x.IsKind(SyntaxKind.IdentifierToken) && fieldNames.Contains(x.Text));
 
             newRoot = newRoot.ReplaceTokens(tokensToRename, (old, _)
-                => old.CopyAnnotationsTo(SyntaxFactory.Identifier(ToPascalCase(old.Text))));
+                => SyntaxFactory.Identifier(ToPascalCase(old.Text)).WithAnnotationsFrom(old));
 
             // ==================================================================================================================
             // Step 2: Convert class -> record, and fields to parameter list
@@ -122,9 +122,8 @@ namespace Vinyl
                     newClassDeclaration.OpenBraceToken,
                     membersWithoutFields,
                     newClassDeclaration.CloseBraceToken,
-                    default);
-
-            newRecordDeclaration = newClassDeclaration.CopyAnnotationsTo(newRecordDeclaration);
+                    default)
+                .WithAnnotationsFrom(newClassDeclaration);
 
             // ==================================================================================================================
             // Step 3: Add default-setting ctor, and set defaults based on best matching constructor

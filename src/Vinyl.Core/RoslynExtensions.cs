@@ -26,5 +26,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             => from member in members
                where member.IsKind(SyntaxKind.ConstructorDeclaration)
                select (ConstructorDeclarationSyntax)member;
+
+        public static TNode WithAnnotationsFrom<TNode>(this TNode node, SyntaxNode sourceNodeWithAnnotations) where TNode : SyntaxNode
+            => sourceNodeWithAnnotations.CopyAnnotationsTo(node);
+
+        public static SyntaxToken WithAnnotationsFrom(this SyntaxToken token, SyntaxToken sourceTokenWithAnnotations)
+            => sourceTokenWithAnnotations.CopyAnnotationsTo(token);
     }
 }
