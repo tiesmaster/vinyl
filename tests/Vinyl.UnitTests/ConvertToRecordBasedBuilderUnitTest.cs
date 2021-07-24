@@ -316,7 +316,7 @@ namespace TestProject
             await VerifyCS.VerifyAnalyzerAsync(test);
         }
 
-        [Fact(Skip = "First refactor something")]
+        [Fact]
         public async Task GivenClassBasedBuilderWithBuildMethodOnMultipleLines_WhenFixing_ThenMaintainsIndentation()
         {
             var test = @"

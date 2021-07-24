@@ -85,7 +85,7 @@ namespace Vinyl
                 .DescendantTokens().Where(x => x.IsKind(SyntaxKind.IdentifierToken) && fieldNames.Contains(x.Text));
 
             newRoot = newRoot.ReplaceTokens(tokensToRename, (old, _)
-                => SyntaxFactory.Identifier(ToPascalCase(old.Text)).WithAnnotationsFrom(old));
+                => SyntaxFactory.Identifier(ToPascalCase(old.Text)).WithTriviaFrom(old));
 
             // ==================================================================================================================
             // Step 2: Convert class -> record, and fields to parameter list
