@@ -257,8 +257,8 @@ namespace Vinyl
 
             return contructor.Body.Statements
                 .Select(statement => (statement as ExpressionStatementSyntax)?.Expression as AssignmentExpressionSyntax)
-                .Where(assignment => IsFieldAssignment(assignment.Left, recordParameterNames))
-                .Where(assignment => !IsParameterReference(assignment.Right, constructorParameterNames));
+                .Where(assignment => IsFieldAssignment(assignment.Left, recordParameterNames)
+                                 && !IsParameterReference(assignment.Right, constructorParameterNames));
         }
 
         private ArrowExpressionClauseSyntax GetContructorInvocationFromParameterList(
