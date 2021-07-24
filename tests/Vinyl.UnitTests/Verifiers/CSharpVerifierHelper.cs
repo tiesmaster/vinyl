@@ -1,8 +1,8 @@
-﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-
 using System;
 using System.Collections.Immutable;
+
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace Vinyl.UnitTests
 {
@@ -24,11 +24,9 @@ namespace Vinyl.UnitTests
             var nullableWarnings = commandLineArguments.CompilationOptions.SpecificDiagnosticOptions;
 
             // Workaround for https://github.com/dotnet/roslyn/issues/41610
-            nullableWarnings = nullableWarnings
+            return nullableWarnings
                 .SetItem("CS8632", ReportDiagnostic.Error)
                 .SetItem("CS8669", ReportDiagnostic.Error);
-
-            return nullableWarnings;
         }
     }
 }

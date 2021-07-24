@@ -13,7 +13,7 @@ namespace Vinyl.Test
         [Fact]
         public async Task NoCodeNoDiagnostic()
         {
-            var test = @"";
+            const string test = "";
 
             await VerifyCS.VerifyAnalyzerAsync(test);
         }
@@ -21,7 +21,7 @@ namespace Vinyl.Test
         [Fact]
         public async Task GivenClassBasedBuilder_WhenAnalysing_ThenReportsTheLegacyBuilder()
         {
-            var test = @"
+            const string test = @"
 namespace TestProject
 {
     public {|#0:class BookBuilder|}
@@ -70,7 +70,7 @@ namespace TestProject
         [Fact]
         public async Task GivenClassBasedBuilderAndFieldsAlreadyCamelCase_WhenAnalysing_ThenDoesNotReportsTheLegacyBuilder()
         {
-            var test = @"
+            const string test = @"
 namespace TestProject
 {
     public class BookBuilder
@@ -118,7 +118,7 @@ namespace TestProject
         [Fact]
         public async Task GivenClassBasedBuilder_WhenFixing_ThenDoesAllTheSteps()
         {
-            var test = @"
+            const string test = @"
 namespace TestProject
 {
     public {|#0:class BookBuilder|}
@@ -160,7 +160,7 @@ namespace TestProject
     }
 }";
 
-            var fixtest = @"
+            const string fixtest = @"
 namespace TestProject
 {
     public record BookBuilder(int Id, string Title)
@@ -196,7 +196,7 @@ namespace TestProject
         [Fact]
         public async Task GivenClassBasedBuilderWithoutClearlyDefaultSettingContructor_WhenFixing_ThenSimplyAddsDefaultConstructor()
         {
-            var test = @"
+            const string test = @"
 namespace TestProject
 {
     public {|#0:class BookBuilder|}
@@ -238,7 +238,7 @@ namespace TestProject
     }
 }";
 
-            var fixtest = @"
+            const string fixtest = @"
 namespace TestProject
 {
     public record BookBuilder(int Id, string Title)
@@ -274,7 +274,7 @@ namespace TestProject
         [Fact]
         public async Task GivenClassBasedBuilderNonImmutable_WhenAnalysing_ThenDoesNotReport()
         {
-            var test = @"
+            const string test = @"
 namespace TestProject
 {
     public {|#0:class BookBuilder|}
@@ -319,7 +319,7 @@ namespace TestProject
         [Fact]
         public async Task GivenClassBasedBuilderWithBuildMethodOnMultipleLines_WhenFixing_ThenMaintainsIndentation()
         {
-            var test = @"
+            const string test = @"
 namespace TestProject
 {
     public {|#0:class BookBuilder|}
@@ -364,7 +364,7 @@ namespace TestProject
     }
 }";
 
-            var fixtest = @"
+            const string fixtest = @"
 namespace TestProject
 {
     public record BookBuilder(int Id, string Title)

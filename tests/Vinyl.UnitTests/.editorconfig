@@ -1,0 +1,6 @@
+# CSharp code style settings:
+[*.cs]
+
+# RCS1090: Add call to 'ConfigureAwait' (or vice versa).
+# Justification: Not needed in the tests
+dotnet_diagnostic.RCS1090.severity = none
