@@ -188,7 +188,7 @@ namespace Vinyl
             // Step 5: Use target-type new expression in Build() method
             // ==================================================================================================================
 
-            bool IsBuildMethod(MemberDeclarationSyntax member)
+            static bool IsBuildMethod(MemberDeclarationSyntax member)
                 => member is MethodDeclarationSyntax method && method.Identifier.ValueText == "Build";
 
             var buildMethod = (MethodDeclarationSyntax)newRecordDeclaration.Members.Single(IsBuildMethod);

@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             => propertyNode.WithModifiers(SyntaxFactory.TokenList(modifiers));
 
         public static HashSet<T> ToHashSet<T>(this IEnumerable<T> source)
-            => new HashSet<T>(source);
+            => new(source);
 
         public static HashSet<string> ToParameterNames(this ParameterListSyntax parameterList)
             => parameterList.Parameters

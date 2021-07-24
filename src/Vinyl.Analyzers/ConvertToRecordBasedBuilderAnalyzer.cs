@@ -20,7 +20,7 @@ namespace Vinyl
         private const string _messageFormat = "Class-based builder '{0}' can be converted to record-based builder";
         private const string _description = "Class-based builder should be using records instead.";
 
-        private static readonly DiagnosticDescriptor _rule = new DiagnosticDescriptor(
+        private static readonly DiagnosticDescriptor _rule = new(
             DiagnosticId,
             _title,
             _messageFormat,
@@ -58,7 +58,7 @@ namespace Vinyl
 
         private bool AllFieldsHaveFieldNamingConvention(ClassDeclarationSyntax classdeclaration)
         {
-            bool HasFieldNamingConvention(string fieldName)
+            static bool HasFieldNamingConvention(string fieldName)
             {
                 return fieldName.Length > 1 && fieldName.StartsWith("_") && char.IsLower(fieldName[1]);
             }
