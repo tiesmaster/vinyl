@@ -85,7 +85,7 @@ namespace Vinyl
                 .DescendantTokens().Where(x => x.IsKind(SyntaxKind.IdentifierToken) && fieldNames.Contains(x.Text));
 
             newRoot = newRoot.ReplaceTokens(tokensToRename, (old, _)
-                => SyntaxFactory.Identifier(ToPascalCase(old.Text)).WithTriviaFrom(old));
+                => SyntaxFactory.Identifier(old.Text.ToPascalCase()).WithTriviaFrom(old));
 
             // ==================================================================================================================
             // Step 2: Convert class -> record, and fields to parameter list
@@ -207,10 +207,6 @@ namespace Vinyl
             return document.WithSyntaxRoot(newRoot).Project.Solution;
         }
 
-        private string ToPascalCase(ISymbol symbol) => ToPascalCase(symbol.Name);
-        private string ToPascalCase(string name) => char.ToUpper(name[1]) + name.Substring(2);
-        private string ToCamelCase(string name) => char.ToLower(name[0]) + name.Substring(1);
-
         private ParameterListSyntax ToParameterList(IEnumerable<FieldDeclarationSyntax> readonlyFields)
         {
             var parameters = readonlyFields.Select(x =>
@@ -292,6 +288,7 @@ namespace Vinyl
                     ((MethodDeclarationSyntax)member).ParameterList.Parameters.First());
         }
 
-        private (string, string) ToParameterTypeAndName(ParameterSyntax node) => (node.Type.ToString(), ToCamelCase(node.Identifier.ValueText));
+        private (string, string) ToParameterTypeAndName(ParameterSyntax node)
+            => (node.Type.ToString(), node.Identifier.ValueText.ToCamelCase());
     }
 }

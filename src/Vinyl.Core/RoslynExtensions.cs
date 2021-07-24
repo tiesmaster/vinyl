@@ -32,5 +32,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
         public static SyntaxToken WithAnnotationsFrom(this SyntaxToken token, SyntaxToken sourceTokenWithAnnotations)
             => sourceTokenWithAnnotations.CopyAnnotationsTo(token);
+
+        public static string ToPascalCase(this ISymbol symbol) => ToPascalCase(symbol.Name);
+        public static string ToPascalCase(this string name) => char.ToUpper(name[1]) + name.Substring(2);
+        public static string ToCamelCase(this string name) => char.ToLower(name[0]) + name.Substring(1);
     }
 }
