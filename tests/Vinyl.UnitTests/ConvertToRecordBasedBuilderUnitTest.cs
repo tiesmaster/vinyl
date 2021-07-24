@@ -315,5 +315,89 @@ namespace TestProject
 
             await VerifyCS.VerifyAnalyzerAsync(test);
         }
+
+        [Fact]
+        public async Task GivenClassBasedBuilderWithBuildMethodOnMultipleLines_WhenFixing_ThenMaintainsIndentation()
+        {
+            var test = @"
+namespace TestProject
+{
+    public {|#0:class BookBuilder|}
+    {
+        private readonly int _id;
+        private readonly string _title;
+
+        public BookBuilder(int id, string title)
+        {
+            _id = id;
+            _title = title;
+        }
+
+        public BookBuilder()
+        {
+            _id = default;
+            _title = string.Empty;
+        }
+
+        public BookBuilder WithId(int id) => new BookBuilder(id, _title);
+        public BookBuilder WithTitle(string title) => new BookBuilder(_id, title);
+
+        public Book Build() => new Book(
+            _id,
+            _title);
+
+        public static implicit operator Book(BookBuilder builder) => builder.Build();
+
+        public BookBuilder WithDifferentId() => WithId(_id + 1);
+    }
+
+    public class Book
+    {
+        public Book(int id, string title)
+        {
+            Id = id;
+            Title = title;
+        }
+
+        public int Id { get; }
+        public string Title { get; }
+    }
+}";
+
+            var fixtest = @"
+namespace TestProject
+{
+    public record BookBuilder(int Id, string Title)
+    {
+        public static BookBuilder Default => new(Id: default, Title: string.Empty);
+
+        public BookBuilder WithId(int id) => this with { Id = id };
+        public BookBuilder WithTitle(string title) => this with { Title = title };
+
+        public Book Build() => new(
+            Id,
+            Title);
+
+        public static implicit operator Book(BookBuilder builder) => builder.Build();
+
+        public BookBuilder WithDifferentId() => WithId(Id + 1);
+    }
+
+    public class Book
+    {
+        public Book(int id, string title)
+        {
+            Id = id;
+            Title = title;
+        }
+
+        public int Id { get; }
+        public string Title { get; }
+    }
+}";
+
+            var expected = VerifyCS.Diagnostic("VINYL0001").WithLocation(0).WithArguments("BookBuilder");
+            await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
+        }
     }
 }
