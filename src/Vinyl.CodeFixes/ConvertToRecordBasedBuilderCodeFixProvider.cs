@@ -247,12 +247,18 @@ namespace Vinyl
         {
             var constructorParameterNames = contructor.ParameterList.ToParameterNames();
 
+            bool IsFieldAssignment(ExpressionSyntax expression, HashSet<string> fields)
+                => expression is IdentifierNameSyntax fieldSettingIdent
+                    && fields.Contains(fieldSettingIdent.Identifier.Text);
+
+            bool IsParameterReference(ExpressionSyntax expression, HashSet<string> parameters)
+                => expression is IdentifierNameSyntax parameterIdent
+                        && parameters.Contains(parameterIdent.Identifier.Text);
+
             return contructor.Body.Statements
                 .Select(statement => (statement as ExpressionStatementSyntax)?.Expression as AssignmentExpressionSyntax)
-                .Where(assignment => assignment.Left is IdentifierNameSyntax fieldSettingIdent
-                    && recordParameterNames.Contains(fieldSettingIdent.Identifier.Text))
-                .Where(assignment => !(assignment.Right is IdentifierNameSyntax parameterIdent
-                        && constructorParameterNames.Contains(parameterIdent.Identifier.Text)));
+                .Where(assignment => IsFieldAssignment(assignment.Left, recordParameterNames))
+                .Where(assignment => !IsParameterReference(assignment.Right, constructorParameterNames));
         }
 
         private ArrowExpressionClauseSyntax GetContructorInvocationFromParameterList(
