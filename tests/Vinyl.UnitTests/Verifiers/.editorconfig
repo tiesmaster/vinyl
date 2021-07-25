@@ -1,0 +1,10 @@
+# CSharp code style settings:
+[*.cs]
+
+# CA1034: Nested types should not be visible
+# Justification: Code from the template
+dotnet_diagnostic.CA1034.severity = none
+
+# CA1000: Do not declare static members on generic types
+# Justification: Code from the template
+dotnet_diagnostic.CA1000.severity = none
