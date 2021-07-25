@@ -40,6 +40,10 @@ dotnet_naming_style.prefix_underscore.required_prefix = _
 # Justification: Use C# 8 nullable reference types instead
 dotnet_diagnostic.CA1062.severity = none
 
+# CA1014: Mark assemblies with CLSCompliant
+# Justification: We're not in 2001 anymore
+dotnet_diagnostic.CA1014.severity = none
+
 # Roslynator diagnostics
 dotnet_diagnostic.RCS1246.severity = none
 
