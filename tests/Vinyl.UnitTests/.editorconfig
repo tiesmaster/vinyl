@@ -5,10 +5,15 @@
 # Justification: We use this to separate Given/When/Then for scenarios in tests
 dotnet_diagnostic.CA1707.severity = none
 
-# RCS1090: Add call to 'ConfigureAwait' (or vice versa).
-# Justification: Not needed in the tests
-dotnet_diagnostic.RCS1090.severity = none
 
 # CA1724: Type names should not match namespaces
 # Justification: Not needed in the tests
 dotnet_diagnostic.CA1724.severity = none
+
+# CA2007: Consider calling ConfigureAwait on the awaited task
+# Justification: Not needed in the tests
+dotnet_diagnostic.CA2007.severity = none
+
+# RCS1090: Add call to 'ConfigureAwait' (or vice versa).
+# Justification: Dup of CA2007
+dotnet_diagnostic.RCS1090.severity = none
