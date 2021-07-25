@@ -8,3 +8,7 @@ dotnet_diagnostic.CA1707.severity = none
 # RCS1090: Add call to 'ConfigureAwait' (or vice versa).
 # Justification: Not needed in the tests
 dotnet_diagnostic.RCS1090.severity = none
+
+# CA1724: Type names should not match namespaces
+# Justification: Not needed in the tests
+dotnet_diagnostic.CA1724.severity = none
