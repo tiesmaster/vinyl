@@ -1,0 +1,4 @@
+# CSharp code style settings:
+[*.cs]
+
+csharp_style_prefer_range_operator = false
