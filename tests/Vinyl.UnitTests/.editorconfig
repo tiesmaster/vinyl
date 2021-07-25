@@ -1,6 +1,10 @@
 # CSharp code style settings:
 [*.cs]
 
+# CA1707: Identifiers should not contain underscores
+# Justification: We use this to separate Given/When/Then for scenarios in tests
+dotnet_diagnostic.CA1707.severity = none
+
 # RCS1090: Add call to 'ConfigureAwait' (or vice versa).
 # Justification: Not needed in the tests
 dotnet_diagnostic.RCS1090.severity = none
