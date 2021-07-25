@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 
@@ -43,7 +44,7 @@ namespace Vinyl
         {
             var classdeclaration = (ClassDeclarationSyntax)context.Node;
 
-            if (classdeclaration.Identifier.ValueText.EndsWith("Builder")
+            if (classdeclaration.Identifier.ValueText.EndsWith("Builder", StringComparison.InvariantCulture)
                 && AllFieldsHaveFieldNamingConvention(classdeclaration)
                 && IsImmutableFluentBuilder(classdeclaration))
             {
@@ -60,7 +61,7 @@ namespace Vinyl
         {
             static bool HasFieldNamingConvention(string fieldName)
             {
-                return fieldName.Length > 1 && fieldName.StartsWith("_") && char.IsLower(fieldName[1]);
+                return fieldName.Length > 1 && fieldName.StartsWith("_", StringComparison.InvariantCulture) && char.IsLower(fieldName[1]);
             }
 
             var fields = classdeclaration
@@ -76,7 +77,7 @@ namespace Vinyl
             return !classDeclaration.Members
                 .Any(member =>
                     member is MethodDeclarationSyntax method
-                    && method.Identifier.ValueText.StartsWith("With")
+                    && method.Identifier.ValueText.StartsWith("With", StringComparison.InvariantCulture)
                     && method.Body?.Statements.Any(x =>
                         x is ReturnStatementSyntax @return
                         && @return.Expression.IsKind(SyntaxKind.ThisExpression)) == true);

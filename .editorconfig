@@ -36,6 +36,10 @@ dotnet_naming_symbols.private_fields.applicable_accessibilities = private
 dotnet_naming_style.prefix_underscore.capitalization = camel_case
 dotnet_naming_style.prefix_underscore.required_prefix = _
 
+# CA1062: Validate arguments of public methods
+# Justification: Use C# 8 nullable reference types instead
+dotnet_diagnostic.CA1062.severity = none
+
 # Roslynator diagnostics
 dotnet_diagnostic.RCS1246.severity = none
 
