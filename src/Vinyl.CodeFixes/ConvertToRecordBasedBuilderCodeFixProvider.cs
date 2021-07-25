@@ -207,7 +207,7 @@ namespace Vinyl
             return document.WithSyntaxRoot(newRoot).Project.Solution;
         }
 
-        private ParameterListSyntax ToParameterList(IEnumerable<FieldDeclarationSyntax> readonlyFields)
+        private static ParameterListSyntax ToParameterList(IEnumerable<FieldDeclarationSyntax> readonlyFields)
         {
             var parameters = readonlyFields.Select(x =>
             {
@@ -220,7 +220,7 @@ namespace Vinyl
             return SyntaxFactory.ParameterList(SyntaxFactory.SeparatedList(parameters));
         }
 
-        private MemberDeclarationSyntax FindBestMatchForDefaultSettingConstructor(
+        private static MemberDeclarationSyntax FindBestMatchForDefaultSettingConstructor(
             RecordDeclarationSyntax newRecordDeclaration,
             HashSet<string> recordParameterNames)
         {
@@ -231,7 +231,7 @@ namespace Vinyl
                 .Last();
         }
 
-        private Dictionary<string, ExpressionSyntax> CalculateDefaultValuesFromFieldSetting(
+        private static Dictionary<string, ExpressionSyntax> CalculateDefaultValuesFromFieldSetting(
             ConstructorDeclarationSyntax bestMatchDefaultSettingContructor,
             HashSet<string> recordParameterNames)
         {
@@ -241,7 +241,7 @@ namespace Vinyl
                     assignment => assignment.Right);
         }
 
-        private IEnumerable<AssignmentExpressionSyntax> GetDefaultSettingParameterAssignments(
+        private static IEnumerable<AssignmentExpressionSyntax> GetDefaultSettingParameterAssignments(
             ConstructorDeclarationSyntax contructor,
             HashSet<string> recordParameterNames)
         {
@@ -282,7 +282,7 @@ namespace Vinyl
                 .WithArgumentList(SyntaxFactory.ArgumentList(arguments)));
         }
 
-        private bool IsDefaultWitherMethod(
+        private static bool IsDefaultWitherMethod(
             MemberDeclarationSyntax member,
             Dictionary<string, ParameterSyntax> defaultWitherMethodNameToParametersMapping)
         {
@@ -294,7 +294,7 @@ namespace Vinyl
                     ((MethodDeclarationSyntax)member).ParameterList.Parameters.First());
         }
 
-        private (string, string) ToParameterTypeAndName(ParameterSyntax node)
+        private static (string, string) ToParameterTypeAndName(ParameterSyntax node)
             => (node.Type.ToString(), node.Identifier.ValueText.ToCamelCase());
     }
 }

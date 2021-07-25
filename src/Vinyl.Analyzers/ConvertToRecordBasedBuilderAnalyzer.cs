@@ -57,7 +57,7 @@ namespace Vinyl
             }
         }
 
-        private bool AllFieldsHaveFieldNamingConvention(ClassDeclarationSyntax classdeclaration)
+        private static bool AllFieldsHaveFieldNamingConvention(ClassDeclarationSyntax classdeclaration)
         {
             static bool HasFieldNamingConvention(string fieldName)
             {
@@ -72,7 +72,7 @@ namespace Vinyl
             return fields.All(x => HasFieldNamingConvention(x.Declaration.Variables.Single().Identifier.Text));
         }
 
-        private bool IsImmutableFluentBuilder(ClassDeclarationSyntax classDeclaration)
+        private static bool IsImmutableFluentBuilder(ClassDeclarationSyntax classDeclaration)
         {
             return !classDeclaration.Members
                 .Any(member =>
