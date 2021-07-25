@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
@@ -34,7 +35,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             => sourceTokenWithAnnotations.CopyAnnotationsTo(token);
 
         public static string ToPascalCase(this ISymbol symbol) => ToPascalCase(symbol.Name);
-        public static string ToPascalCase(this string name) => char.ToUpper(name[1]) + name.Substring(2);
-        public static string ToCamelCase(this string name) => char.ToLower(name[0]) + name.Substring(1);
+
+        public static string ToPascalCase(this string name)
+            => char.ToUpper(name[1], CultureInfo.InvariantCulture) + name.Substring(2);
+
+        public static string ToCamelCase(this string name)
+            => char.ToLower(name[0], CultureInfo.InvariantCulture) + name.Substring(1);
     }
 }
