@@ -13,12 +13,13 @@
     <MinClientVersion>3.0</MinClientVersion>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/tiesmaster/vinyl</PackageProjectUrl>
+    <PackageIcon>images/logo.png</PackageIcon>
     <PackageIconUrl>https://en.wikipedia.org/wiki/LP_record#/media/File:12in-Vinyl-LP-Record-Angle.jpg</PackageIconUrl>
     <RepositoryUrl>https://github.com/tiesmaster/vinyl</RepositoryUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description>Vinyl</Description>
     <PackageReleaseNotes>Summary of changes made in this release of the package.</PackageReleaseNotes>
-    <Copyright>Copyright</Copyright>
+    <Copyright>Copyright 2021</Copyright>
     <PackageTags>Vinyl, analyzers</PackageTags>
     <DevelopmentDependency>true</DevelopmentDependency>
     <NoPackageAnalysis>true</NoPackageAnalysis>
@@ -28,6 +29,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Vinyl.CodeFixes\Vinyl.CodeFixes.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="images\logo.png" CopyToOutputDirectory="Always" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <Target Name="_AddAnalyzersToOutput">

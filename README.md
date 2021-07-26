@@ -20,3 +20,7 @@ Vinyl is a set of C# analyzers, code fixers, refactorings, and source generators
  * [.nuspec reference](https://docs.microsoft.com/en-us/nuget/reference/nuspec)
  * [MSBuild reference for .NET SDK projects](https://docs.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props#nuget-metadata-properties)
  * [Create a NuGet package using the dotnet CLI](https://docs.microsoft.com/en-us/nuget/create-packages/creating-a-package-dotnet-cli)
+
+# Credits
+
+ * [Font Awesome](https://fontawesome.com/license)
