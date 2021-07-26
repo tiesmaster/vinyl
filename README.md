@@ -14,6 +14,9 @@ Vinyl is a set of C# analyzers, code fixers, refactorings, and source generators
  * [Awesome Roslyn](https://project-awesome.org/ironcev/awesome-roslyn)
  * [Source of Roslyn]( https://sourceroslyn.io/)
 
-## NuGet package
+## MSBuild & NuGet package
 
  * [Nuspec -> MSBuild property mapping](https://docs.microsoft.com/en-us/nuget/reference/msbuild-targets#pack-target)
+ * [.nuspec reference](https://docs.microsoft.com/en-us/nuget/reference/nuspec)
+ * [MSBuild reference for .NET SDK projects](https://docs.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props#nuget-metadata-properties)
+ * [Create a NuGet package using the dotnet CLI](https://docs.microsoft.com/en-us/nuget/create-packages/creating-a-package-dotnet-cli)
