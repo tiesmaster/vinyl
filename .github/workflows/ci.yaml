@@ -19,3 +19,22 @@ jobs:
         run: dotnet test
       - name: Build Package
         run: dotnet build src/Vinyl.Package
+
+  push-ci-package:
+
+    runs-on: ubuntu-latest
+    env:
+      DOTNET_NOLOGO: true
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v1
+      - name: Build Package
+        run: dotnet build src/Vinyl.Package
+      - name: Push CI Package
+        run: dotnet push src/Vinyl.Package/bin/Debug/*.nupkg --api-key ${GITHUB_TOKEN} --source https://nuget.pkg.github.com/tiesmaster/index.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
