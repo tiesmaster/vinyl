@@ -10,6 +10,7 @@
   <PropertyGroup>
     <PackageId>Vinyl</PackageId>
     <Authors>tiesmaster</Authors>
+    <MinClientVersion>3.0</MinClientVersion>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/tiesmaster/vinyl</PackageProjectUrl>
     <PackageIconUrl>https://en.wikipedia.org/wiki/LP_record#/media/File:12in-Vinyl-LP-Record-Angle.jpg</PackageIconUrl>
@@ -27,10 +28,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Vinyl.CodeFixes\Vinyl.CodeFixes.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="tools\*.ps1" CopyToOutputDirectory="Always" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <Target Name="_AddAnalyzersToOutput">
