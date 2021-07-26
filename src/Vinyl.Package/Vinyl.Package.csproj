@@ -14,7 +14,7 @@
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/tiesmaster/vinyl</PackageProjectUrl>
     <PackageIcon>images/logo.png</PackageIcon>
-    <PackageIconUrl>https://en.wikipedia.org/wiki/LP_record#/media/File:12in-Vinyl-LP-Record-Angle.jpg</PackageIconUrl>
+    <PackageIconUrl>https://github.com/tiesmaster/vinyl/tree/main/src/Vinyl.Package</PackageIconUrl>
     <RepositoryUrl>https://github.com/tiesmaster/vinyl</RepositoryUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description>Vinyl</Description>
