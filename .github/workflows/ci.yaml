@@ -15,10 +15,10 @@ jobs:
           fetch-depth: 0
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v1
+      - name: Build Package
+        run: dotnet build Vinyl.slnf
       - name: Run Tests
         run: dotnet test
-      - name: Build Package
-        run: dotnet build src/Vinyl.Package
 
   push-ci-package:
 
