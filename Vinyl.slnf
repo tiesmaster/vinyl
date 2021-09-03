@@ -1,0 +1,12 @@
+{
+  "solution": {
+    "path": "Vinyl.sln",
+    "projects": [
+      "src\\Vinyl.Analyzers\\Vinyl.Analyzers.csproj",
+      "src\\Vinyl.CodeFixes\\Vinyl.CodeFixes.csproj",
+      "src\\Vinyl.Core\\Vinyl.Core.csproj",
+      "src\\Vinyl.Package\\Vinyl.Package.csproj",
+      "tests\\Vinyl.UnitTests\\Vinyl.UnitTests.csproj"
+    ]
+  }
+}
