@@ -3,7 +3,7 @@ name: Continuous Integration
 on: [push, pull_request]
 
 jobs:
-  run-tests:
+  test-all:
 
     runs-on: ubuntu-latest
     env:
@@ -15,26 +15,7 @@ jobs:
           fetch-depth: 0
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v1
-      - name: Build Package
+      - name: Build all projects (except VSIX)
         run: dotnet build Vinyl.slnf
       - name: Run Tests
         run: dotnet test
-
-  push-ci-package:
-
-    runs-on: ubuntu-latest
-    env:
-      DOTNET_NOLOGO: true
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@v1
-      - name: Build Package
-        run: dotnet build src/Vinyl.Package
-      - name: Push CI Package
-        run: dotnet nuget push src/Vinyl.Package/bin/Debug/*.nupkg --api-key ${GITHUB_TOKEN} --source https://nuget.pkg.github.com/tiesmaster/index.json
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
