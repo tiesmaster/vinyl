@@ -3,7 +3,7 @@ name: Continuous Integration
 on: [push, pull_request]
 
 jobs:
-  test-all:
+  build-non-vsix:
 
     runs-on: ubuntu-latest
     env:
@@ -19,3 +19,16 @@ jobs:
         run: dotnet build Vinyl.slnf
       - name: Run Tests
         run: dotnet test
+
+  build-vsix:
+
+    runs-on: windows-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1
+      - name: Build VSIX project
+        run: msbuild src/Vinyl.Vsix/Vinyl.Vsix.csproj /v:m
