@@ -38,7 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="LICENSE">
+    <Content Include="..\..\LICENSE" Link="LICENSE">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
