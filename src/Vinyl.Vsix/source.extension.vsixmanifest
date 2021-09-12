@@ -5,6 +5,7 @@
     <DisplayName>Vinyl</DisplayName>
     <Description xml:space="preserve">Vinyl is a set of C# analyzers, code fixers, refactorings, and source generators for C# 9 records</Description>
     <License>LICENSE</License>
+    <Icon>Resources\logo.png</Icon>
   </Metadata>
   <Installation>
     <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[16.8,)" />
