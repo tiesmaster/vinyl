@@ -24,3 +24,22 @@ jobs:
         run: dotnet nuget push src/Vinyl.Package/bin/Debug/*.nupkg --api-key ${GITHUB_TOKEN} --source https://nuget.pkg.github.com/tiesmaster/index.json
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  push-vsix-package:
+
+    runs-on: windows-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v1
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1
+      - name: Restore packages
+        run: dotnet restore
+      - name: Build VSIX project
+        run: msbuild src/Vinyl.Vsix/Vinyl.Vsix.csproj /v:m /p:Configuration=Release
+      - name: Push VSIX package
+        run: 'curl -i -X POST https://www.vsixgallery.com/api/upload?repo=https%3A%2F%2Fgithub.com%2Ftiesmaster%2Fvinyl%2F&issuetracker=https%3A%2F%2Fgithub.com%2Ftiesmaster%2Fvinyl%2Fissues%2F&readmeUrl=https%3A%2F%2Fgithub.com%2Ftiesmaster%2Fvinyl%2Fblob%2Fmain%2FREADME.md --form file=@src/Vinyl.Vsix/bin/Release/net472/Vinyl.Vsix.vsix'
