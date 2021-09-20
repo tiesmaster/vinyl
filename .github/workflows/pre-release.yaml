@@ -69,13 +69,13 @@ jobs:
           ISSUE_URL=$REPO_URL/issues/
           README_URL=https://raw.githubusercontent.com/$GITHUB_REPOSITORY/main/README.md
 
-          PUBLISH_URL="https://www.vsixgallery.com/api/upload?
-          ?repo=$(uriencode $REPO_URL)
-          &issuetracker=$(uriencode $ISSUE_URL)
+          PUBLISH_URL="https://www.vsixgallery.com/api/upload\
+          ?repo=$(uriencode $REPO_URL)\
+          &issuetracker=$(uriencode $ISSUE_URL)\
           &readmeUrl=$(uriencode $README_URL)"
 
           curl \
             -i \
             -X POST \
             --form file=@src/Vinyl.Vsix/bin/Release/net472/Vinyl.Vsix.vsix \
-            "$PUBLISH_URL"
+            $PUBLISH_URL
