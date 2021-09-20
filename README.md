@@ -5,6 +5,10 @@
 
 Vinyl is a set of C# analyzers, code fixers, refactorings, and source generators for C# 9 records
 
+# Pre-release Packages
+
+ * [VSIX](https://www.vsixgallery.com/extension/Vinyl.94aea5b7-3b9f-46ad-9795-54128dd39cd7)
+ * [NuGet Package](https://github.com/tiesmaster/vinyl/packages/914795)
 
 # Useful Links
 
