@@ -55,4 +55,4 @@ jobs:
       - name: Restore packages
         run: dotnet restore
       - name: Build VSIX project
-        run: msbuild src/Vinyl.Vsix/Vinyl.Vsix.csproj /v:m
+        run: msbuild src/Vinyl.Vsix/Vinyl.Vsix.csproj
