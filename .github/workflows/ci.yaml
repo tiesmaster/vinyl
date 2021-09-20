@@ -21,24 +21,31 @@ jobs:
           fetch-depth: 0
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v1
+      - uses: actions/cache@v2
+        with:
+          path: ~/.nuget/packages
+          # Look to see if there is a cache hit for the corresponding requirements file
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget
       - name: Build all projects (except VSIX)
         run: dotnet build Vinyl.slnf
       - name: Run Tests
         run: dotnet test
 
-  build-vsix:
+  # build-vsix:
 
-    runs-on: windows-latest
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@v1
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1
-      - name: Restore packages
-        run: dotnet restore
-      - name: Build VSIX project
-        run: msbuild src/Vinyl.Vsix/Vinyl.Vsix.csproj /v:m
+  #   runs-on: windows-latest
+  #   steps:
+  #     - name: Checkout source
+  #       uses: actions/checkout@v2
+  #       with:
+  #         fetch-depth: 0
+  #     - name: Setup .NET Core SDK
+  #       uses: actions/setup-dotnet@v1
+  #     - name: Setup MSBuild
+  #       uses: microsoft/setup-msbuild@v1
+  #     - name: Restore packages
+  #       run: dotnet restore
+  #     - name: Build VSIX project
+  #       run: msbuild src/Vinyl.Vsix/Vinyl.Vsix.csproj /v:m
