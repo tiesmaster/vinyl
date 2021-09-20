@@ -31,7 +31,7 @@ jobs:
       - name: Build all projects (except VSIX)
         run: dotnet build Vinyl.slnf
       - name: Run Tests
-        run: dotnet test
+        run: dotnet test Vinyl.slnf
 
   # build-vsix:
 
