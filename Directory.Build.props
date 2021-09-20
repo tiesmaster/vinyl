@@ -5,7 +5,12 @@
     <LangVersion>9</LangVersion>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Enable NuGet package lock files (packages.lock.json), and force repeatable builds on CI. -->
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <RestoreLockedMode Condition=<"'$(GITHUB_ACTIONS)' == 'true'">true</RestoreLockedMode>
   </PropertyGroup>
 
   <ItemGroup>
