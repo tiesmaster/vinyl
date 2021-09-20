@@ -42,4 +42,40 @@ jobs:
       - name: Build VSIX project
         run: msbuild src/Vinyl.Vsix/Vinyl.Vsix.csproj /v:m /p:Configuration=Release
       - name: Push VSIX package
-        run: 'curl -i -X POST "https://www.vsixgallery.com/api/upload?repo=https%3A%2F%2Fgithub.com%2Ftiesmaster%2Fvinyl%2F&issuetracker=https%3A%2F%2Fgithub.com%2Ftiesmaster%2Fvinyl%2Fissues%2F&readmeUrl=https%3A%2F%2Fgithub.com%2Ftiesmaster%2Fvinyl%2Fblob%2Fmain%2FREADME.md" --form file=@src/Vinyl.Vsix/bin/Release/net472/Vinyl.Vsix.vsix'
+        shell: bash
+        run: |
+
+          uriencode() {
+            s="${1//'%'/%25}"
+            s="${s//' '/%20}"
+            s="${s//'"'/%22}"
+            s="${s//'#'/%23}"
+            s="${s//'$'/%24}"
+            s="${s//'&'/%26}"
+            s="${s//'+'/%2B}"
+            s="${s//','/%2C}"
+            s="${s//'/'/%2F}"
+            s="${s//':'/%3A}"
+            s="${s//';'/%3B}"
+            s="${s//'='/%3D}"
+            s="${s//'?'/%3F}"
+            s="${s//'@'/%40}"
+            s="${s//'['/%5B}"
+            s="${s//']'/%5D}"
+            printf %s "$s"
+          }
+
+          REPO_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/
+          ISSUE_URL=$REPO_URL/issues/
+          README_URL=https://raw.githubusercontent.com/$GITHUB_REPOSITORY/main/README.md
+
+          PUBLISH_URL="https://www.vsixgallery.com/api/upload?
+          ?repo=$(uriencode $REPO_URL)
+          &issuetracker=$(uriencode $ISSUE_URL)
+          &readmeUrl=$(uriencode $README_URL)"
+
+          curl \
+            -i \
+            -X POST \
+            --form file=@src/Vinyl.Vsix/bin/Release/net472/Vinyl.Vsix.vsix \
+            $PUBLISH_URL
