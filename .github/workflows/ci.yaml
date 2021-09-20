@@ -33,19 +33,19 @@ jobs:
       - name: Run Tests
         run: dotnet test Vinyl.slnf
 
-  # build-vsix:
+  build-vsix:
 
-  #   runs-on: windows-latest
-  #   steps:
-  #     - name: Checkout source
-  #       uses: actions/checkout@v2
-  #       with:
-  #         fetch-depth: 0
-  #     - name: Setup .NET Core SDK
-  #       uses: actions/setup-dotnet@v1
-  #     - name: Setup MSBuild
-  #       uses: microsoft/setup-msbuild@v1
-  #     - name: Restore packages
-  #       run: dotnet restore
-  #     - name: Build VSIX project
-  #       run: msbuild src/Vinyl.Vsix/Vinyl.Vsix.csproj /v:m
+    runs-on: windows-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v1
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1
+      - name: Restore packages
+        run: dotnet restore
+      - name: Build VSIX project
+        run: msbuild src/Vinyl.Vsix/Vinyl.Vsix.csproj /v:m
