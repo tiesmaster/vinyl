@@ -1,6 +1,12 @@
 name: Continuous Integration
 
-on: [push, pull_request]
+on:
+  push:
+    branches-ignore:
+      - main
+  pull-request:
+    branches:
+      - main
 
 jobs:
   build-non-vsix:
