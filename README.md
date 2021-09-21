@@ -1,7 +1,9 @@
 # Vinyl
 
-[![Pre-release](https://github.com/tiesmaster/vinyl/actions/workflows/pre-release.yaml/badge.svg?branch=main)](https://github.com/tiesmaster/vinyl/actions/workflows/pre-release.yaml)
-[![Continuous Integration](https://github.com/tiesmaster/vinyl/actions/workflows/ci.yaml/badge.svg?branch=dev)](https://github.com/tiesmaster/vinyl/actions/workflows/ci.yaml)
+![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/tiesmaster/vinyl/Pre-release/main?label=Pre-release&logo=github)
+![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/tiesmaster/vinyl/Continuous%20Integration/dev?label=Continuous%20Integration&logo=github)
+
+![GitHub](https://img.shields.io/github/license/tiesmaster/vinyl)
 
 Vinyl is a set of C# analyzers, code fixers, refactorings, and source generators for C# 9 records
 
