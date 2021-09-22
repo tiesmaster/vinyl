@@ -41,6 +41,12 @@
         "resolved": "3.4.231",
         "contentHash": "ifpSbv0sySgIVymTQQz0pjI6O7o/JxnIQMlj28JF5Ybr1LoUTcMfoKnAKwteRlhpQM9qJmONGy9M8BgrEcOteg=="
       },
+      "Roslynator.Analyzers": {
+        "type": "Direct",
+        "requested": "[3.2.2, )",
+        "resolved": "3.2.2",
+        "contentHash": "hYHBXdHZCJAht63BfWDy2Hb5HqQb+IN1Xqj7pVkPHS0qQoBcX8bH8az3ntB/HKD//HUOBSLUa4l7riplYTTZTQ=="
+      },
       "StyleCop.Analyzers": {
         "type": "Direct",
         "requested": "[1.1.118, )",

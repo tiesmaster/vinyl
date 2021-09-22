@@ -41,6 +41,12 @@
           "Microsoft.NETCore.Platforms": "1.1.0"
         }
       },
+      "Roslynator.Analyzers": {
+        "type": "Direct",
+        "requested": "[3.2.2, )",
+        "resolved": "3.2.2",
+        "contentHash": "hYHBXdHZCJAht63BfWDy2Hb5HqQb+IN1Xqj7pVkPHS0qQoBcX8bH8az3ntB/HKD//HUOBSLUa4l7riplYTTZTQ=="
+      },
       "StyleCop.Analyzers": {
         "type": "Direct",
         "requested": "[1.1.118, )",
