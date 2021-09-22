@@ -40,13 +40,13 @@ namespace Vinyl
             context.RegisterCodeFix(
                 CodeAction.Create(
                     title: _codeFixTitle,
-                    createChangedSolution: c => ConvertToRecordBasedBuilder(context.Document, declaration, c),
+                    createChangedSolution: c => ConvertToRecordBasedBuilderAsync(context.Document, declaration, c),
                     equivalenceKey: _codeFixTitle),
                 diagnostic);
         }
 
         [SuppressMessage("Performance", "EPS06:Hidden struct copy operation", Justification = "Limited impact")]
-        private async Task<Solution> ConvertToRecordBasedBuilder(
+        private async Task<Solution> ConvertToRecordBasedBuilderAsync(
             Document document,
             ClassDeclarationSyntax classDeclaration,
             CancellationToken cancellationToken)
