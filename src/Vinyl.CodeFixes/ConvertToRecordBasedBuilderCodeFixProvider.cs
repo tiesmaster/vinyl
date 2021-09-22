@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -43,6 +44,7 @@ namespace Vinyl
                 diagnostic);
         }
 
+        [SuppressMessage("Performance", "EPS06:Hidden struct copy operation", Justification = "Limited impact")]
         private async Task<Solution> ConvertToRecordBasedBuilder(
             Document document,
             ClassDeclarationSyntax classDeclaration,
