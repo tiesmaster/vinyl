@@ -36,6 +36,8 @@ dotnet_naming_symbols.private_fields.applicable_accessibilities = private
 dotnet_naming_style.prefix_underscore.capitalization = camel_case
 dotnet_naming_style.prefix_underscore.required_prefix = _
 
+# .NET SDK diagnostics (roslyn-analyzers)
+
 # CA1062: Validate arguments of public methods
 # Justification: Use C# 8 nullable reference types instead
 dotnet_diagnostic.CA1062.severity = none
@@ -43,6 +45,13 @@ dotnet_diagnostic.CA1062.severity = none
 # CA1014: Mark assemblies with CLSCompliant
 # Justification: We're not in 2001 anymore
 dotnet_diagnostic.CA1014.severity = none
+
+# AsyncFixer diagnostics
+
+# AsyncFixer01: Unnecessary async/await usage
+# Justification: These days, the advise is to only "elide" async/await on overload chains. This rule
+# doesn't take that into account, and therefore does more harm.
+dotnet_diagnostic.AsyncFixer01.severity = none
 
 # Roslynator diagnostics
 dotnet_diagnostic.RCS1246.severity = none
