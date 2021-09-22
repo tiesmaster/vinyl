@@ -56,6 +56,11 @@ dotnet_diagnostic.SA1101.severity = none
 # Justification: Defacto standard these days is to put them on top.
 dotnet_diagnostic.SA1200.severity = none
 
+# SA1204: Static elements should appear before instance elements
+# Justification: Private static methods can be helpers in the given class, and following the rule of
+# "be able to read like a book", static methods shouldn't be placed higher then when they're referenced.
+dotnet_diagnostic.SA1204.severity = none
+
 # SA1309: Field names should not begin with underscore
 # Justification: The naming convention of this project is to start a field with an underscore.
 dotnet_diagnostic.SA1309.severity = none
