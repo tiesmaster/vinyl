@@ -296,7 +296,7 @@ namespace Vinyl
                     ((MethodDeclarationSyntax)member).ParameterList.Parameters.First());
         }
 
-        private static (string, string) ToParameterTypeAndName(ParameterSyntax node)
+        private static (string ParameterType, string ParameterName) ToParameterTypeAndName(ParameterSyntax node)
             => (node.Type.ToString(), node.Identifier.ValueText.ToCamelCase());
     }
 }
