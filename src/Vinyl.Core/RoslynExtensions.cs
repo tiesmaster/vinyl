@@ -6,10 +6,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
     public static class RoslynExtensions
     {
-        public static SyntaxList<TNode> ToSyntaxList<TNode>(this IEnumerable<TNode> source) where TNode : SyntaxNode
+        public static SyntaxList<TNode> ToSyntaxList<TNode>(this IEnumerable<TNode> source)
+            where TNode : SyntaxNode
             => SyntaxFactory.List(source);
 
-        public static SeparatedSyntaxList<TNode> ToSeparatedSyntaxList<TNode>(this IEnumerable<TNode> source) where TNode : SyntaxNode
+        public static SeparatedSyntaxList<TNode> ToSeparatedSyntaxList<TNode>(this IEnumerable<TNode> source)
+            where TNode : SyntaxNode
             => SyntaxFactory.SeparatedList(source);
 
         public static PropertyDeclarationSyntax WithModifiers(this PropertyDeclarationSyntax propertyNode, params SyntaxToken[] modifiers)
@@ -28,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                where member.IsKind(SyntaxKind.ConstructorDeclaration)
                select (ConstructorDeclarationSyntax)member;
 
-        public static TNode WithAnnotationsFrom<TNode>(this TNode node, SyntaxNode sourceNodeWithAnnotations) where TNode : SyntaxNode
+        public static TNode WithAnnotationsFrom<TNode>(this TNode node, SyntaxNode sourceNodeWithAnnotations)
+            where TNode : SyntaxNode
             => sourceNodeWithAnnotations.CopyAnnotationsTo(node);
 
         public static SyntaxToken WithAnnotationsFrom(this SyntaxToken token, SyntaxToken sourceTokenWithAnnotations)
