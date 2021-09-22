@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 
@@ -17,6 +18,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         public static PropertyDeclarationSyntax WithModifiers(this PropertyDeclarationSyntax propertyNode, params SyntaxToken[] modifiers)
             => propertyNode.WithModifiers(SyntaxFactory.TokenList(modifiers));
 
+        [SuppressMessage(
+            "StyleCop.CSharp.SpacingRules",
+            "SA1000:Keywords should be spaced correctly",
+            Justification = "Implict new() shouldn't have that.")]
         public static HashSet<T> ToHashSet<T>(this IEnumerable<T> source)
             => new(source);
 
