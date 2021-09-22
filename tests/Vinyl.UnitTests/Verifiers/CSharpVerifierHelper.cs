@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -15,6 +16,10 @@ namespace Vinyl.UnitTests
         /// related to nullability mapped to <see cref="ReportDiagnostic.Error"/>, which is then used to enable all
         /// of these warnings for default validation during analyzer and code fix tests.
         /// </summary>
+        [SuppressMessage(
+            "StyleCop.CSharp.DocumentationRules",
+            "SA1623:Property summary documentation should match accessors",
+            Justification = "Summary comes from File > New Project, so generated content is fine.")]
         internal static ImmutableDictionary<string, ReportDiagnostic> NullableWarnings { get; } = GetNullableWarningsFromCompiler();
 
         private static ImmutableDictionary<string, ReportDiagnostic> GetNullableWarningsFromCompiler()
