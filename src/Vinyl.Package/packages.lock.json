@@ -20,6 +20,12 @@
         "resolved": "0.1.2",
         "contentHash": "2AuzqxkREpl8kBt249CeR1sM70ZxBwm6nMcqi8tikisn5jD9jQW2ZNv8Q7PwHzxQYwTSmeRuua8vbPfClqXCzA=="
       },
+      "Microsoft.VisualStudio.Threading.Analyzers": {
+        "type": "Direct",
+        "requested": "[16.10.56, )",
+        "resolved": "16.10.56",
+        "contentHash": "uTvu9fbmHTtRFY5xUgG45waU+ARad0JxyG/2btOC9Su6RTo3PrGVXKU2vHDtVELqlJsnKImhMaPH3YR0XCVwDg=="
+      },
       "Nerdbank.GitVersioning": {
         "type": "Direct",
         "requested": "[3.4.231, )",

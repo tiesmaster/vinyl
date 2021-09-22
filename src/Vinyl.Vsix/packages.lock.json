@@ -20,6 +20,12 @@
         "resolved": "0.1.2",
         "contentHash": "2AuzqxkREpl8kBt249CeR1sM70ZxBwm6nMcqi8tikisn5jD9jQW2ZNv8Q7PwHzxQYwTSmeRuua8vbPfClqXCzA=="
       },
+      "Microsoft.VisualStudio.Threading.Analyzers": {
+        "type": "Direct",
+        "requested": "[16.10.56, )",
+        "resolved": "16.10.56",
+        "contentHash": "uTvu9fbmHTtRFY5xUgG45waU+ARad0JxyG/2btOC9Su6RTo3PrGVXKU2vHDtVELqlJsnKImhMaPH3YR0XCVwDg=="
+      },
       "Microsoft.VSSDK.BuildTools": {
         "type": "Direct",
         "requested": "[16.11.16, )",
@@ -111,11 +117,6 @@
         "dependencies": {
           "Microsoft.VisualStudio.Threading.Analyzers": "15.8.122"
         }
-      },
-      "Microsoft.VisualStudio.Threading.Analyzers": {
-        "type": "Transitive",
-        "resolved": "15.8.122",
-        "contentHash": "1gu3LopB8nLiomlMGx6Y8Glb+rwABHpksdpNH1X9/GGp6uJvnHAUZWsFUQz8sAuu1CKcQagJcSOUt4bb4pOFKg=="
       },
       "System.Buffers": {
         "type": "Transitive",
