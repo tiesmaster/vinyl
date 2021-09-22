@@ -2,6 +2,12 @@
   "version": 1,
   "dependencies": {
     ".NETStandard,Version=v2.0": {
+      "AsyncFixer": {
+        "type": "Direct",
+        "requested": "[1.5.1, )",
+        "resolved": "1.5.1",
+        "contentHash": "q3S4Cfk3V7tA17tlldemqPXQUW7WZ/PT/4HhHeSXZUcF11w1sc9zFjGGSZk5fQX0HiivUFj2MQ0OM2Y8tQeWFw=="
+      },
       "Microsoft.CodeAnalysis.Analyzers": {
         "type": "Direct",
         "requested": "[3.3.2, )",
