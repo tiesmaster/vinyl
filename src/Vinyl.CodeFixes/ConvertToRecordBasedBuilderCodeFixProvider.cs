@@ -14,7 +14,8 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Vinyl
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(ConvertToRecordBasedBuilderCodeFixProvider)), Shared]
+    [Shared]
+    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(ConvertToRecordBasedBuilderCodeFixProvider))]
     public class ConvertToRecordBasedBuilderCodeFixProvider : CodeFixProvider
     {
         private const string _codeFixTitle = "Convert to record-based builder";
