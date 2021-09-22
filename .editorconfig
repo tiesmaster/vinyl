@@ -39,12 +39,42 @@ dotnet_naming_style.prefix_underscore.required_prefix = _
 # .NET SDK diagnostics (roslyn-analyzers)
 
 # CA1062: Validate arguments of public methods
-# Justification: Use C# 8 nullable reference types instead
+# Justification: Use C# 8 nullable reference types instead.
 dotnet_diagnostic.CA1062.severity = none
 
 # CA1014: Mark assemblies with CLSCompliant
-# Justification: We're not in 2001 anymore
+# Justification: We're not in 2001 anymore.
 dotnet_diagnostic.CA1014.severity = none
+
+# StyleCop diagnostics
+
+# SA1101: Prefix local calls with this
+# Justification: Superfluous, so let's not do this.
+dotnet_diagnostic.SA1101.severity = none
+
+# SA1200: Using directives should be placed correctly
+# Justification: Defacto standard these days is to put them on top.
+dotnet_diagnostic.SA1200.severity = none
+
+# SA1309: Field names should not begin with underscore
+# Justification: The naming convention of this project is to start a field with an underscore.
+dotnet_diagnostic.SA1309.severity = none
+
+# SA1512: Single-line comments should not be followed by blank line
+# Justification: Blank line after "multiple" single-line comments is more neat.
+dotnet_diagnostic.SA1512.severity = none
+
+# SA1600: Elements should be documented
+# Justification: Not every single public member requires documentation.
+dotnet_diagnostic.SA1600.severity = none
+
+# SA1601: Partial elements should be documented
+# Justification: See SA1600
+dotnet_diagnostic.SA1601.severity = none
+
+# SA1633: File should have header
+# Justification: Not needed for this project.
+dotnet_diagnostic.SA1633.severity = none
 
 # AsyncFixer diagnostics
 
