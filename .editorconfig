@@ -89,6 +89,7 @@ dotnet_diagnostic.SA1633.severity = none
 dotnet_diagnostic.AsyncFixer01.severity = none
 
 # Roslynator diagnostics
+
 # RCS1246: Use element access.
 # Justification: The perf gain is minimal, and readability decreases with this rule.
 dotnet_diagnostic.RCS1246.severity = none
@@ -96,6 +97,57 @@ dotnet_diagnostic.RCS1246.severity = none
 # RCS9006: Use element access.
 # Justification: See RCS1246.
 dotnet_diagnostic.RCS9006.severity = none
+
+# Roslynator Formatting diagnostics
+dotnet_diagnostic.RCS0001.severity = suggestion
+dotnet_diagnostic.RCS0002.severity = suggestion
+dotnet_diagnostic.RCS0003.severity = suggestion
+dotnet_diagnostic.RCS0004.severity = suggestion
+dotnet_diagnostic.RCS0005.severity = suggestion
+dotnet_diagnostic.RCS0006.severity = suggestion
+dotnet_diagnostic.RCS0007.severity = suggestion
+dotnet_diagnostic.RCS0008.severity = suggestion
+dotnet_diagnostic.RCS0009.severity = suggestion
+dotnet_diagnostic.RCS0010.severity = suggestion
+dotnet_diagnostic.RCS0011.severity = suggestion
+dotnet_diagnostic.RCS0012.severity = none
+dotnet_diagnostic.RCS0013.severity = suggestion
+dotnet_diagnostic.RCS0014.severity = suggestion
+dotnet_diagnostic.RCS0015.severity = suggestion
+dotnet_diagnostic.RCS0016.severity = suggestion
+dotnet_diagnostic.RCS0020.severity = suggestion
+dotnet_diagnostic.RCS0021.severity = suggestion
+dotnet_diagnostic.RCS0022.severity = suggestion
+dotnet_diagnostic.RCS0023.severity = suggestion
+dotnet_diagnostic.RCS0024.severity = suggestion
+dotnet_diagnostic.RCS0025.severity = suggestion
+dotnet_diagnostic.RCS0027.severity = suggestion
+dotnet_diagnostic.RCS0028.severity = suggestion
+dotnet_diagnostic.RCS0029.severity = suggestion
+dotnet_diagnostic.RCS0030.severity = suggestion
+dotnet_diagnostic.RCS0031.severity = suggestion
+dotnet_diagnostic.RCS0032.severity = suggestion
+dotnet_diagnostic.RCS0033.severity = suggestion
+dotnet_diagnostic.RCS0034.severity = suggestion
+dotnet_diagnostic.RCS0036.severity = suggestion
+dotnet_diagnostic.RCS0038.severity = suggestion
+dotnet_diagnostic.RCS0039.severity = suggestion
+dotnet_diagnostic.RCS0041.severity = suggestion
+dotnet_diagnostic.RCS0042.severity = suggestion
+dotnet_diagnostic.RCS0043.severity = suggestion
+dotnet_diagnostic.RCS0044.severity = suggestion
+dotnet_diagnostic.RCS0045.severity = none
+dotnet_diagnostic.RCS0046.severity = none
+dotnet_diagnostic.RCS0047.severity = suggestion
+dotnet_diagnostic.RCS0048.severity = suggestion
+dotnet_diagnostic.RCS0049.severity = suggestion
+dotnet_diagnostic.RCS0050.severity = suggestion
+dotnet_diagnostic.RCS0051.severity = suggestion
+dotnet_diagnostic.RCS0052.severity = suggestion
+dotnet_diagnostic.RCS0053.severity = suggestion
+dotnet_diagnostic.RCS0054.severity = suggestion
+dotnet_diagnostic.RCS0055.severity = suggestion
+dotnet_diagnostic.RCS0056.severity = suggestion
 
 # Xml project files
 [*.{csproj,vcxproj,vcxproj.filters,proj,nativeproj,locproj}]
