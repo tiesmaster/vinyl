@@ -34,9 +34,9 @@
       },
       "Microsoft.VisualStudio.Threading.Analyzers": {
         "type": "Direct",
-        "requested": "[16.10.56, )",
-        "resolved": "16.10.56",
-        "contentHash": "uTvu9fbmHTtRFY5xUgG45waU+ARad0JxyG/2btOC9Su6RTo3PrGVXKU2vHDtVELqlJsnKImhMaPH3YR0XCVwDg=="
+        "requested": "[17.0.63, )",
+        "resolved": "17.0.63",
+        "contentHash": "awAw0YlX/0fzgQeL75S1OrTPLb8qOemFpAk6Vqh5DQ9p45mWGFFFiZzUB1UWltKk+ec+QmshYrm18iBGE1lvSQ=="
       },
       "Nerdbank.GitVersioning": {
         "type": "Direct",
