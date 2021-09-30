@@ -27,10 +27,7 @@ namespace Vinyl.UnitTests
         /// <inheritdoc cref="AnalyzerVerifier{TAnalyzer, TTest, TVerifier}.VerifyAnalyzerAsync(string, DiagnosticResult[])"/>
         public static async Task VerifyAnalyzerAsync(string source, params DiagnosticResult[] expected)
         {
-            var test = new Test
-            {
-                TestCode = source,
-            };
+            var test = new Test { TestCode = source };
 
             test.ExpectedDiagnostics.AddRange(expected);
             test.ReferenceAssemblies = ReferenceAssemblies.Net.Net50;

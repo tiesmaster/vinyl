@@ -15,9 +15,7 @@ namespace Vinyl
     public class ConvertToRecordBasedBuilderAnalyzer : DiagnosticAnalyzer
     {
         public const string DiagnosticId = "VINYL0001";
-
         private const string _category = "Simplification";
-
         private const string _title = "Class-based builder can be converted to record-based builder";
         private const string _messageFormat = "Class-based builder '{0}' can be converted to record-based builder";
         private const string _description = "Class-based builder should be using records instead.";
@@ -66,7 +64,9 @@ namespace Vinyl
         {
             static bool HasFieldNamingConvention(string fieldName)
             {
-                return fieldName.Length > 1 && fieldName.StartsWith("_", StringComparison.InvariantCulture) && char.IsLower(fieldName[1]);
+                return fieldName.Length > 1
+                    && fieldName.StartsWith("_", StringComparison.InvariantCulture)
+                    && char.IsLower(fieldName[1]);
             }
 
             var fields = classdeclaration
@@ -82,10 +82,10 @@ namespace Vinyl
             return !classDeclaration.Members
                 .Any(member =>
                     member is MethodDeclarationSyntax method
-                    && method.Identifier.ValueText.StartsWith("With", StringComparison.InvariantCulture)
-                    && method.Body?.Statements.Any(x =>
-                        x is ReturnStatementSyntax @return
-                        && @return.Expression.IsKind(SyntaxKind.ThisExpression)) == true);
+                        && method.Identifier.ValueText.StartsWith("With", StringComparison.InvariantCulture)
+                        && method.Body?.Statements.Any(x =>
+                            x is ReturnStatementSyntax @return
+                                && @return.Expression.IsKind(SyntaxKind.ThisExpression)) == true);
         }
     }
 }

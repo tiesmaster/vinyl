@@ -194,7 +194,7 @@ namespace TestProject
         }
 
         [Fact]
-        public async Task GivenClassBasedBuilderWithoutClearlyDefaultSettingContructor_WhenFixing_ThenSimplyAddsDefaultConstructor()
+        public async Task GivenClassBasedBuilderWithoutClearlyDefaultSettingCtor_WhenFixing_ThenSimplyAddsDefaultCtor()
         {
             const string test = @"
 namespace TestProject

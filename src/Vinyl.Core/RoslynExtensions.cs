@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             where TNode : SyntaxNode
             => SyntaxFactory.SeparatedList(source);
 
-        public static PropertyDeclarationSyntax WithModifiers(this PropertyDeclarationSyntax propertyNode, params SyntaxToken[] modifiers)
+        public static PropertyDeclarationSyntax WithModifiers(
+            this PropertyDeclarationSyntax propertyNode,
+            params SyntaxToken[] modifiers)
             => propertyNode.WithModifiers(SyntaxFactory.TokenList(modifiers));
 
         [SuppressMessage(
@@ -30,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 .Select(node => node.Identifier.Text)
                 .ToHashSet();
 
-        public static IEnumerable<ConstructorDeclarationSyntax> GetContructors(this SyntaxList<MemberDeclarationSyntax> members)
+        public static IEnumerable<ConstructorDeclarationSyntax> GetContructors(
+            this SyntaxList<MemberDeclarationSyntax> members)
             => from member in members
                where member.IsKind(SyntaxKind.ConstructorDeclaration)
                select (ConstructorDeclarationSyntax)member;

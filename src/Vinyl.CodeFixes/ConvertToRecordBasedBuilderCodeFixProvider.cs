@@ -34,7 +34,8 @@ namespace Vinyl
             var diagnosticSpan = diagnostic.Location.SourceSpan;
 
             // Find the type declaration identified by the diagnostic.
-            var declaration = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<ClassDeclarationSyntax>().First();
+            var declaration = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<ClassDeclarationSyntax>()
+                .First();
 
             // Register a code action that will invoke the fix.
             context.RegisterCodeFix(
@@ -85,10 +86,13 @@ namespace Vinyl
                 .ToHashSet();
 
             var tokensToRename = newRoot
-                .DescendantTokens().Where(x => x.IsKind(SyntaxKind.IdentifierToken) && fieldNames.Contains(x.Text));
+                .DescendantTokens()
+                .Where(x => x.IsKind(SyntaxKind.IdentifierToken) && fieldNames.Contains(x.Text));
 
-            newRoot = newRoot.ReplaceTokens(tokensToRename, (old, _)
-                => SyntaxFactory.Identifier(old.Text.ToPascalCase()).WithTriviaFrom(old));
+            newRoot = newRoot.ReplaceTokens(
+                tokensToRename,
+                (old, _)
+                    => SyntaxFactory.Identifier(old.Text.ToPascalCase()).WithTriviaFrom(old));
 
             // ==================================================================================================================
             // Step 2: Convert class -> record, and fields to parameter list
@@ -136,7 +140,9 @@ namespace Vinyl
             var recordParameterNames = parameterList.ToParameterNames();
 
             // Find best matching default setting constructor and create default property with defaults from that constructor
-            var bestMatchDefaultSettingContructor = FindBestMatchForDefaultSettingConstructor(newRecordDeclaration, recordParameterNames);
+            var bestMatchDefaultSettingContructor = FindBestMatchForDefaultSettingConstructor(
+                newRecordDeclaration,
+                recordParameterNames);
 
             var defaultValueLookup = CalculateDefaultValuesFromFieldSetting(
                 (ConstructorDeclarationSyntax)bestMatchDefaultSettingContructor, recordParameterNames);
@@ -172,7 +178,8 @@ namespace Vinyl
                     parameter => parameter);
 
             newRecordDeclaration = newRecordDeclaration.ReplaceNodes(
-                newRecordDeclaration.Members.Where(member => IsDefaultWitherMethod(member, defaultWitherMethodNameToParametersMapping)),
+                newRecordDeclaration.Members
+                    .Where(member => IsDefaultWitherMethod(member, defaultWitherMethodNameToParametersMapping)),
                 (node, _) =>
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)node;
@@ -256,12 +263,12 @@ namespace Vinyl
 
             bool IsParameterReference(ExpressionSyntax expression, HashSet<string> parameters)
                 => expression is IdentifierNameSyntax parameterIdent
-                        && parameters.Contains(parameterIdent.Identifier.Text);
+                    && parameters.Contains(parameterIdent.Identifier.Text);
 
             return contructor.Body.Statements
                 .Select(statement => (statement as ExpressionStatementSyntax)?.Expression as AssignmentExpressionSyntax)
                 .Where(assignment => IsFieldAssignment(assignment.Left, recordParameterNames)
-                                 && !IsParameterReference(assignment.Right, constructorParameterNames));
+                    && !IsParameterReference(assignment.Right, constructorParameterNames));
         }
 
         private ArrowExpressionClauseSyntax GetContructorInvocationFromParameterList(
