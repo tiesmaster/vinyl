@@ -143,7 +143,7 @@ dotnet_diagnostic.RCS0043.severity = suggestion
 dotnet_diagnostic.RCS0044.severity = suggestion
 dotnet_diagnostic.RCS0045.severity = none
 dotnet_diagnostic.RCS0046.severity = none
-dotnet_diagnostic.RCS0047.severity = suggestion
+dotnet_diagnostic.RCS0047.severity = none
 dotnet_diagnostic.RCS0048.severity = suggestion
 dotnet_diagnostic.RCS0049.severity = suggestion
 dotnet_diagnostic.RCS0050.severity = suggestion
@@ -153,6 +153,11 @@ dotnet_diagnostic.RCS0053.severity = suggestion
 dotnet_diagnostic.RCS0054.severity = suggestion
 dotnet_diagnostic.RCS0055.severity = suggestion
 dotnet_diagnostic.RCS0056.severity = suggestion
+
+# Meziantou Analyzers diagnostics
+# MA0006: Use String.Equals instead of equality operator
+# Justification: Using string.Equals doesn't improve readability
+dotnet_diagnostic.MA0006.severity = none
 
 # Xml project files
 [*.{csproj,vcxproj,vcxproj.filters,proj,nativeproj,locproj}]

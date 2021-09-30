@@ -20,3 +20,11 @@ dotnet_diagnostic.RCS1090.severity = none
 # VSTHRD200: Use "Async" suffix in names of methods that return an awaitable type.
 # Justification: Not needed in test names.
 dotnet_diagnostic.VSTHRD200.severity = none
+
+# MA0004: Use Task.ConfigureAwait(false)
+# Justitfication: Not needed in tests
+dotnet_diagnostic.MA0004.severity = none
+
+# MA0051: Method is too long
+# Justitfication: Long methods for tests is fine
+dotnet_diagnostic.MA0051.severity = none
