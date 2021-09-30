@@ -24,14 +24,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             "StyleCop.CSharp.SpacingRules",
             "SA1000:Keywords should be spaced correctly",
             Justification = "Implict new() shouldn't have that.")]
+        [SuppressMessage(
+            "Design",
+            "MA0016:Prefer return collection abstraction instead of implementation",
+            Justification = "The purpose of this method is to return a concrete implementation, and not an abstraction.")]
         public static HashSet<T> ToHashSet<T>(this IEnumerable<T> source)
             => new(source);
 
+        [SuppressMessage(
+            "Design",
+            "MA0016:Prefer return collection abstraction instead of implementation",
+            Justification = "This is a special case, and we don't want to return an abstraction.")]
         public static HashSet<string> ToParameterNames(this ParameterListSyntax parameterList)
             => parameterList.Parameters
                 .Select(node => node.Identifier.Text)
                 .ToHashSet();
 
+        [SuppressMessage(
+            "Performance",
+            "MA0078:Use 'Cast' instead of 'Select' to cast",
+            Justification = "Not possible with linq comprehension syntax.")]
         public static IEnumerable<ConstructorDeclarationSyntax> GetContructors(
             this SyntaxList<MemberDeclarationSyntax> members)
             => from member in members

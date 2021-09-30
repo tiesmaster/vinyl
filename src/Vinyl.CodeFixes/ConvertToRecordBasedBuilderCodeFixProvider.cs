@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Composition;
@@ -46,6 +47,10 @@ namespace Vinyl
                 diagnostic);
         }
 
+        [SuppressMessage(
+            "Design",
+            "MA0051:Method is too long",
+            Justification = "This is the main method, and we don't want to fix it now.")]
         [SuppressMessage("Performance", "EPS06:Hidden struct copy operation", Justification = "Limited impact")]
         private async Task<Solution> ConvertToRecordBasedBuilderAsync(
             Document document,
@@ -175,7 +180,8 @@ namespace Vinyl
                 .Parameters
                 .ToDictionary(
                     parameter => $"With{parameter.Identifier.ValueText}",
-                    parameter => parameter);
+                    parameter => parameter,
+                    StringComparer.Ordinal);
 
             newRecordDeclaration = newRecordDeclaration.ReplaceNodes(
                 newRecordDeclaration.Members
@@ -248,7 +254,8 @@ namespace Vinyl
             return GetDefaultSettingParameterAssignments(bestMatchDefaultSettingContructor, recordParameterNames)
                 .ToDictionary(
                     assignment => ((IdentifierNameSyntax)assignment.Left).Identifier.Text,
-                    assignment => assignment.Right);
+                    assignment => assignment.Right,
+                    StringComparer.Ordinal);
         }
 
         private static IEnumerable<AssignmentExpressionSyntax> GetDefaultSettingParameterAssignments(

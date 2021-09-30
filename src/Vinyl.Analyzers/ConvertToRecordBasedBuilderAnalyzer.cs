@@ -43,7 +43,7 @@ namespace Vinyl
             context.RegisterSyntaxNodeAction(AnalyzeClassDeclaration, ImmutableArray.Create(SyntaxKind.ClassDeclaration));
         }
 
-        private void AnalyzeClassDeclaration(SyntaxNodeAnalysisContext context)
+        private static void AnalyzeClassDeclaration(SyntaxNodeAnalysisContext context)
         {
             var classdeclaration = (ClassDeclarationSyntax)context.Node;
 
