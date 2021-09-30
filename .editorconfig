@@ -36,6 +36,11 @@ dotnet_naming_symbols.private_fields.applicable_accessibilities = private
 dotnet_naming_style.prefix_underscore.capitalization = camel_case
 dotnet_naming_style.prefix_underscore.required_prefix = _
 
+# CSharp compiler diagnostics
+
+# CS1591: Missing XML comment for publicly visible type or member
+dotnet_diagnostic.CS1591.severity = none
+
 # .NET SDK diagnostics (roslyn-analyzers)
 
 # CA1062: Validate arguments of public methods
