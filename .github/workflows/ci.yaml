@@ -4,6 +4,7 @@ on:
   push:
     branches-ignore:
       - main
+      - dependabot/**
   pull_request:
     branches:
       - main
