@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Immutable;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 using Microsoft.CodeAnalysis;
@@ -20,10 +19,6 @@ namespace Vinyl
         private const string _messageFormat = "Class-based builder '{0}' can be converted to record-based builder";
         private const string _description = "Class-based builder should be using records instead.";
 
-        [SuppressMessage(
-            "StyleCop.CSharp.SpacingRules",
-            "SA1000:Keywords should be spaced correctly",
-            Justification = "Implict new() shouldn't have that.")]
         private static readonly DiagnosticDescriptor _rule = new(
             DiagnosticId,
             _title,

@@ -21,10 +21,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             => propertyNode.WithModifiers(SyntaxFactory.TokenList(modifiers));
 
         [SuppressMessage(
-            "StyleCop.CSharp.SpacingRules",
-            "SA1000:Keywords should be spaced correctly",
-            Justification = "Implict new() shouldn't have that.")]
-        [SuppressMessage(
             "Design",
             "MA0016:Prefer return collection abstraction instead of implementation",
             Justification = "The purpose of this method is to return a concrete implementation, and not an abstraction.")]
@@ -50,10 +46,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                where member.IsKind(SyntaxKind.ConstructorDeclaration)
                select (ConstructorDeclarationSyntax)member;
 
-        [SuppressMessage(
-            "StyleCop.CSharp.SpacingRules",
-            "SA1009:Closing parenthesis should be spaced correctly",
-            Justification = "SA1009 is not updated yet for nullable reference types, in this case.")]
         public static TNode WithAnnotationsFrom<TNode>(this TNode node, SyntaxNode sourceNodeWithAnnotations)
             where TNode : SyntaxNode
             => sourceNodeWithAnnotations.CopyAnnotationsTo(node)!;
