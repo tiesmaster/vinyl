@@ -266,8 +266,6 @@ namespace Vinyl
                     StringComparer.Ordinal);
         }
 
-#nullable disable warnings
-
         private static IEnumerable<AssignmentExpressionSyntax> GetDefaultSettingParameterAssignments(
             ConstructorDeclarationSyntax contructor,
             HashSet<string> recordParameterNames)
@@ -282,13 +280,12 @@ namespace Vinyl
                 => expression is IdentifierNameSyntax parameterIdent
                     && parameters.Contains(parameterIdent.Identifier.Text);
 
-            return contructor.Body.Statements
+            return contructor.Body!.Statements
                 .Select(statement => (statement as ExpressionStatementSyntax)?.Expression as AssignmentExpressionSyntax)
-                .Where(assignment => IsFieldAssignment(assignment.Left, recordParameterNames)
-                    && !IsParameterReference(assignment.Right, constructorParameterNames));
+                .Where(assignment => assignment is object
+                    && IsFieldAssignment(assignment.Left, recordParameterNames)
+                    && !IsParameterReference(assignment.Right, constructorParameterNames))!;
         }
-
-#nullable enable
 
         private ArrowExpressionClauseSyntax GetContructorInvocationFromParameterList(
             ParameterListSyntax parameterList,
