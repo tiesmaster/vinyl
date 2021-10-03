@@ -50,9 +50,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                where member.IsKind(SyntaxKind.ConstructorDeclaration)
                select (ConstructorDeclarationSyntax)member;
 
+        [SuppressMessage(
+            "StyleCop.CSharp.SpacingRules",
+            "SA1009:Closing parenthesis should be spaced correctly",
+            Justification = "SA1009 is not updated yet for nullable reference types, in this case.")]
         public static TNode WithAnnotationsFrom<TNode>(this TNode node, SyntaxNode sourceNodeWithAnnotations)
             where TNode : SyntaxNode
-            => sourceNodeWithAnnotations.CopyAnnotationsTo(node);
+            => sourceNodeWithAnnotations.CopyAnnotationsTo(node)!;
 
         public static SyntaxToken WithAnnotationsFrom(this SyntaxToken token, SyntaxToken sourceTokenWithAnnotations)
             => sourceTokenWithAnnotations.CopyAnnotationsTo(token);
