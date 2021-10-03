@@ -13,8 +13,8 @@ namespace Vinyl.UnitTests
             {
                 SolutionTransforms.Add((solution, projectId) =>
                 {
-                    var compilationOptions = solution.GetProject(projectId).CompilationOptions;
-                    compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(
+                    var compilationOptions = solution.GetProject(projectId)!.CompilationOptions;
+                    compilationOptions = compilationOptions!.WithSpecificDiagnosticOptions(
                         compilationOptions.SpecificDiagnosticOptions.SetItems(CSharpVerifierHelper.NullableWarnings));
 
                     return solution.WithProjectCompilationOptions(projectId, compilationOptions);
