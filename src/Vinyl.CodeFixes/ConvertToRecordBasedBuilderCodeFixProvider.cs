@@ -323,12 +323,7 @@ namespace Vinyl
                     ((MethodDeclarationSyntax)member).ParameterList.Parameters.First());
         }
 
-#nullable disable warnings
-
-        private static (string ParameterType, string ParameterName) ToParameterTypeAndName(ParameterSyntax node)
-            => (node.Type.ToString(), node.Identifier.ValueText.ToCamelCase());
-
-#nullable enable
-
+        private static (string? ParameterType, string ParameterName) ToParameterTypeAndName(ParameterSyntax node)
+            => (node.Type?.ToString(), node.Identifier.ValueText.ToCamelCase());
     }
 }
