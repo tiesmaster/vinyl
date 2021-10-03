@@ -27,6 +27,8 @@ namespace Vinyl
         public sealed override FixAllProvider GetFixAllProvider()
             => WellKnownFixAllProviders.BatchFixer;
 
+#nullable disable warnings
+
         public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
@@ -46,6 +48,10 @@ namespace Vinyl
                     equivalenceKey: _codeFixTitle),
                 diagnostic);
         }
+
+#nullable enable
+
+#nullable disable warnings
 
         [SuppressMessage(
             "Design",
@@ -223,6 +229,8 @@ namespace Vinyl
             return document.WithSyntaxRoot(newRoot).Project.Solution;
         }
 
+#nullable enable
+
         private static ParameterListSyntax ToParameterList(IEnumerable<FieldDeclarationSyntax> readonlyFields)
         {
             var parameters = readonlyFields.Select(x =>
@@ -258,6 +266,8 @@ namespace Vinyl
                     StringComparer.Ordinal);
         }
 
+#nullable disable warnings
+
         private static IEnumerable<AssignmentExpressionSyntax> GetDefaultSettingParameterAssignments(
             ConstructorDeclarationSyntax contructor,
             HashSet<string> recordParameterNames)
@@ -277,6 +287,8 @@ namespace Vinyl
                 .Where(assignment => IsFieldAssignment(assignment.Left, recordParameterNames)
                     && !IsParameterReference(assignment.Right, constructorParameterNames));
         }
+
+#nullable enable
 
         private ArrowExpressionClauseSyntax GetContructorInvocationFromParameterList(
             ParameterListSyntax parameterList,
@@ -311,7 +323,12 @@ namespace Vinyl
                     ((MethodDeclarationSyntax)member).ParameterList.Parameters.First());
         }
 
+#nullable disable warnings
+
         private static (string ParameterType, string ParameterName) ToParameterTypeAndName(ParameterSyntax node)
             => (node.Type.ToString(), node.Identifier.ValueText.ToCamelCase());
+
+#nullable enable
+
     }
 }
