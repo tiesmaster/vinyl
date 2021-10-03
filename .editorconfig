@@ -51,6 +51,12 @@ dotnet_diagnostic.CA1062.severity = none
 # Justification: We're not in 2001 anymore.
 dotnet_diagnostic.CA1014.severity = none
 
+# Roslyn Analyzers (analyzers for Roslyn API itself)
+
+# RS2008: Enable analyzer release tracking
+# Justification: This project is too small to do release tracking
+dotnet_diagnostic.RS2008.severity = none
+
 # StyleCop diagnostics
 
 # SA1101: Prefix local calls with this
