@@ -50,8 +50,6 @@ namespace Vinyl
                 diagnostic);
         }
 
-#nullable disable warnings
-
         [SuppressMessage(
             "Design",
             "MA0051:Method is too long",
@@ -75,7 +73,7 @@ namespace Vinyl
             // Step 0: Paint target node
             // ==================================================================================================================
 
-            newRoot = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            newRoot = (await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false))!;
 
             var targetNodeAnnotation = new SyntaxAnnotation();
             var newTargetNode = classDeclaration.WithAdditionalAnnotations(targetNodeAnnotation);
@@ -181,7 +179,7 @@ namespace Vinyl
             // ==================================================================================================================
 
             var defaultWitherMethodNameToParametersMapping = newRecordDeclaration
-                .ParameterList
+                .ParameterList!
                 .Parameters
                 .ToDictionary(
                     parameter => $"With{parameter.Identifier.ValueText}",
@@ -201,7 +199,7 @@ namespace Vinyl
                     var parameterName = methodDeclaration.ParameterList.Parameters.First().Identifier.ValueText;
 
                     return methodDeclaration.ReplaceNode(
-                        methodDeclaration.ExpressionBody.Expression,
+                        methodDeclaration.ExpressionBody!.Expression,
                         SyntaxFactory.ParseExpression($"this with {{ {propertyName} = {parameterName} }}"));
                 });
 
@@ -214,9 +212,9 @@ namespace Vinyl
 
             var buildMethod = (MethodDeclarationSyntax)newRecordDeclaration.Members.Single(IsBuildMethod);
 
-            var oldNode = (ObjectCreationExpressionSyntax)buildMethod.ExpressionBody.Expression;
+            var oldNode = (ObjectCreationExpressionSyntax)buildMethod.ExpressionBody!.Expression;
 
-            var newNode = SyntaxFactory.ImplicitObjectCreationExpression().WithArgumentList(oldNode.ArgumentList);
+            var newNode = SyntaxFactory.ImplicitObjectCreationExpression().WithArgumentList(oldNode.ArgumentList!);
 
             newRecordDeclaration = newRecordDeclaration.ReplaceNode(oldNode, newNode);
 
@@ -227,8 +225,6 @@ namespace Vinyl
             newRoot = newRoot.ReplaceNode(newClassDeclaration, newRecordDeclaration);
             return document.WithSyntaxRoot(newRoot).Project.Solution;
         }
-
-#nullable enable
 
         private static ParameterListSyntax ToParameterList(IEnumerable<FieldDeclarationSyntax> readonlyFields)
         {
