@@ -39,6 +39,7 @@ dotnet_naming_style.prefix_underscore.required_prefix = _
 # CSharp compiler diagnostics
 
 # CS1591: Missing XML comment for publicly visible type or member
+# Justification: Not everything needs to have XML comments
 dotnet_diagnostic.CS1591.severity = none
 
 # .NET SDK diagnostics (roslyn-analyzers)
