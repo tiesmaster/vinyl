@@ -37,7 +37,8 @@ public class ConvertToRecordBasedBuilderAnalyzer : DiagnosticAnalyzer
 
         if (classdeclaration.Identifier.ValueText.EndsWith("Builder", StringComparison.InvariantCulture)
             && AllFieldsHaveFieldNamingConvention(classdeclaration)
-            && IsImmutableFluentBuilder(classdeclaration))
+            && IsImmutableFluentBuilder(classdeclaration)
+            && !IsClassStatic(classdeclaration))
         {
             var location = Location.Create(
                 context.Node.SyntaxTree,
@@ -75,4 +76,7 @@ public class ConvertToRecordBasedBuilderAnalyzer : DiagnosticAnalyzer
                         x is ReturnStatementSyntax @return
                             && @return.Expression.IsKind(SyntaxKind.ThisExpression)) == true);
     }
+
+    private static bool IsClassStatic(ClassDeclarationSyntax classDeclaration)
+        => classDeclaration.Modifiers.Any(x => x.IsKind(SyntaxKind.StaticKeyword));
 }

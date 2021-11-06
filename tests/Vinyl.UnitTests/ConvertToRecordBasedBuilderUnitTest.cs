@@ -15,6 +15,20 @@ public class ConvertToRecordBasedBuilderUnitTest
     }
 
     [Fact]
+    public async Task GivenStaticClass_WhenAnalysing_ThenNoDiagnostic()
+    {
+        const string test = @"
+namespace TestProject
+{
+public static {|#0:class BookBuilder|}
+{
+}
+}";
+
+        await VerifyCS.VerifyAnalyzerAsync(test);
+    }
+
+    [Fact]
     public async Task GivenClassBasedBuilder_WhenAnalysing_ThenReportsTheLegacyBuilder()
     {
         const string test = @"
