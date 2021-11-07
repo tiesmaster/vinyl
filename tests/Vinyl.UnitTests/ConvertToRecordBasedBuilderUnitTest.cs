@@ -29,6 +29,21 @@ public static {|#0:class BookBuilder|}
     }
 
     [Fact]
+    public async Task GivenMutableClass_WhenAnalysing_ThenNoDiagnostic()
+    {
+        const string test = @"
+namespace TestProject
+{
+public {|#0:class BookBuilder|}
+{
+    private int _id;
+}
+}";
+
+        await VerifyCS.VerifyAnalyzerAsync(test);
+    }
+
+    [Fact]
     public async Task GivenClassBasedBuilder_WhenAnalysing_ThenReportsTheLegacyBuilder()
     {
         const string test = @"

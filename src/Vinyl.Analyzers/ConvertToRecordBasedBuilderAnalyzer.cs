@@ -37,6 +37,7 @@ public class ConvertToRecordBasedBuilderAnalyzer : DiagnosticAnalyzer
 
         if (classdeclaration.Identifier.ValueText.EndsWith("Builder", StringComparison.InvariantCulture)
             && AllFieldsHaveFieldNamingConvention(classdeclaration)
+            && !AnyFieldsMutable(classdeclaration)
             && IsImmutableFluentBuilder(classdeclaration)
             && !IsClassStatic(classdeclaration))
         {
@@ -64,6 +65,15 @@ public class ConvertToRecordBasedBuilderAnalyzer : DiagnosticAnalyzer
             .Cast<FieldDeclarationSyntax>();
 
         return fields.All(x => HasFieldNamingConvention(x.Declaration.Variables.Single().Identifier.Text));
+    }
+
+    private static bool AnyFieldsMutable(ClassDeclarationSyntax classdeclaration)
+    {
+        return classdeclaration
+            .Members
+            .Any(x =>
+                x.IsKind(SyntaxKind.FieldDeclaration)
+                && !x.Modifiers.Any(x => x.IsKind(SyntaxKind.ReadOnlyKeyword)));
     }
 
     private static bool IsImmutableFluentBuilder(ClassDeclarationSyntax classDeclaration)
