@@ -31,7 +31,7 @@ jobs:
 
   build-vsix:
 
-    runs-on: windows-latest
+    runs-on: windows-2022
     steps:
       - name: Checkout source
         uses: actions/checkout@v2
