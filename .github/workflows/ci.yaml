@@ -22,6 +22,8 @@ jobs:
           fetch-depth: 0
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
       - name: Build all projects (except VSIX)
         run: dotnet build Vinyl.slnf
       - name: Run Tests
@@ -37,6 +39,8 @@ jobs:
           fetch-depth: 0
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v1
       - name: Restore packages
