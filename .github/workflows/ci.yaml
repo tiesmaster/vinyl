@@ -43,8 +43,6 @@ jobs:
           dotnet-version: '6.0.x'
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v1
-        with:
-          vs-version: '[17.0,'
       - name: Restore packages
         run: dotnet restore
       - name: Build VSIX project
