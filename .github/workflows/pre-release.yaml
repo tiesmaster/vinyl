@@ -43,9 +43,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          ./.sonar/scanner/sonarscanner begin /k:"tiesmaster_vinyl" /o:"tiesmaster" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          ./.sonar/scanner/dotnet-sonarscanner begin /k:"tiesmaster_vinyl" /o:"tiesmaster" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build src/Vinyl.Package
-          ./.sonar/scanner/sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+          ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
       - name: Push Pre-release Package
         run: dotnet nuget push src/Vinyl.Package/bin/Debug/*.nupkg --api-key ${GITHUB_TOKEN} --source https://nuget.pkg.github.com/tiesmaster/index.json
         env:
