@@ -6,22 +6,22 @@ using VerifyCS = Vinyl.UnitTests.CSharpCodeFixVerifier<
     Vinyl.ConvertToRecordBasedBuilderAnalyzer,
     Vinyl.ConvertToRecordBasedBuilderCodeFixProvider>;
 
-namespace Vinyl.Test
+namespace Vinyl.Test;
+
+public class ConvertToRecordBasedBuilderUnitTest
 {
-    public class ConvertToRecordBasedBuilderUnitTest
+    [Fact]
+    public async Task NoCodeNoDiagnostic()
     {
-        [Fact]
-        public async Task NoCodeNoDiagnostic()
-        {
-            const string test = "";
+        const string test = "";
 
-            await VerifyCS.VerifyAnalyzerAsync(test);
-        }
+        await VerifyCS.VerifyAnalyzerAsync(test);
+    }
 
-        [Fact]
-        public async Task GivenClassBasedBuilder_WhenAnalysing_ThenReportsTheLegacyBuilder()
-        {
-            const string test = @"
+    [Fact]
+    public async Task GivenClassBasedBuilder_WhenAnalysing_ThenReportsTheLegacyBuilder()
+    {
+        const string test = @"
 namespace TestProject
 {
     public {|#0:class BookBuilder|}
@@ -63,14 +63,14 @@ namespace TestProject
     }
 }";
 
-            var expected = VerifyCS.Diagnostic("VINYL0001").WithLocation(0).WithArguments("BookBuilder");
-            await VerifyCS.VerifyAnalyzerAsync(test, expected);
-        }
+        var expected = VerifyCS.Diagnostic("VINYL0001").WithLocation(0).WithArguments("BookBuilder");
+        await VerifyCS.VerifyAnalyzerAsync(test, expected);
+    }
 
-        [Fact]
-        public async Task GivenClassBasedBuilderAndFieldsAlreadyCamelCase_WhenAnalysing_ThenDoesNotReportsTheLegacyBuilder()
-        {
-            const string test = @"
+    [Fact]
+    public async Task GivenClassBasedBuilderAndFieldsAlreadyCamelCase_WhenAnalysing_ThenDoesNotReportsTheLegacyBuilder()
+    {
+        const string test = @"
 namespace TestProject
 {
     public class BookBuilder
@@ -112,13 +112,13 @@ namespace TestProject
     }
 }";
 
-            await VerifyCS.VerifyAnalyzerAsync(test);
-        }
+        await VerifyCS.VerifyAnalyzerAsync(test);
+    }
 
-        [Fact]
-        public async Task GivenClassBasedBuilder_WhenFixing_ThenDoesAllTheSteps()
-        {
-            const string test = @"
+    [Fact]
+    public async Task GivenClassBasedBuilder_WhenFixing_ThenDoesAllTheSteps()
+    {
+        const string test = @"
 namespace TestProject
 {
     public {|#0:class BookBuilder|}
@@ -160,7 +160,7 @@ namespace TestProject
     }
 }";
 
-            const string fixtest = @"
+        const string fixtest = @"
 namespace TestProject
 {
     public record BookBuilder(int Id, string Title)
@@ -189,14 +189,14 @@ namespace TestProject
     }
 }";
 
-            var expected = VerifyCS.Diagnostic("VINYL0001").WithLocation(0).WithArguments("BookBuilder");
-            await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
-        }
+        var expected = VerifyCS.Diagnostic("VINYL0001").WithLocation(0).WithArguments("BookBuilder");
+        await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
+    }
 
-        [Fact]
-        public async Task GivenClassBasedBuilderWithoutClearlyDefaultSettingCtor_WhenFixing_ThenSimplyAddsDefaultCtor()
-        {
-            const string test = @"
+    [Fact]
+    public async Task GivenClassBasedBuilderWithoutClearlyDefaultSettingCtor_WhenFixing_ThenSimplyAddsDefaultCtor()
+    {
+        const string test = @"
 namespace TestProject
 {
     public {|#0:class BookBuilder|}
@@ -238,7 +238,7 @@ namespace TestProject
     }
 }";
 
-            const string fixtest = @"
+        const string fixtest = @"
 namespace TestProject
 {
     public record BookBuilder(int Id, string Title)
@@ -267,14 +267,14 @@ namespace TestProject
     }
 }";
 
-            var expected = VerifyCS.Diagnostic("VINYL0001").WithLocation(0).WithArguments("BookBuilder");
-            await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
-        }
+        var expected = VerifyCS.Diagnostic("VINYL0001").WithLocation(0).WithArguments("BookBuilder");
+        await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
+    }
 
-        [Fact]
-        public async Task GivenClassBasedBuilderNonImmutable_WhenAnalysing_ThenDoesNotReport()
-        {
-            const string test = @"
+    [Fact]
+    public async Task GivenClassBasedBuilderNonImmutable_WhenAnalysing_ThenDoesNotReport()
+    {
+        const string test = @"
 namespace TestProject
 {
     public {|#0:class BookBuilder|}
@@ -313,13 +313,13 @@ namespace TestProject
     }
 }";
 
-            await VerifyCS.VerifyAnalyzerAsync(test);
-        }
+        await VerifyCS.VerifyAnalyzerAsync(test);
+    }
 
-        [Fact]
-        public async Task GivenClassBasedBuilderWithBuildMethodOnMultipleLines_WhenFixing_ThenMaintainsIndentation()
-        {
-            const string test = @"
+    [Fact]
+    public async Task GivenClassBasedBuilderWithBuildMethodOnMultipleLines_WhenFixing_ThenMaintainsIndentation()
+    {
+        const string test = @"
 namespace TestProject
 {
     public {|#0:class BookBuilder|}
@@ -364,7 +364,7 @@ namespace TestProject
     }
 }";
 
-            const string fixtest = @"
+        const string fixtest = @"
 namespace TestProject
 {
     public record BookBuilder(int Id, string Title)
@@ -396,8 +396,7 @@ namespace TestProject
     }
 }";
 
-            var expected = VerifyCS.Diagnostic("VINYL0001").WithLocation(0).WithArguments("BookBuilder");
-            await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
-        }
+        var expected = VerifyCS.Diagnostic("VINYL0001").WithLocation(0).WithArguments("BookBuilder");
+        await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
     }
 }
