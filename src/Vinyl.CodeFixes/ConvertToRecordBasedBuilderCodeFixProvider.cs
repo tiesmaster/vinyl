@@ -277,7 +277,7 @@ public class ConvertToRecordBasedBuilderCodeFixProvider : CodeFixProvider
 
         return contructor.Body!.Statements
             .Select(statement => (statement as ExpressionStatementSyntax)?.Expression as AssignmentExpressionSyntax)
-            .Where(assignment => assignment is object
+            .Where(assignment => assignment is not null
                 && IsFieldAssignment(assignment.Left, recordParameterNames)
                 && !IsParameterReference(assignment.Right, constructorParameterNames))!;
     }
