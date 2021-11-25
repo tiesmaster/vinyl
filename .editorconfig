@@ -24,6 +24,7 @@ dotnet_separate_import_directive_groups = true
 csharp_style_var_for_built_in_types = true:suggestion
 csharp_style_var_when_type_is_apparent = true:suggestion
 csharp_style_var_elsewhere = true:suggestion
+csharp_style_namespace_declarations = file_scoped:warning
 
 # From issue #22884 on Roslyn repo: https://github.com/dotnet/roslyn/issues/22884#issuecomment-358776444
 dotnet_naming_rule.private_members_with_underscore.symbols  = private_fields
