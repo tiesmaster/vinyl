@@ -1,7 +1,3 @@
-using System.Threading.Tasks;
-
-using Xunit;
-
 using VerifyCS = Vinyl.UnitTests.CSharpCodeFixVerifier<
     Vinyl.ConvertToRecordBasedBuilderAnalyzer,
     Vinyl.ConvertToRecordBasedBuilderCodeFixProvider>;

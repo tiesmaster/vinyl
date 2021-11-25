@@ -3,11 +3,20 @@
 
   <PropertyGroup>
     <LangVersion>10</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+  <Using Include="System.Collections.Immutable" />
+
+  <Using Include="Microsoft.CodeAnalysis" />
+  <Using Include="Microsoft.CodeAnalysis.CSharp" />
+  <Using Include="Microsoft.CodeAnalysis.CSharp.Syntax" />
+</ItemGroup>
 
   <PropertyGroup>
     <!-- Enable NuGet package lock files (packages.lock.json), and force repeatable builds on CI. -->
