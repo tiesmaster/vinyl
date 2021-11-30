@@ -31,3 +31,4 @@ Vinyl is a set of C# analyzers, code fixers, refactorings, and source generators
 # Credits
 
  * [Font Awesome](https://fontawesome.com/license)
+ 
