@@ -61,9 +61,9 @@
       },
       "Roslynator.Formatting.Analyzers": {
         "type": "Direct",
-        "requested": "[1.2.2, )",
-        "resolved": "1.2.2",
-        "contentHash": "rM7XcIAO15VjA+Z+qTorUfpLA9TOli5jJYLAs2iDyh6k3pOYya9kHoNf9HKge0OiEwXk12OgF7oyjTfJhV54Cw=="
+        "requested": "[3.3.0, )",
+        "resolved": "3.3.0",
+        "contentHash": "H53SecRoBo0EGQsc+IAt+Bu9WJXwgFSZPNKEZxcM8P5MlN2NXi8E6aEabetws71MWbri4PELnkcQlNLnsOq5Jg=="
       },
       "StyleCop.Analyzers": {
         "type": "Direct",
