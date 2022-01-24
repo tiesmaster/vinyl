@@ -11,12 +11,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-  <Using Include="System.Collections.Immutable" />
+    <Using Include="System.Collections.Immutable" />
 
-  <Using Include="Microsoft.CodeAnalysis" />
-  <Using Include="Microsoft.CodeAnalysis.CSharp" />
-  <Using Include="Microsoft.CodeAnalysis.CSharp.Syntax" />
-</ItemGroup>
+    <Using Include="Microsoft.CodeAnalysis" />
+    <Using Include="Microsoft.CodeAnalysis.CSharp" />
+    <Using Include="Microsoft.CodeAnalysis.CSharp.Syntax" />
+  </ItemGroup>
 
   <PropertyGroup>
     <!-- Enable NuGet package lock files (packages.lock.json), and force repeatable builds on CI. -->
