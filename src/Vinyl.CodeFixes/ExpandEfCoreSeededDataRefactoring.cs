@@ -69,11 +69,30 @@ public class ExpandEfCoreSeededDataRefactoring : CodeRefactoringProvider
 
         var argumentList = seededDataInvocation.ArgumentList;
 
-        var newValueArgument = argumentList.Arguments.Last();
+        var newValueArgument = GenerateNewValue(argumentList.Arguments.Last());
 
         var newRoot = root.ReplaceNode(argumentList, argumentList.AddArgument(newValueArgument));
 
         return document.WithSyntaxRoot(newRoot);
+    }
+
+    private static ArgumentSyntax GenerateNewValue(ArgumentSyntax templateArgument)
+    {
+        var objectCreation = (AnonymousObjectCreationExpressionSyntax)templateArgument.Expression;
+
+        var newObjectCreation = objectCreation.ReplaceNodes(objectCreation.Initializers.ToList(), (node, _) =>
+        {
+            if (node.NameEquals!.Name.Identifier.ValueText == "Id")
+            {
+                return node;
+            }
+            else
+            {
+                return node.WithExpression(SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal("")));
+            }
+        });
+
+        return templateArgument.WithExpression(newObjectCreation);
     }
 }
 
