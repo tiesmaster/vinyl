@@ -80,17 +80,23 @@ public class ExpandEfCoreSeededDataRefactoring : CodeRefactoringProvider
     {
         var objectCreation = (AnonymousObjectCreationExpressionSyntax)templateArgument.Expression;
 
-        var newObjectCreation = objectCreation.ReplaceNodes(objectCreation.Initializers.ToList(), (node, _) =>
-        {
-            if (node.NameEquals!.Name.Identifier.ValueText == "Id")
+        var newObjectCreation = objectCreation.ReplaceNodes(
+            objectCreation.Initializers.ToList(),
+            (node, _) =>
             {
-                return node;
-            }
-            else
-            {
-                return node.WithExpression(SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal("")));
-            }
-        });
+                if (node.NameEquals!.Name.Identifier.ValueText == "Id")
+                {
+                    var stringLiteralToken = node.DescendantTokens().Single(x => x.IsKind(SyntaxKind.StringLiteralToken));
+                    return node.ReplaceToken(stringLiteralToken, SyntaxFactory.Literal(Guid.NewGuid().ToString()));
+                }
+                else
+                {
+                    return node.WithExpression(
+                        SyntaxFactory.LiteralExpression(
+                            SyntaxKind.StringLiteralExpression,
+                            SyntaxFactory.Literal(string.Empty)));
+                }
+            });
 
         return templateArgument.WithExpression(newObjectCreation);
     }
