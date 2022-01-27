@@ -67,9 +67,21 @@ public class ExpandEfCoreSeededDataRefactoring : CodeRefactoringProvider
     {
         var root = await seededDataInvocation.SyntaxTree.GetRootAsync(cancellationToken).ConfigureAwait(false);
 
-        var newValueArgument = seededDataInvocation.ArgumentList.Arguments.Last();
+        var argumentList = seededDataInvocation.ArgumentList;
 
-        var arguments = seededDataInvocation.ArgumentList.Arguments;
+        var newValueArgument = argumentList.Arguments.Last();
+
+        var newRoot = root.ReplaceNode(argumentList, argumentList.AddArgument(newValueArgument));
+
+        return document.WithSyntaxRoot(newRoot);
+    }
+}
+
+public static class HoiExtensions
+{
+    public static ArgumentListSyntax AddArgument(this ArgumentListSyntax argumentList, ArgumentSyntax newValueArgument)
+    {
+        var arguments = argumentList.Arguments;
 
         var separator = arguments.GetSeparators().First();
         var argumentsAndSeparatorsList = arguments.GetWithSeparators();
@@ -79,10 +91,6 @@ public class ExpandEfCoreSeededDataRefactoring : CodeRefactoringProvider
 
         var newArguments = SyntaxFactory.SeparatedList<ArgumentSyntax>(argumentsAndSeparatorsList);
 
-        var newArgumentList = seededDataInvocation.ArgumentList.WithArguments(newArguments);
-
-        var newRoot = root.ReplaceNode(seededDataInvocation.ArgumentList, newArgumentList);
-
-        return document.WithSyntaxRoot(newRoot);
+        return argumentList.WithArguments(newArguments);
     }
 }
