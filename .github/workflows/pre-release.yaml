@@ -105,5 +105,5 @@ jobs:
           curl \
             -i \
             -X POST \
-            --form file=@src/Vinyl.Vsix/bin/Release/net472/Vinyl.Vsix.vsix \
+            --form file=@src/Vinyl.Vsix/bin/Release/net48/Vinyl.Vsix.vsix \
             $PUBLISH_URL
