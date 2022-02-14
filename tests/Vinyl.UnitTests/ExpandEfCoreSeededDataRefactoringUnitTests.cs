@@ -9,7 +9,7 @@ public class ExpandEfCoreSeededDataRefactoringUnitTests
     public async Task TestAsync()
     {
         ExpandEfCoreSeededDataRefactoring.NewGuidFactory = () => new Guid("5fd45b56-fed7-4490-8ff6-97e31616ccf9");
-        var source = @"using System;
+        const string source = @"using System;
 
 public class BookDbContext
 {
@@ -38,7 +38,7 @@ public class EntityTypeBuilder<TEntity>
     public void HasData<TEntity>(params TEntity[] data) => throw new NotImplementedException();
 }";
 
-        var fixedSource = @"using System;
+        const string fixedSource = @"using System;
 
 public class BookDbContext
 {

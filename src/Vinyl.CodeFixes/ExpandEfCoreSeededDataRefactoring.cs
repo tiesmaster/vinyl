@@ -10,14 +10,17 @@ namespace Vinyl;
 [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = nameof(ExpandEfCoreSeededDataRefactoring))]
 public class ExpandEfCoreSeededDataRefactoring : CodeRefactoringProvider
 {
-    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:Fields should be private", Justification = "We need this for unit testing.")]
+    [SuppressMessage(
+        "StyleCop.CSharp.MaintainabilityRules",
+        "SA1401:Fields should be private",
+        Justification = "We need this for unit testing.")]
     [SuppressMessage("Usage", "CA2211:Non-constant fields should not be visible", Justification = "See SA1401 suppression")]
     [SuppressMessage("Design", "MA0069:Non-constant static fields should not be visible", Justification = "See SA1401 suppression")]
     public static Func<Guid> NewGuidFactory = () => Guid.NewGuid();
 
     public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
     {
-        var root = await context.Document.GetSyntaxRootAsync().ConfigureAwait(false);
+        var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
 
         if (root is null)
         {
@@ -59,8 +62,8 @@ public class ExpandEfCoreSeededDataRefactoring : CodeRefactoringProvider
         foreach (var dataSeedExpression in dataSeedExpressions)
         {
             var action = CodeAction.Create(
-               "Expand seeded with new value",
-               c => ExpandSeededDataWithNewValueAsync(context.Document, (InvocationExpressionSyntax)dataSeedExpression.Parent!, c));
+                "Expand seeded with new value",
+                c => ExpandSeededDataWithNewValueAsync(context.Document, (InvocationExpressionSyntax)dataSeedExpression.Parent!, c));
 
             context.RegisterRefactoring(action);
         }
@@ -96,13 +99,11 @@ public class ExpandEfCoreSeededDataRefactoring : CodeRefactoringProvider
                     var stringLiteralToken = node.DescendantTokens().Single(x => x.IsKind(SyntaxKind.StringLiteralToken));
                     return node.ReplaceToken(stringLiteralToken, SyntaxFactory.Literal(NewGuidFactory().ToString()));
                 }
-                else
-                {
-                    return node.WithExpression(
-                        SyntaxFactory.LiteralExpression(
-                            SyntaxKind.StringLiteralExpression,
-                            SyntaxFactory.Literal(string.Empty)));
-                }
+
+                return node.WithExpression(
+                    SyntaxFactory.LiteralExpression(
+                        SyntaxKind.StringLiteralExpression,
+                        SyntaxFactory.Literal(string.Empty)));
             });
 
         return templateArgument.WithExpression(newObjectCreation);
