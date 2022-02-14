@@ -60,13 +60,13 @@ public class ExpandEfCoreSeededDataRefactoring : CodeRefactoringProvider
         {
             var action = CodeAction.Create(
                "Expand seeded with new value",
-               c => ExpandSeededDataWithNewValueAsync(context.Document, (InvocationExpressionSyntax)dataSeedExpression.Parent, c));
+               c => ExpandSeededDataWithNewValueAsync(context.Document, (InvocationExpressionSyntax)dataSeedExpression.Parent!, c));
 
             context.RegisterRefactoring(action);
         }
     }
 
-    private async Task<Document> ExpandSeededDataWithNewValueAsync(
+    private static async Task<Document> ExpandSeededDataWithNewValueAsync(
         Document document,
         InvocationExpressionSyntax seededDataInvocation,
         CancellationToken cancellationToken)
@@ -82,6 +82,7 @@ public class ExpandEfCoreSeededDataRefactoring : CodeRefactoringProvider
         return document.WithSyntaxRoot(newRoot);
     }
 
+    [SuppressMessage("Performance", "EPS06:Hidden struct copy operation", Justification = "Limited impact")]
     private static ArgumentSyntax GenerateNewValue(ArgumentSyntax templateArgument)
     {
         var objectCreation = (AnonymousObjectCreationExpressionSyntax)templateArgument.Expression;
@@ -105,23 +106,5 @@ public class ExpandEfCoreSeededDataRefactoring : CodeRefactoringProvider
             });
 
         return templateArgument.WithExpression(newObjectCreation);
-    }
-}
-
-public static class HoiExtensions
-{
-    public static ArgumentListSyntax AddArgument(this ArgumentListSyntax argumentList, ArgumentSyntax newValueArgument)
-    {
-        var arguments = argumentList.Arguments;
-
-        var separator = arguments.GetSeparators().First();
-        var argumentsAndSeparatorsList = arguments.GetWithSeparators();
-
-        argumentsAndSeparatorsList = argumentsAndSeparatorsList.Add(separator);
-        argumentsAndSeparatorsList = argumentsAndSeparatorsList.Add(newValueArgument);
-
-        var newArguments = SyntaxFactory.SeparatedList<ArgumentSyntax>(argumentsAndSeparatorsList);
-
-        return argumentList.WithArguments(newArguments);
     }
 }

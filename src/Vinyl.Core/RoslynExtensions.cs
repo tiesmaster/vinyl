@@ -44,6 +44,21 @@ public static class RoslynExtensions
            where member.IsKind(SyntaxKind.ConstructorDeclaration)
            select (ConstructorDeclarationSyntax)member;
 
+    public static ArgumentListSyntax AddArgument(this ArgumentListSyntax argumentList, ArgumentSyntax newValueArgument)
+    {
+        var arguments = argumentList.Arguments;
+
+        var separator = arguments.GetSeparators().First();
+        var argumentsAndSeparatorsList = arguments.GetWithSeparators();
+
+        argumentsAndSeparatorsList = argumentsAndSeparatorsList.Add(separator);
+        argumentsAndSeparatorsList = argumentsAndSeparatorsList.Add(newValueArgument);
+
+        var newArguments = SyntaxFactory.SeparatedList<ArgumentSyntax>(argumentsAndSeparatorsList);
+
+        return argumentList.WithArguments(newArguments);
+    }
+
     public static TNode WithAnnotationsFrom<TNode>(this TNode node, SyntaxNode sourceNodeWithAnnotations)
         where TNode : SyntaxNode
         => sourceNodeWithAnnotations.CopyAnnotationsTo(node)!;
