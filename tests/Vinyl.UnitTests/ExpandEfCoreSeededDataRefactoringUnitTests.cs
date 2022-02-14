@@ -5,9 +5,10 @@ namespace Vinyl;
 
 public class ExpandEfCoreSeededDataRefactoringUnitTests
 {
-    [Fact(Skip = "Got to figure out how to test the generated GUID")]
+    [Fact]
     public async Task TestAsync()
     {
+        ExpandEfCoreSeededDataRefactoring.NewGuidFactory = () => new Guid("5fd45b56-fed7-4490-8ff6-97e31616ccf9");
         var source = @"using System;
 
 public class BookDbContext
@@ -46,7 +47,7 @@ public class BookDbContext
         builder.Entity<Book>().HasData(
             new { Id = new Guid(""aa0d97b3-89b8-4a4c-a743-11d9925854dc""), Name = ""Catch-22"", Author = ""Joseph Heller"" },
             new { Id = new Guid(""9afaf16c-6fd5-49ac-ae92-0b9b096649ea""), Name = ""Nineteen Eighty-Four"", Author = ""George Orwell"" },
-            new { Id = new Guid(""9afaf16c-6fd5-49ac-ae92-0b9b096649ea""), Name = """", Author = """" });
+            new { Id = new Guid(""5fd45b56-fed7-4490-8ff6-97e31616ccf9""), Name = """", Author = """" });
     }
 }
 

@@ -1,4 +1,5 @@
 using System.Composition;
+using System.Diagnostics.CodeAnalysis;
 
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeRefactorings;
@@ -9,6 +10,11 @@ namespace Vinyl;
 [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = nameof(ExpandEfCoreSeededDataRefactoring))]
 public class ExpandEfCoreSeededDataRefactoring : CodeRefactoringProvider
 {
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:Fields should be private", Justification = "We need this for unit testing.")]
+    [SuppressMessage("Usage", "CA2211:Non-constant fields should not be visible", Justification = "See SA1401 suppression")]
+    [SuppressMessage("Design", "MA0069:Non-constant static fields should not be visible", Justification = "See SA1401 suppression")]
+    public static Func<Guid> NewGuidFactory = () => Guid.NewGuid();
+
     public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
     {
         var root = await context.Document.GetSyntaxRootAsync().ConfigureAwait(false);
@@ -60,7 +66,7 @@ public class ExpandEfCoreSeededDataRefactoring : CodeRefactoringProvider
         }
     }
 
-    private static async Task<Document> ExpandSeededDataWithNewValueAsync(
+    private async Task<Document> ExpandSeededDataWithNewValueAsync(
         Document document,
         InvocationExpressionSyntax seededDataInvocation,
         CancellationToken cancellationToken)
@@ -87,7 +93,7 @@ public class ExpandEfCoreSeededDataRefactoring : CodeRefactoringProvider
                 if (node.NameEquals!.Name.Identifier.ValueText == "Id")
                 {
                     var stringLiteralToken = node.DescendantTokens().Single(x => x.IsKind(SyntaxKind.StringLiteralToken));
-                    return node.ReplaceToken(stringLiteralToken, SyntaxFactory.Literal(Guid.NewGuid().ToString()));
+                    return node.ReplaceToken(stringLiteralToken, SyntaxFactory.Literal(NewGuidFactory().ToString()));
                 }
                 else
                 {
