@@ -1712,6 +1712,13 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp": "3.9.0"
         }
+      },
+      "vinyl.refactorings": {
+        "type": "Project",
+        "dependencies": {
+          "Microsoft.CodeAnalysis.CSharp.Workspaces": "3.9.0",
+          "Vinyl.Core": "1.0.0"
+        }
       }
     }
   }

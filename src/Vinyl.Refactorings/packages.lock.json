@@ -26,6 +26,18 @@
         "resolved": "1.0.694",
         "contentHash": "Sn0UbAoFJDHs8qQcabAEqXgoI+V2BOo+729i6wUa2fhq7gfcTNl1n60QXqb65NyMyLq8yyw86fbJb44CdhZ3OQ=="
       },
+      "Microsoft.CodeAnalysis.CSharp.Workspaces": {
+        "type": "Direct",
+        "requested": "[3.9.0, )",
+        "resolved": "3.9.0",
+        "contentHash": "GeDDyxAN+yJmjF7+i4SMuvXL54uuug9fQ9ACzlCDQv1t+OXPdArGyxC1pTOAERZ9ylPRFduZdG3Kkn0a73ksSA==",
+        "dependencies": {
+          "Humanizer.Core": "2.2.0",
+          "Microsoft.CodeAnalysis.CSharp": "[3.9.0]",
+          "Microsoft.CodeAnalysis.Common": "[3.9.0]",
+          "Microsoft.CodeAnalysis.Workspaces.Common": "[3.9.0]"
+        }
+      },
       "Microsoft.VisualStudio.Threading.Analyzers": {
         "type": "Direct",
         "requested": "[17.0.64, )",
@@ -115,17 +127,6 @@
         "contentHash": "NTsiK3fnoZGemy4dBHrILwg9rL+jDnOJ7aixFu4EOWM1r6MZMrNCIhT2tO4AmIMdfICLPwj910uZRRLpbMnqHg==",
         "dependencies": {
           "Microsoft.CodeAnalysis.Common": "[3.9.0]"
-        }
-      },
-      "Microsoft.CodeAnalysis.CSharp.Workspaces": {
-        "type": "Transitive",
-        "resolved": "3.9.0",
-        "contentHash": "GeDDyxAN+yJmjF7+i4SMuvXL54uuug9fQ9ACzlCDQv1t+OXPdArGyxC1pTOAERZ9ylPRFduZdG3Kkn0a73ksSA==",
-        "dependencies": {
-          "Humanizer.Core": "2.2.0",
-          "Microsoft.CodeAnalysis.CSharp": "[3.9.0]",
-          "Microsoft.CodeAnalysis.Common": "[3.9.0]",
-          "Microsoft.CodeAnalysis.Workspaces.Common": "[3.9.0]"
         }
       },
       "Microsoft.CodeAnalysis.Workspaces.Common": {
@@ -560,24 +561,10 @@
           "Vinyl.Core": "1.0.0"
         }
       },
-      "vinyl.codefixes": {
-        "type": "Project",
-        "dependencies": {
-          "Microsoft.CodeAnalysis.CSharp.Workspaces": "3.9.0",
-          "Vinyl.Analyzers": "1.0.0"
-        }
-      },
       "vinyl.core": {
         "type": "Project",
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp": "3.9.0"
-        }
-      },
-      "vinyl.refactorings": {
-        "type": "Project",
-        "dependencies": {
-          "Microsoft.CodeAnalysis.CSharp.Workspaces": "3.9.0",
-          "Vinyl.Core": "1.0.0"
         }
       }
     }

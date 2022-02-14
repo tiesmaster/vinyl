@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Vinyl.CodeFixes\Vinyl.CodeFixes.csproj" />
+    <ProjectReference Include="..\..\src\Vinyl.Refactorings\Vinyl.Refactorings.csproj" />
   </ItemGroup>
 
 </Project>

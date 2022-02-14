@@ -35,6 +35,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Vinyl.Analyzers\Vinyl.Analyzers.csproj" />
     <ProjectReference Include="..\Vinyl.CodeFixes\Vinyl.CodeFixes.csproj" />
+    <ProjectReference Include="..\Vinyl.Refactorings\Vinyl.Refactorings.csproj" />
   </ItemGroup>
 
   <ItemGroup>
