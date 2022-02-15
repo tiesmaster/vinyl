@@ -27,43 +27,14 @@ public class ExpandEfCoreSeededDataRefactoring : CodeRefactoringProvider
             return;
         }
 
-        var dbContextClasses = root
-            .DescendantNodes()
-            .OfType<ClassDeclarationSyntax>()
-            .Where(x => x.Identifier.ValueText.EndsWith("DbContext", StringComparison.Ordinal));
+        var refactorNode = root.FindNode(context.Span);
 
-        if (!dbContextClasses.Any())
+        if (refactorNode is IdentifierNameSyntax dataSeedIdentifier && dataSeedIdentifier.Identifier.ValueText == "HasData")
         {
-            return;
-        }
-
-        var firstDbContext = dbContextClasses.First();
-
-        var modelCreatingMethod = firstDbContext
-            .DescendantNodes()
-            .OfType<MethodDeclarationSyntax>()
-            .SingleOrDefault(x => x.Identifier.ValueText == "OnModelCreating");
-
-        if (modelCreatingMethod is null)
-        {
-            return;
-        }
-
-        var dataSeedExpressions = modelCreatingMethod
-            .DescendantNodes()
-            .OfType<MemberAccessExpressionSyntax>()
-            .Where(x => x.Name.ToString() == "HasData");
-
-        if (!dataSeedExpressions.Any())
-        {
-            return;
-        }
-
-        foreach (var dataSeedExpression in dataSeedExpressions)
-        {
+            var seededDataInvocation = dataSeedIdentifier.Ancestors().First(x => x is InvocationExpressionSyntax);
             var action = CodeAction.Create(
                 "Expand seeded with new value",
-                c => ExpandSeededDataWithNewValueAsync(context.Document, (InvocationExpressionSyntax)dataSeedExpression.Parent!, c));
+                c => ExpandSeededDataWithNewValueAsync(context.Document, (InvocationExpressionSyntax)seededDataInvocation, c));
 
             context.RegisterRefactoring(action);
         }
