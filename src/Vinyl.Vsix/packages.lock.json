@@ -50,21 +50,21 @@
       },
       "Roslynator.Analyzers": {
         "type": "Direct",
-        "requested": "[4.0.2, )",
-        "resolved": "4.0.2",
-        "contentHash": "UmKLY06/yIAAkARvvGHjIS5LA0XEeEn7pbRHmsDcxvbLFla2fqrTTPVBUW7HMttBAwFi2WKvkVzGNu3/0JDdxA=="
+        "requested": "[4.1.0, )",
+        "resolved": "4.1.0",
+        "contentHash": "xTSs7KdwhIUOTqEubcfW043o0dpSjKpNF+C6Aj5OuJv69rVJ0ypjChNeeXRALB2I1S9W1+qmgbVWYg7qftgoCA=="
       },
       "Roslynator.CodeAnalysis.Analyzers": {
         "type": "Direct",
-        "requested": "[4.0.2, )",
-        "resolved": "4.0.2",
-        "contentHash": "2PRQ2UTNxVsRUa7iPMxgbCEdDTmMrLSoiaGRnpajHTf9O8GYI9qMH/lp+omCcXXGTy30NJ4UTYewDQFMcj47OQ=="
+        "requested": "[4.1.0, )",
+        "resolved": "4.1.0",
+        "contentHash": "TaR8RyhIpGx1qU/MSz7tc1+PNaRLSs5kbNrASiudEsvT6Ew88B/TALLiDg+7HxKrFWQr2NeGzS62SJLCckQGCA=="
       },
       "Roslynator.Formatting.Analyzers": {
         "type": "Direct",
-        "requested": "[4.0.2, )",
-        "resolved": "4.0.2",
-        "contentHash": "ImNC6/EE3/UWrwPrwJ25vSD0OGy3ZqaDyzkTj64kUC6bKpQgs1koI6251Ms3C58HsLuu9sMmu9bQgDQiwk1kyQ=="
+        "requested": "[4.1.0, )",
+        "resolved": "4.1.0",
+        "contentHash": "07+FEc9pS1HRK6r8ImX1BljB8VdbGKDolhM+i0FFxxipiHfSckm6qSggPCf4PWIVe9WYYYYMKdhc9xFOKBN3FA=="
       },
       "StyleCop.Analyzers": {
         "type": "Direct",
