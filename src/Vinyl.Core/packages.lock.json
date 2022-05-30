@@ -70,9 +70,9 @@
       },
       "Roslynator.Formatting.Analyzers": {
         "type": "Direct",
-        "requested": "[4.1.0, )",
-        "resolved": "4.1.0",
-        "contentHash": "07+FEc9pS1HRK6r8ImX1BljB8VdbGKDolhM+i0FFxxipiHfSckm6qSggPCf4PWIVe9WYYYYMKdhc9xFOKBN3FA=="
+        "requested": "[4.1.1, )",
+        "resolved": "4.1.1",
+        "contentHash": "oa7CDqLQ36WqofShBHFyCTufE0BxoRwt5qjxsHUq0jj1uFIgdMidz5wewb7gPq8xZhWCaUO9It5CJo3njcDNkw=="
       },
       "StyleCop.Analyzers": {
         "type": "Direct",
