@@ -22,9 +22,9 @@
       },
       "Meziantou.Analyzer": {
         "type": "Direct",
-        "requested": "[1.0.704, )",
-        "resolved": "1.0.704",
-        "contentHash": "AY8Zh6Q3szSNuLPP1hxXh9CuYnf+OYglCT042uuYsvi9Kyj6iawLNI4oxIPXZIlM4dzEb8wqd2P8B/ImQFvRjw=="
+        "requested": "[1.0.705, )",
+        "resolved": "1.0.705",
+        "contentHash": "qVEA2KiBOHGkgrqtI6XQ1VITvnkW1ACtLFnP8di8lKzur+euaMbOwcdh7yP3CzW9txnPLucKaLos1UBFAngfkw=="
       },
       "Microsoft.CodeAnalysis.CSharp.Workspaces": {
         "type": "Direct",
