@@ -22,31 +22,31 @@
       },
       "Meziantou.Analyzer": {
         "type": "Direct",
-        "requested": "[1.0.708, )",
-        "resolved": "1.0.708",
-        "contentHash": "rLT/4tvcF9Sn+B2wS09sN9IyOEdivXPhT0fHntnmeU7EspvV7jCeY+XoyvMtjTVamcBAzBL0k134eBY+49kNpA=="
+        "requested": "[1.0.712, )",
+        "resolved": "1.0.712",
+        "contentHash": "IrajpUttxM05QqDpHzUoes6uJLO+bCsAiF47PMtzveB//W0KZyLN2qRw+lZbJEnXMw+UAfejmzoQv8IYNpqWLQ=="
       },
       "Microsoft.VisualStudio.Threading.Analyzers": {
         "type": "Direct",
-        "requested": "[17.2.32, )",
-        "resolved": "17.2.32",
-        "contentHash": "izJIEScEIBe8m96gMkox9vZE6r/Unk6giifbfRroqYJR3yESJqTkaQ707pE+jkJMqxHNT/lqBensuex90vPfPw=="
+        "requested": "[17.3.44, )",
+        "resolved": "17.3.44",
+        "contentHash": "96TPV4lH1a8iXNoq6sQxSTAXXCewyt2bE7luIZd3kS7Zzs1fs6Uwd9bFg2AxBt1WNPU1ozb3D1olpsoRmLKleA=="
       },
       "Microsoft.VSSDK.BuildTools": {
         "type": "Direct",
-        "requested": "[17.3.2090, )",
-        "resolved": "17.3.2090",
-        "contentHash": "5wBr0EC1RFwhW0W6BJaWP2eWou7kkLUeBXCl/MIoBrLYRCSrpA+7BxBbqlV3qj4uzYf6J0wFpaVaOgP6Ak/b/Q==",
+        "requested": "[17.3.2093, )",
+        "resolved": "17.3.2093",
+        "contentHash": "GK7Vq41kcCc10fPuLWL7g5TQfp0QAxUTYQAbpKuOhB5e6OcXSI4aVY43Yqttq/ZEB6WbO/YXF47PoxAH+JslrQ==",
         "dependencies": {
-          "Microsoft.VSSDK.CompatibilityAnalyzer": "17.3.2090",
+          "Microsoft.VSSDK.CompatibilityAnalyzer": "17.3.2093",
           "Microsoft.VisualStudio.SDK.Analyzers": "16.10.10"
         }
       },
       "Nerdbank.GitVersioning": {
         "type": "Direct",
-        "requested": "[3.5.108, )",
-        "resolved": "3.5.108",
-        "contentHash": "+1Zn/jrrbBS1MVK20W8d8g4nEREPuZ6IHDTmtqlJiNeGXN45Iou0IPe5hykbLAVyWfnoN3bPCDBIVjeAfoMsWQ=="
+        "requested": "[3.5.109, )",
+        "resolved": "3.5.109",
+        "contentHash": "tKA1XJ5U2Ytk+u2/5sGNa04Pw6z9noYmqbpmHpjvbwJTtIalqsQjnwT4RQKSDTTIznHBbKxzv3HVh8QD28Qk+g=="
       },
       "Roslynator.Analyzers": {
         "type": "Direct",
@@ -154,8 +154,8 @@
       },
       "Microsoft.VSSDK.CompatibilityAnalyzer": {
         "type": "Transitive",
-        "resolved": "17.3.2090",
-        "contentHash": "MVmpw0Lr7VhCOpNNzUBCXrw5MdRTP5yBUJISSdilhXfLgXtNPkiWE8CAN53A9NuWtPZUBUGBrb/XeQs0kaHrTw=="
+        "resolved": "17.3.2093",
+        "contentHash": "Jrxg7GXzSE2UNKHNE1hcGHyCEomRD+sOZ7McQoE5cWiwS8ABjzNZekQIlfo9kLVx1dtzG1YQ2F+50aHmpcj0mA=="
       },
       "StyleCop.Analyzers.Unstable": {
         "type": "Transitive",
@@ -280,28 +280,28 @@
       "vinyl.analyzers": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.CodeAnalysis.Analyzers": "3.3.3",
-          "Vinyl.Core": "1.0.0"
+          "Microsoft.CodeAnalysis.Analyzers": "[3.3.3, )",
+          "Vinyl.Core": "[1.0.0, )"
         }
       },
       "vinyl.codefixes": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.CodeAnalysis.CSharp.Workspaces": "3.9.0",
-          "Vinyl.Analyzers": "1.0.0"
+          "Microsoft.CodeAnalysis.CSharp.Workspaces": "[3.9.0, )",
+          "Vinyl.Analyzers": "[1.0.0, )"
         }
       },
       "vinyl.core": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.CodeAnalysis.CSharp": "3.9.0"
+          "Microsoft.CodeAnalysis.CSharp": "[3.9.0, )"
         }
       },
       "vinyl.refactorings": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.CodeAnalysis.CSharp.Workspaces": "3.9.0",
-          "Vinyl.Core": "1.0.0"
+          "Microsoft.CodeAnalysis.CSharp.Workspaces": "[3.9.0, )",
+          "Vinyl.Core": "[1.0.0, )"
         }
       }
     }

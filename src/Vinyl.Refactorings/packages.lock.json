@@ -22,9 +22,9 @@
       },
       "Meziantou.Analyzer": {
         "type": "Direct",
-        "requested": "[1.0.708, )",
-        "resolved": "1.0.708",
-        "contentHash": "rLT/4tvcF9Sn+B2wS09sN9IyOEdivXPhT0fHntnmeU7EspvV7jCeY+XoyvMtjTVamcBAzBL0k134eBY+49kNpA=="
+        "requested": "[1.0.712, )",
+        "resolved": "1.0.712",
+        "contentHash": "IrajpUttxM05QqDpHzUoes6uJLO+bCsAiF47PMtzveB//W0KZyLN2qRw+lZbJEnXMw+UAfejmzoQv8IYNpqWLQ=="
       },
       "Microsoft.CodeAnalysis.CSharp.Workspaces": {
         "type": "Direct",
@@ -40,15 +40,15 @@
       },
       "Microsoft.VisualStudio.Threading.Analyzers": {
         "type": "Direct",
-        "requested": "[17.2.32, )",
-        "resolved": "17.2.32",
-        "contentHash": "izJIEScEIBe8m96gMkox9vZE6r/Unk6giifbfRroqYJR3yESJqTkaQ707pE+jkJMqxHNT/lqBensuex90vPfPw=="
+        "requested": "[17.3.44, )",
+        "resolved": "17.3.44",
+        "contentHash": "96TPV4lH1a8iXNoq6sQxSTAXXCewyt2bE7luIZd3kS7Zzs1fs6Uwd9bFg2AxBt1WNPU1ozb3D1olpsoRmLKleA=="
       },
       "Nerdbank.GitVersioning": {
         "type": "Direct",
-        "requested": "[3.5.108, )",
-        "resolved": "3.5.108",
-        "contentHash": "+1Zn/jrrbBS1MVK20W8d8g4nEREPuZ6IHDTmtqlJiNeGXN45Iou0IPe5hykbLAVyWfnoN3bPCDBIVjeAfoMsWQ=="
+        "requested": "[3.5.109, )",
+        "resolved": "3.5.109",
+        "contentHash": "tKA1XJ5U2Ytk+u2/5sGNa04Pw6z9noYmqbpmHpjvbwJTtIalqsQjnwT4RQKSDTTIznHBbKxzv3HVh8QD28Qk+g=="
       },
       "NETStandard.Library": {
         "type": "Direct",
@@ -557,7 +557,7 @@
       "vinyl.core": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.CodeAnalysis.CSharp": "3.9.0"
+          "Microsoft.CodeAnalysis.CSharp": "[3.9.0, )"
         }
       }
     }
