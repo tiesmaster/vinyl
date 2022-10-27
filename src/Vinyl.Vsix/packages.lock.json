@@ -22,9 +22,9 @@
       },
       "Meziantou.Analyzer": {
         "type": "Direct",
-        "requested": "[1.0.734, )",
-        "resolved": "1.0.734",
-        "contentHash": "s3HyDLPX8qjwnZR0DRGu7zQ1kUDnGffKFRq5cODULpqA7rrucoIRGmgrCEyb5vh6SCUnKWxoNhwjkaO+GGQWEg=="
+        "requested": "[1.0.743, )",
+        "resolved": "1.0.743",
+        "contentHash": "RMs0XJaUUSFYI5yOLXg220SDl/wyARtwhjIKNNO49Hr1Ps4tLa4mxtN64khkHp+RdKjVOrddA+VBBFtXThUrxA=="
       },
       "Microsoft.VisualStudio.Threading.Analyzers": {
         "type": "Direct",
@@ -154,8 +154,8 @@
       },
       "Microsoft.VsSDK.CompatibilityAnalyzer": {
         "type": "Transitive",
-        "resolved": "17.5.2-preview1-gd6f6e938",
-        "contentHash": "42/pfQ7znb/NOS1tTbzsU64DhAgvwbvFWOtx2m+LUcsjkShvHjyxwg2JRmkh3xGK8vqMHVp7NAQpT0xcTFsAiQ=="
+        "resolved": "17.4.2118-g0ae3713e",
+        "contentHash": "MXA9wZL3/BWIAqIflgo55TAiA16/FawFHAk0d57vbW0h6JC0FnJhmd2JC37u4SbiL1k6/YTWP8OAeqplS40wLw=="
       },
       "StyleCop.Analyzers.Unstable": {
         "type": "Transitive",
