@@ -44,9 +44,9 @@
       },
       "Nerdbank.GitVersioning": {
         "type": "Direct",
-        "requested": "[3.5.113, )",
-        "resolved": "3.5.113",
-        "contentHash": "4fBSMkqhi410qlkjPm+Mxfk8iO3C7dmgdVS7ljsfVO21WEzZCHP1VCOqB6rlOPfPidR/oxX+/Do/I7meCAz+Jg=="
+        "requested": "[3.5.119, )",
+        "resolved": "3.5.119",
+        "contentHash": "x8k4zV6YKZA5Rr810439lG9NngdbyPtFv0QpIYz32m1Im59kvSbEHO8gKGZoNvsfZSquayjEDUCa8acbut372g=="
       },
       "Roslynator.Analyzers": {
         "type": "Direct",
@@ -154,8 +154,8 @@
       },
       "Microsoft.VsSDK.CompatibilityAnalyzer": {
         "type": "Transitive",
-        "resolved": "17.5.2-preview1-gd6f6e938",
-        "contentHash": "42/pfQ7znb/NOS1tTbzsU64DhAgvwbvFWOtx2m+LUcsjkShvHjyxwg2JRmkh3xGK8vqMHVp7NAQpT0xcTFsAiQ=="
+        "resolved": "17.4.2118-g0ae3713e",
+        "contentHash": "MXA9wZL3/BWIAqIflgo55TAiA16/FawFHAk0d57vbW0h6JC0FnJhmd2JC37u4SbiL1k6/YTWP8OAeqplS40wLw=="
       },
       "StyleCop.Analyzers.Unstable": {
         "type": "Transitive",
