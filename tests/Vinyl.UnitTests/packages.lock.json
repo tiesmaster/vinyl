@@ -97,9 +97,9 @@
       },
       "Roslynator.CodeAnalysis.Analyzers": {
         "type": "Direct",
-        "requested": "[4.1.1, )",
-        "resolved": "4.1.1",
-        "contentHash": "Xz897MdF4lg9pU/2dwpEXwEZnlgOw7/S4BeVQKVDGdsOLFQqzIb9aXQHcMr0umKNQ6DZTMFZbxGFGq8OBSEwTw=="
+        "requested": "[4.1.2, )",
+        "resolved": "4.1.2",
+        "contentHash": "HS79TMH4RTaq5UJBWQxXrjVAsCzSNLF3O/dd5Sew9Degnyfm+leGHXinEWzG5NpfjBKQcjYh5+MUtkH+qaqqcA=="
       },
       "Roslynator.Formatting.Analyzers": {
         "type": "Direct",
