@@ -22,9 +22,9 @@
       },
       "Meziantou.Analyzer": {
         "type": "Direct",
-        "requested": "[1.0.746, )",
-        "resolved": "1.0.746",
-        "contentHash": "nhbLua3Bl1MupNKMC+YeXQ5lMizw679haJ4tVoNPPz2N0BerYYSDiiW2TZOm3ep2H0wMP9bNIBQOaj9ngqAqew=="
+        "requested": "[1.0.747, )",
+        "resolved": "1.0.747",
+        "contentHash": "e6pGGs6H9eZ0ERQAgn+mSDatKYA1hjaRNu1fJwqKyBdMtY61NWuUvliL2w/U1xcCNyurMugYlU860DIgh9GF3w=="
       },
       "Microsoft.VisualStudio.Threading.Analyzers": {
         "type": "Direct",
