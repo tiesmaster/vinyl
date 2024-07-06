@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31424.327
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vinyl.Analyzers", "src\Vinyl.Analyzers\Vinyl.Analyzers.csproj", "{1C08E817-FB89-4E7E-BC34-6B3DDB596A35}"
 EndProject
@@ -19,7 +19,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{99CBAE8E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CE521E5B-75C5-4C25-9F1E-2CE1CE5C0266}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vinyl.Refactorings", "src\Vinyl.Refactorings\Vinyl.Refactorings.csproj", "{329BA59C-EB31-4F7E-AC9F-B6D26D4243F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vinyl.Refactorings", "src\Vinyl.Refactorings\Vinyl.Refactorings.csproj", "{329BA59C-EB31-4F7E-AC9F-B6D26D4243F4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{58CD502E-F9E9-472A-B8CE-CEFF969721B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,7 +62,12 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{1C08E817-FB89-4E7E-BC34-6B3DDB596A35} = {CE521E5B-75C5-4C25-9F1E-2CE1CE5C0266}
+		{1846ABC4-D1FA-4660-BEEA-16579A61815D} = {CE521E5B-75C5-4C25-9F1E-2CE1CE5C0266}
+		{14C09D12-A1C5-4AF4-BA22-4E254504FF43} = {58CD502E-F9E9-472A-B8CE-CEFF969721B2}
 		{7D985F72-B797-49F2-81E0-61EF9C594154} = {99CBAE8E-DCD1-40D1-A2A1-46C41C90C60F}
+		{BCC569B5-7568-446A-9BDD-8260F86A83A9} = {58CD502E-F9E9-472A-B8CE-CEFF969721B2}
+		{F1885B76-1D04-42C3-966D-3E995569B7A7} = {CE521E5B-75C5-4C25-9F1E-2CE1CE5C0266}
 		{329BA59C-EB31-4F7E-AC9F-B6D26D4243F4} = {CE521E5B-75C5-4C25-9F1E-2CE1CE5C0266}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
