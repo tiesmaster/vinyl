@@ -5,7 +5,7 @@
 
 ![GitHub](https://img.shields.io/github/license/tiesmaster/vinyl)
 
-Vinyl is a set of C# analyzers, code fixers, refactorings, and source generators for C# 9 records
+Vinyl is a set of C# analyzers, code fixers, refactorings, and source generators for C# 9 records, and other things
 
 # Pre-release Packages
 
