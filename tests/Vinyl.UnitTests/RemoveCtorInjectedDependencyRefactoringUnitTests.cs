@@ -13,6 +13,28 @@ public class RemoveCtorInjectedDependencyRefactoringUnitTests
     }
 
     [Fact]
+    public async Task GivenOnParameter_WhenEnclosingDeclarationIsNotCtor_ThenNoRefactoring()
+    {
+        const string source = """
+            // namespace SomeNamespace;
+
+            public class SomeClass
+            {
+                public void DoStuff(
+                    ISomeService some[||]Service,
+                    IAnotherService anotherService)
+                {
+                }
+            }
+
+            public interface ISomeService { }
+            public interface IAnotherService { }
+            """;
+
+        await VerifyCS.VerifyRefactoringAsync(source, source);
+    }
+
+    [Fact]
     public async Task MostSimpleScenario()
     {
         const string source = """

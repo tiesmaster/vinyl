@@ -67,6 +67,11 @@ public class RemoveCtorInjectedDependencyRefactoring : CodeRefactoringProvider
         public QueryResult FromParameter(ParameterSyntax parameterNode)
         {
             var ctorNode = parameterNode.FirstAncestorOrSelf<ConstructorDeclarationSyntax>();
+            if (ctorNode is null)
+            {
+                return QueryResult.NoResult;
+            }
+
             var assignmentStatement = ctorNode.Body.Statements.First();
 
             var fieldDeclaration = ctorNode
@@ -95,6 +100,10 @@ public class RemoveCtorInjectedDependencyRefactoring : CodeRefactoringProvider
             => new(
                 CanApplyRefactoring: true,
                 Command: command);
+
+        public static QueryResult NoResult { get; } = new(
+            CanApplyRefactoring: false,
+            Command: null!);
     }
 
     private class RemoveDependencyCommand(
