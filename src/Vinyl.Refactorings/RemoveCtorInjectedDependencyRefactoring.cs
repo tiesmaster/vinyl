@@ -27,16 +27,11 @@ public class RemoveCtorInjectedDependencyRefactoring : CodeRefactoringProvider
             return;
         }
 
-        var ctorNode = parameterNode.FirstAncestorOrSelf<ConstructorDeclarationSyntax>();
-        var assignmentStatement = ctorNode.Body.Statements.First();
-
-        var fieldDeclaration = ctorNode
-            .Ancestors()
-            .OfType<ClassDeclarationSyntax>()
-            .First()
-            .DescendantNodes()
-            .OfType<FieldDeclarationSyntax>()
-            .First();
+        var query = new RemoveDependencyQuery(context.Document, root).FromParameter(parameterNode);
+        if (query.CanApplyRefactoring)
+        {
+            context.RegisterRefactoring(query.Command);
+        }
 
         //var assignmentExpression = ctorNode
         //    .DescendantNodes()
@@ -45,13 +40,6 @@ public class RemoveCtorInjectedDependencyRefactoring : CodeRefactoringProvider
         //        x.Right is IdentifierNameSyntax parameterIdentifier &&
         //        parameterIdentifier.Identifier == parameterNode.Identifier);
 
-        context.RegisterRefactoring(
-            new RemoveDependencyCodeAction(
-                context.Document,
-                root,
-                parameterNode,
-                assignmentStatement,
-                fieldDeclaration));
 
                 //(StatementSyntax)assignmentExpression.Parent));
 
@@ -76,7 +64,44 @@ public class RemoveCtorInjectedDependencyRefactoring : CodeRefactoringProvider
         throw new NotImplementedException();
     }
 
-    private class RemoveDependencyCodeAction(
+    private class RemoveDependencyQuery(Document document, SyntaxNode root)
+    {
+        public QueryResult FromParameter(ParameterSyntax parameterNode)
+        {
+            var ctorNode = parameterNode.FirstAncestorOrSelf<ConstructorDeclarationSyntax>();
+            var assignmentStatement = ctorNode.Body.Statements.First();
+
+            var fieldDeclaration = ctorNode
+                .Ancestors()
+                .OfType<ClassDeclarationSyntax>()
+                .First()
+                .DescendantNodes()
+                .OfType<FieldDeclarationSyntax>()
+                .First();
+
+            return new QueryResult(
+                canApplyRefactoring: true,
+                new RemoveDependencyCommand(
+                    document: document,
+                    root: root,
+                    parameterNode: parameterNode,
+                    statementNode: assignmentStatement,
+                    fieldDeclaration: fieldDeclaration));
+        }
+    }
+
+    // TODO: Make record
+
+    private class QueryResult(
+        bool canApplyRefactoring,
+        CodeAction command)
+    {
+        public bool CanApplyRefactoring { get; } = canApplyRefactoring;
+
+        public CodeAction Command { get; } = command;
+    }
+
+    private class RemoveDependencyCommand(
         Document document,
         SyntaxNode root,
         ParameterSyntax parameterNode,
