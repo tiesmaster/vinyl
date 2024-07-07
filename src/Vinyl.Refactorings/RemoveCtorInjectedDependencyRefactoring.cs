@@ -19,18 +19,16 @@ public class RemoveCtorInjectedDependencyRefactoring : CodeRefactoringProvider
         }
 
         var node = root.FindNode(context.Span);
+        var query = new RemoveDependencyQuery(context.Document, root);
 
         // See if this is a parameter
         var parameterNode = node.FirstAncestorOrSelf<ParameterSyntax>();
-        if (parameterNode is null)
+        if (parameterNode is ParameterSyntax
+            && query.FromParameter(parameterNode) is QueryResult queryResult
+            && queryResult.CanApplyRefactoring)
         {
+            context.RegisterRefactoring(queryResult.Command);
             return;
-        }
-
-        var query = new RemoveDependencyQuery(context.Document, root).FromParameter(parameterNode);
-        if (query.CanApplyRefactoring)
-        {
-            context.RegisterRefactoring(query.Command);
         }
 
         //var assignmentExpression = ctorNode
