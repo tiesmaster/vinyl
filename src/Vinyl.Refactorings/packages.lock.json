@@ -26,6 +26,12 @@
         "resolved": "2.0.7",
         "contentHash": "IHisSrVb20pX+6VbKcTJ3fj778pwNG2dBGdqFufBRWnZmVbHJpaA7Gb6cZkoTPAcFvWMAQBhITt5slTMqwbkuA=="
       },
+      "Meziantou.Polyfill": {
+        "type": "Direct",
+        "requested": "[1.0.38, )",
+        "resolved": "1.0.38",
+        "contentHash": "VHZvKZPwcYJZUwHi1Oh6ZtnqCRompotJjxtLG0Sk/eKgdM76EX6kn27Gq0jT9vymnwPG38hKHGKRFjRrIP8b3g=="
+      },
       "Microsoft.CodeAnalysis.CSharp.Workspaces": {
         "type": "Direct",
         "requested": "[3.9.0, )",

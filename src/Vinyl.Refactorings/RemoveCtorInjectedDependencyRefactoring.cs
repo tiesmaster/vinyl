@@ -79,8 +79,7 @@ public class RemoveCtorInjectedDependencyRefactoring : CodeRefactoringProvider
                 .OfType<FieldDeclarationSyntax>()
                 .First();
 
-            return new QueryResult(
-                canApplyRefactoring: true,
+            return QueryResult.Success(
                 new RemoveDependencyCommand(
                     document: document,
                     root: root,
@@ -90,15 +89,14 @@ public class RemoveCtorInjectedDependencyRefactoring : CodeRefactoringProvider
         }
     }
 
-    // TODO: Make record
-
-    private class QueryResult(
-        bool canApplyRefactoring,
-        CodeAction command)
+    private record QueryResult(
+        bool CanApplyRefactoring,
+        CodeAction Command)
     {
-        public bool CanApplyRefactoring { get; } = canApplyRefactoring;
-
-        public CodeAction Command { get; } = command;
+        public static QueryResult Success(CodeAction command)
+            => new(
+                CanApplyRefactoring: true,
+                Command: command);
     }
 
     private class RemoveDependencyCommand(
