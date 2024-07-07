@@ -16,7 +16,7 @@ public class RemoveCtorInjectedDependencyRefactoringUnitTests
     public async Task MostSimpleScenario()
     {
         const string source = """
-            namespace SomeNamespace;
+            // namespace SomeNamespace;
 
             public class SomeClass
             {
@@ -37,7 +37,7 @@ public class RemoveCtorInjectedDependencyRefactoringUnitTests
             """;
 
         const string fixedSource = """
-            namespace SomeNamespace;
+            // namespace SomeNamespace;
 
             public class SomeClass
             {
