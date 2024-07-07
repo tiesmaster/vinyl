@@ -35,6 +35,28 @@ public class RemoveCtorInjectedDependencyRefactoringUnitTests
     }
 
     [Fact]
+    public async Task GivenOnParameterOfConstructor_WhenFieldAssignmentsAreAbsentInConstructor_ThenNoRefactoring()
+    {
+        const string source = """
+            // namespace SomeNamespace;
+
+            public class SomeClass
+            {
+                public SomeClass(
+                    ISomeService some[||]Service,
+                    IAnotherService anotherService)
+                {
+                }
+            }
+
+            public interface ISomeService { }
+            public interface IAnotherService { }
+            """;
+
+        await VerifyCS.VerifyRefactoringAsync(source, source);
+    }
+
+    [Fact]
     public async Task MostSimpleScenario()
     {
         const string source = """

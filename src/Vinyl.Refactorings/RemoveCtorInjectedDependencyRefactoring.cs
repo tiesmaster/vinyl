@@ -30,49 +30,29 @@ public class RemoveCtorInjectedDependencyRefactoring : CodeRefactoringProvider
             context.RegisterRefactoring(queryResult.Command);
             return;
         }
-
-        //var assignmentExpression = ctorNode
-        //    .DescendantNodes()
-        //    .OfType<AssignmentExpressionSyntax>()
-        //    .Single(x =>
-        //        x.Right is IdentifierNameSyntax parameterIdentifier &&
-        //        parameterIdentifier.Identifier == parameterNode.Identifier);
-
-
-                //(StatementSyntax)assignmentExpression.Parent));
-
-        //// And contained as part of a constructor declaration
-        //var ctorNode = parameterNode.FirstAncestorOrSelf<ConstructorDeclarationSyntax>();
-        //if (ctorNode is null)
-        //{
-        //    return;
-        //}
-
-        //var (b, fieldIdentifier) = ctorNode.DescendantNodes().OfType<StatementSyntax>().Any(x => IsFieldInitializer(x, parameterNode.Identifier));
-
-        //var action = CodeAction.Create(
-        //    "Expand seeded with new value",
-        //    c => ExpandSeededDataWithNewValueAsync(context.Document, (InvocationExpressionSyntax)dataSeedExpression.Parent!, c));
-
-        //context.RegisterRefactoring(action);
-    }
-
-    private (bool, SyntaxNode) IsFieldInitializer(StatementSyntax x, SyntaxToken identifier)
-    {
-        throw new NotImplementedException();
     }
 
     private class RemoveDependencyQuery(Document document, SyntaxNode root)
     {
         public QueryResult FromParameter(ParameterSyntax parameterNode)
         {
+            // The dependeny should be an parameter of a contructor
             var ctorNode = parameterNode.FirstAncestorOrSelf<ConstructorDeclarationSyntax>();
             if (ctorNode is null)
             {
                 return QueryResult.NoResult;
             }
 
-            var assignmentStatement = ctorNode.Body.Statements.First();
+            // And the contructor should use the dependency to set a field
+            var assignmentStatement = ctorNode
+                .DescendantNodes()
+                .OfType<ExpressionStatementSyntax>()
+                .FirstOrDefault(x => IsFieldInitializerOfParameter(x, parameterNode));
+
+            if (assignmentStatement is null)
+            {
+                return QueryResult.NoResult;
+            }
 
             var fieldDeclaration = ctorNode
                 .Ancestors()
@@ -89,6 +69,14 @@ public class RemoveCtorInjectedDependencyRefactoring : CodeRefactoringProvider
                     parameterNode: parameterNode,
                     statementNode: assignmentStatement,
                     fieldDeclaration: fieldDeclaration));
+        }
+
+        private static bool IsFieldInitializerOfParameter(ExpressionStatementSyntax expressionNode, ParameterSyntax parameterNode)
+        {
+            return expressionNode.Expression is AssignmentExpressionSyntax assignNode
+                && assignNode.Kind() == SyntaxKind.SimpleAssignmentExpression
+                && assignNode.Right is IdentifierNameSyntax rhIdent
+                && rhIdent.Identifier.IsEquivalentTo(parameterNode.Identifier);
         }
     }
 
